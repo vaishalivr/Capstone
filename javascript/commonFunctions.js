@@ -16,6 +16,17 @@ const createPath = (stroke) => {
   return d;
 };
 
+const scaleGroupToGridCell = (group, translateX, translateY) => {
+  const bbox = group.node().getBBox();
+  var xScale = Math.min(1, 90 / bbox.width);
+  var yScale = Math.min(1, 90 / bbox.height);
+
+  group.attr(
+    "transform",
+    `translate(${translateX}, ${translateY}) scale(${xScale}, ${yScale})`
+  );
+};
+
 const attachHoverEffectToGroup = (group, options) => {
   const bbox = group.node().getBBox();
   const hasHelpText = typeof options.helpText != "undefined";

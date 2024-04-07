@@ -49,5 +49,6 @@ if __name__ == '__main__':
                     pattern_counts[drawing_pattern]["key_id"] = drawing_object["key_id"]
                 else:
                     pattern_counts[drawing_pattern] = {"count": 1, "key_id": drawing_object["key_id"]}
-        print(dict(sorted(pattern_counts.items(), key=lambda x: x[1]["count"], reverse=True)))
+        with open(sys.argv[2], "w") as of:
+            of.write(json.dumps(dict(sorted(pattern_counts.items(), key=lambda x: x[1]["count"], reverse=True))));
 

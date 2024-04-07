@@ -49,14 +49,16 @@ const createDoodleGroup = (
   translateY,
   scaleFactor
 ) => {
-  return svgDifferentWays
-    .append("g")
-    .attr(
-      "transform",
-      `translate(${translateX}, ${translateY}) scale(${scaleFactor})`
-    )
-    .attr("class", groupClass)
-    .attr("id", groupId);
+  return (
+    svgDifferentWays
+      .append("g")
+      // .attr(
+      //   "transform",
+      //   `translate(${translateX}, ${translateY}) scale(${scaleFactor})`
+      // )
+      .attr("class", groupClass)
+      .attr("id", groupId)
+  );
 };
 
 const appendPathsToGroups = (group, lineData, createPath) => {
@@ -127,6 +129,7 @@ Object.keys(shapeDrawings).forEach((word, index) => {
       var path = appendPathsToGroups(group, drawing["strokes"], createPath);
       animatePathStroke(path, path.node().getTotalLength());
       attachHoverEffectToGroup(group, {});
+      scaleGroupToGridCell(group, 100 + index * 200, 100);
     });
   };
   wordTab.render();
