@@ -72,3 +72,40 @@ const attachHoverEffectToGroup = (group, options) => {
       }
     });
 };
+
+const svgTab = {
+  title: "untitled",
+  parentSvg: null,
+  position: [0, 0],
+  clickCallback: null,
+  _underline: null,
+  _svgElement: null,
+  _clickCallback: (_self) => {
+    return function (e) {
+      _self.parentSvg.selectAll("line.svg-tab-underline").remove();
+      _self._underline = _self.parentSvg
+        .append("line")
+        .attr("class", "svg-tab-underline")
+        .attr("x1", _self.position[0])
+        .attr("y1", _self.position[1] + 5)
+        .attr("x2", _self.position[0] + this.getComputedTextLength())
+        .attr("y2", _self.position[1] + 5)
+        .attr("stroke", "#ffd43c")
+        .attr("stroke-width", "3");
+      _self.clickCallback(e);
+    };
+  },
+  render: function () {
+    this._svgElement = this.parentSvg
+      .append("text")
+      .attr("x", this.position[0])
+      .attr("y", this.position[1])
+      .attr("id", this.title)
+      .text(this.title)
+      .style("cursor", "pointer")
+      .on("click", this._clickCallback(this));
+  },
+  reset: function () {
+    this._underline.remove();
+  },
+};

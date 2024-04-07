@@ -76,12 +76,12 @@ const appendRectsWithImagesAndText = (numRects, imagePaths, textArray) => {
       .on("mouseover", function () {
         legendLine.style("opacity", 1);
         groupAnnotationText.style("opacity", 1).text(textArray[row]);
-        d3.select(this).select("rect.encompassing").style("opacity", 1);
+        // d3.select(this).select("rect.encompassing").style("opacity", 1);
       })
       .on("mouseout", function () {
         legendLine.style("opacity", 0);
         groupAnnotationText.style("opacity", 0).text("");
-        d3.select(this).select("rect.encompassing").style("opacity", 0);
+        // d3.select(this).select("rect.encompassing").style("opacity", 0);
       });
 
     for (let col = 0; col < rectsPerRow; col++) {
@@ -108,17 +108,7 @@ const appendRectsWithImagesAndText = (numRects, imagePaths, textArray) => {
       }
     }
 
-    rowGroup
-      .append("rect")
-      .attr("class", "encompassing")
-      .attr("x", startXOffset)
-      .attr("y", yRowStart)
-      .attr("width", totalWidth)
-      .attr("height", rectSize)
-      .attr("stroke", "#ffd43c")
-      .attr("stroke-width", "6px")
-      .attr("fill", "none")
-      .style("opacity", 0);
+    attachHoverEffectToGroup(rowGroup, {});
   }
 };
 
@@ -143,63 +133,47 @@ const drawBarChartLine = () => {
 };
 
 words1.forEach((word, index) => {
-  svgRecognizedFalse
-    .append("text")
-    .attr("fill", "black")
-    .attr("font-size", "1.2rem")
-    .attr("x", positions1[index].x)
-    .attr("y", positions1[index].y)
-    .attr("id", word)
-    .text(word)
-    .on("click", function () {
-      d3.selectAll("line:not(#legend-line):not(#lineAboveBar)").remove();
-      d3.selectAll("g").remove();
+  var wordTab = Object.create(svgTab);
+  wordTab.title = word;
+  wordTab.parentSvg = svgRecognizedFalse;
+  wordTab.position = [positions1[index].x, positions1[index].y];
+  wordTab.clickCallback = function (e) {
+    // d3.selectAll("line:not(#legend-line):not(#lineAboveBar)").remove();
+    d3.selectAll("g").remove();
 
-      svgRecognizedFalse
-        .append("line")
-        .attr("x1", positions1[index].x)
-        .attr("y1", positions1[index].y + 5)
-        .attr("x2", positions1[index].x + this.getComputedTextLength())
-        .attr("y2", positions1[index].y + 5)
-        .attr("stroke", "#ffd43c")
-        .attr("stroke-width", "3")
-        .attr("id", `underline-${index}`);
-
-      if (this.id == "Dishwasher") {
-        resizeBar("#unrecognized-rect", 130, svgRecognizedFalseObj.height);
-        drawBarChartLine();
-        appendRectsWithImagesAndText(24, imagePathDishwasher, [
-          "Counter top Dishwashers",
-          "Tap Shower",
-          "Person Washing Dishes",
-          "Sink",
-        ]);
-      }
-      if (this.id == "Fans") {
-        resizeBar("#unrecognized-rect", 161, svgRecognizedFalseObj.height);
-        drawBarChartLine();
-        appendRectsWithImagesAndText(24, imagePathFan, [
-          "Hand Fan",
-          "Pedestal Fan",
-          "Taylor Swift Fan",
-          "Exhause Fan",
-        ]);
-      }
-      if (this.id == "House") {
-        resizeBar("#unrecognized-rect", 22.42, svgRecognizedFalseObj.height);
-        drawBarChartLine();
-        appendRectsWithImagesAndText(12, imagePathHouse, [
-          "Flat Roofed",
-          "Houses with Scene",
-        ]);
-      }
-      if (this.id == "Blackberry") {
-        resizeBar("#unrecognized-rect", 113, svgRecognizedFalseObj.height);
-        drawBarChartLine();
-        appendRectsWithImagesAndText(12, imagePathBlackberry, [
-          "Fruit",
-          "Phone",
-        ]);
-      }
-    });
+    if (e.target.id == "Dishwasher") {
+      resizeBar("#unrecognized-rect", 130, svgRecognizedFalseObj.height);
+      drawBarChartLine();
+      appendRectsWithImagesAndText(24, imagePathDishwasher, [
+        "Counter top Dishwashers",
+        "Tap Shower",
+        "Person Washing Dishes",
+        "Sink",
+      ]);
+    }
+    if (e.target.id == "Fans") {
+      resizeBar("#unrecognized-rect", 161, svgRecognizedFalseObj.height);
+      drawBarChartLine();
+      appendRectsWithImagesAndText(24, imagePathFan, [
+        "Hand Fan",
+        "Pedestal Fan",
+        "Taylor Swift Fan",
+        "Exhause Fan",
+      ]);
+    }
+    if (e.target.id == "House") {
+      resizeBar("#unrecognized-rect", 22.42, svgRecognizedFalseObj.height);
+      drawBarChartLine();
+      appendRectsWithImagesAndText(12, imagePathHouse, [
+        "Flat Roofed",
+        "Houses with Scene",
+      ]);
+    }
+    if (e.target.id == "Blackberry") {
+      resizeBar("#unrecognized-rect", 113, svgRecognizedFalseObj.height);
+      drawBarChartLine();
+      appendRectsWithImagesAndText(12, imagePathBlackberry, ["Fruit", "Phone"]);
+    }
+  };
+  wordTab.render();
 });

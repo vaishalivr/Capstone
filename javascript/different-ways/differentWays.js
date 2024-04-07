@@ -30,6 +30,12 @@ svgDifferentWays
   .attr("stroke", "black")
   .attr("stroke-width", svgDifferentWaysObj.strokeWidth);
 
+const resetSvg = () => {
+  Object.keys(shapeDrawings).forEach((word, index) => {
+    svgDifferentWays.selectAll(`.${word}-group`).remove();
+  });
+};
+
 const removePreviousDoodles = () => {
   Object.keys(shapeDrawings).forEach((word, index) => {
     svgDifferentWays.selectAll(`.${word}-group`).remove();
@@ -96,32 +102,32 @@ legendLine1.attr("opacity", 0);
 
 Object.keys(shapeDrawings).forEach((word, index) => {
   var tabXPosition = tabRowPadding + tabWidth * index + tabWidth / 2;
-  svgDifferentWays
-    .append("text")
-    .attr("x", tabXPosition)
-    .attr("y", tabYPosition)
-    .attr("id", word)
-    .text(word)
-    .style("cursor", "pointer")
-    .on("click", function () {
-      removePreviousDoodles();
-      drawLegendLine();
-      resizeBar(
-        "#recognized-rect",
-        shapeDrawings[word]["recognizedDrawingCount"],
-        svgDifferentWaysObj.height
+
+  var wordTab = Object.create(svgTab);
+  wordTab.title = word;
+  wordTab.parentSvg = svgDifferentWays;
+  wordTab.position = [tabXPosition, tabYPosition];
+  wordTab.clickCallback = () => {
+    resetSvg();
+    drawLegendLine();
+    resizeBar(
+      "#recognized-rect",
+      shapeDrawings[word]["recognizedDrawingCount"],
+      svgDifferentWaysObj.height
+    );
+
+    shapeDrawings[word]["drawings"].forEach((drawing, index) => {
+      var group = createDoodleGroup(
+        drawing["vectorId"],
+        word + "-group",
+        100 + index * 200,
+        100,
+        0.5
       );
-      shapeDrawings[word]["drawings"].forEach((drawing, index) => {
-        var group = createDoodleGroup(
-          drawing["vectorId"],
-          word + "-group",
-          100 + index * 200,
-          100,
-          0.5
-        );
-        var path = appendPathsToGroups(group, drawing["strokes"], createPath);
-        animatePathStroke(path, path.node().getTotalLength());
-        attachHoverEffectToGroup(group, {});
-      });
+      var path = appendPathsToGroups(group, drawing["strokes"], createPath);
+      animatePathStroke(path, path.node().getTotalLength());
+      attachHoverEffectToGroup(group, {});
     });
+  };
+  wordTab.render();
 });
