@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How Same or Different Are We</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="imagecss.css" />
+  </head>
+  <body>
+    <div class="title-container">
+      <svg width="20%" height="100%" id="svg-title-container"></svg>
+      <div class="title">
+        <h1><span>How Same or Different</span><br /><span>Are We</span></h1>
+      </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <div class="story-text">
+      <p>
+        What if you were told to doodle a
+        <span class="custom-underline"
+          >house
+          <span class="tooltip-content"
+            ><img
+              src="media/story_text_images/tooltip-house.png"
+              alt="House Image"
+              style="width: 50%; height: auto; display: block; margin: auto"
+          /></span> </span
+        >?
+      </p>
+
+      <p>
+        What if you were told to doodle a
+        <span class="custom-underline"
+          >nail
+          <span class="tooltip-content"
+            ><img
+              src="media/story_text_images/tooltip-nail.png"
+              alt="Nail Image"
+              style="width: 50%; height: auto; display: block; margin: auto"
+          /></span> </span
+        >?
+      </p>
+
+      <p>
+        What if you were told to doodle a
+        <span class="custom-underline"
+          >fan
+          <span class="tooltip-content"
+            ><img
+              src="media/story_text_images/tooltip-fan.png"
+              alt="Fan Image"
+              style="width: 50%; height: auto; display: block; margin: auto"
+          /></span> </span
+        >?
+      </p>
+
+      <p>
+        As I write this, the
+        <span class="custom-underline"
+          >dishwasher
+          <span class="tooltip-content"
+            ><img
+              src="media/story_text_images/tooltip-dishwasher.png"
+              alt="Dishwasher Image"
+              style="width: 50%; height: auto; display: block; margin: auto"
+          /></span> </span
+        >that comes to your mind may not be the same as the
+        <span class="custom-underline"
+          >dishwasher
+          <span class="tooltip-content"
+            ><img
+              src="media/story_text_images/tooltip-dishwasher2.png"
+              alt="Dishwasher Image"
+              style="width: 50%; height: auto; display: block; margin: auto"
+          /></span>
+        </span>
+        that comes to my mind.
+      </p>
+
+      <p>
+        The
+        <span class="custom-underline"
+          >blackberry
+          <span class="tooltip-content"
+            ><img
+              src="media/story_text_images/tooltip-blackberry.png"
+              alt="Blackberry Image"
+              style="width: 50%; height: auto; display: block; margin: auto"
+          /></span> </span
+        >that someone ponders about, may not be the same
+        <span class="custom-underline"
+          >blackberry
+          <span class="tooltip-content"
+            ><img
+              src="media/story_text_images/tooltip-blackberry2.png"
+              alt="Blackberry Image"
+              style="width: 50%; height: auto; display: block; margin: auto"
+          /></span>
+        </span>
+        that was meant.
+      </p>
+
+      <p>
+        Or a
+        <span class="custom-underline"
+          >leaf
+          <span class="tooltip-content"
+            ><img
+              src="media/story_text_images/tooltip-leaf.png"
+              alt="Leaf Image"
+              style="width: 50%; height: auto; display: block; margin: auto"
+          /></span> </span
+        >in Canada may not be the same
+        <span class="custom-underline"
+          >leaf
+          <span class="tooltip-content"
+            ><img
+              src="media/story_text_images/tooltip-leaf1.png"
+              alt="Leaf Image"
+              style="width: 50%; height: auto; display: block; margin: auto"
+              s
+          /></span>
+        </span>
+        that most people think of.
+      </p>
+
+      <p>
+        You can <strong><em>hover</em></strong> over the doodles above to see
+        what they actually are.
+      </p>
+      <br />
+      <br />
+      <p class="decorated-p">
+        The image that comes to mind when these words are mentioned, has a lot
+        to do with the version of these words we’ve grown up with.
+      </p>
+      <br />
+      <br />
+      <p>
+        Here I attempt to explore the
+        <a
+          href="https://quickdraw.withgoogle.com/"
+          target="_blank"
+          class="custom-underline"
+          >Google's Quick Draw</a
+        >
+        dataset which is the worlds largest published doodle dataset containing
+        50 million drawings belonging to different categories such as an axe, a
+        football, a flower, a zigzag and even the Eiffel Tower.
+      </p>
+
+      <p>
+        It is a game that challenges players to draw a representation of an
+        object or concept within a limited time frame, typically 20 seconds,
+        while the game's neural network tries to recognize the drawing in
+        real-time. It serves as a research project to improve machine learning
+        technology. By collecting drawings from people around the world,
+        Google's AI learns to recognize a wide variety of doodling styles,
+        shapes, and concepts, enhancing its ability to understand
+        human-generated visual content.
+      </p>
+      <br />
+      <br />
+      <!-- <p class="decorated-p">
+        A Neural Network is a series of algorithms that tries to recognize
+        underlying relationships in a set of data through a process that mimics
+        the way the human brain operates.
+      </p> -->
+      <br />
+      <br />
+      <!-- <p>
+        Neural Networks are used for a wide range of applications where pattern
+        recognition, classification, and prediction are important. Here we use
+        it to identify patterns with visual data apart from its many other
+        applications such as voice recognition, Natural Language Processing
+        (NLP) and autonomour vehicles to name a few.
+      </p> -->
+
+      <p>
+        For the purpose of this story, I have included doodles that have the
+        chance of being different by showing some creativity. Some examples of
+        these would be:
+      </p>
+      <br />
+      <br />
+    </div>
+    <div class="intro-container">
+      <div class="section">
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/necklace/necklace1_5286072449761280.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/necklace/necklace2_5960691955531776.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/necklace/necklace3_4788198762872832.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/necklace/necklace4_5486335764725760.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/necklace/necklace5_4682831118729216.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/necklace/necklace6_6279359012798464.png"
+        />
+      </div>
+
+      <div class="section">
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/snowflake/snowflake1_5913888434421760.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/snowflake/snowflake2_4718135632461824.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/snowflake/snowflake3_5230187002200064.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/snowflake/snowflake4_6275834992132096.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/snowflake/snowflake5_4925051839184896.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/snowflake/snowflake6_5505420602900480.png"
+        />
+      </div>
+      <div class="section">
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/bread/bread1_6101272488837120.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/bread/bread2_4652687247278080.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/bread/bread3_6485502142185472.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/bread/bread4_6435376216408064.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/bread/bread5_5207243739889664.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/bread/bread6_5195740362047488.png"
+        />
+      </div>
+      <div class="section">
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/flower/flower1_5273624929894400.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/flower/flower2_6243046859472896.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/flower/flower3_5034233196183552.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/flower/flower4_4594219316412416.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/flower/flower5_5383674637844480.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/flower/flower6_6148053662695424.png"
+        />
+      </div>
+      <div class="section">
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/flying_saucer/flying_5484332011487232.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/flying_saucer/flying_5515970070183936.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/flying_saucer/flying_5744349012819968.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/flying_saucer/flying_5891192870928384.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/flying_saucer/flying_6048857714589696.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/flying_saucer/flying_6650448951902208.png"
+        />
+      </div>
+      <div class="section">
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/calendar/calendar_4512135579172864.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/calendar/calendar_4881562631929856.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/calendar/calendar_4946272823803904.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/calendar/calendar_5067714982838272.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/calendar/calendar_6578752609845248.png"
+        />
+        <img
+          class="scale-image"
+          src="/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/intro_section/calendar/calendar_6658502443401216.png"
+        />
+      </div>
+    </div>
+
+    <div class="intro-container">
+      <div class="section-name">Necklace</div>
+      <div class="section-name">Snowflake</div>
+      <div class="section-name">Bread</div>
+      <div class="section-name">Flower</div>
+      <div class="section-name">Flying Saucer</div>
+      <div class="section-name">Calendar</div>
+    </div>
+
+    <br />
+    <br />
+    <div class="story-text">
+      Except that the data is not represented as the doodle itself. The doodle
+      for each category is stored in a (dot)NDJSON format as an array of strokes
+      where each stroke is a sequence of x and y coordinates. It represents the
+      vector drawing commands to recreate the drawing.
+    </div>
+    <div class="story-text">
+      <p>Let's take a look at the sample data for a house.</p>
+      <!-- <p>
+    <pre><code>
+    "word" : "house",
+    "countrycode" : "US",
+    "timestamp" : "2017-03-11 19:09:26.08877 UTC",
+    "recognized" : true,
+    "key_id" : "5054419760578560",
+    "drawing" : [[[9,9,13,19,23,41,62,129,145,164,166,161,141,132,0],[108,212,239,252,255,255,253,236,231,220,189,164,100,85,108]],
+    [[3,3,14,44,63,75,100,135],[107,92,68,22,1,0,16,72]],[[27,22,25,37,60,65,63,22],[157,162,203,210,210,203,148,148]],
+    [[13,49,74],[185,187,184]],[[38,42],[156,212]]]
+    </code></pre>  
+      </p> -->
+      <button
+        id="seeDataButton"
+        style="
+          margin-left: 390px;
+          background-color: transparent;
+          border: none;
+          color: black;
+          cursor: pointer;
+          font-size: 21px;
+        "
+      >
+        Start Animation
+      </button>
+
+      <br />
+
+      <svg id="howToReadData" width="900" height="390"></svg>
+    </div>
+
+    <div class="story-text">
+      <p>
+        There are 50 million rows of this data across different categories. And
+        these are real people who have drawn them. The location of these people
+        is scattered across over 200 countries.
+      </p>
+      <p>
+        United States has the largest number of drawings and to represent them,
+        the size of the enclosing rectangle below represents the drawings within
+        the US. United Kingdom the second highest with a huge gap.
+      </p>
+    </div>
+    <div class="story-text" id="countries-legend">Click for Legend</div>
+    <br />
+    <br />
+    <div id="svg-countries-container">
+      <svg id="svg-countries"></svg>
+    </div>
+    <br />
+    <br />
+    <div class="story-text">
+      <p>
+        The data above is skewed. There are also a few other countries apart
+        from the ones shown that have very minimalistic numbers. A few up to
+        10,000 would be Tunisia, Cyprus, Maldives, Bermuda, but at the extreme
+        bottom were less than 20 observations were possible would be Ethiopia,
+        Mali, Guinea.
+      </p>
+      <p class="decorated-p">
+        Not every part of every country in the World has equal access to
+        internet and so, as we may see, the data is always skewed positively
+        towards the developed countries.
+      </p>
+      <br />
+      <br />
+      <br />
+      <p>
+        Let's take a look at a few training drawings. These drawings were given
+        to an AI as the training dataset.
+      </p>
+    </div>
+    <div class="story-text">
+      <p>
+        With the training drawings fed into the system, let's find out if the AI
+        is able to recognize the other drawings belonging to the same category.
+      </p>
+    </div>
+    <div class="story-text">
+      <p>How to Read</p>
+      <p>Click over categories (dishwahser, house...) to see doodles</p>
+      <p>Hover over doodle to see more info</p>
+    </div>
+    <br />
+    <br />
+    <div id="recognized-false-container"><svg id="recognized-false"></svg></div>
+    <br />
+    <br />
+    <!-- <div class="story-text">
+      <p class="square" id="square1">
+        <span id="square1Legend">Total Number of Doodles</span>
+      </p>
+      <p class="square" id="square2">
+        <span id="square2Legend">Total Number of Doodles Unrecognized</span>
+      </p>
+    </div> -->
+    <div class="story-text">
+      <div class="item">
+        <div class="square" id="square1"></div>
+        <div class="label">Total Number of Drawings</div>
+      </div>
+      <div class="item">
+        <div class="square" id="square2"></div>
+        <div class="label">Total Number of Unrecognized Drawings</div>
+      </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <div class="story-text">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+      est laborum.
+    </div>
+    <br />
+    <br />
+    <br />
+    <div id="different-ways-container"><svg id="different-ways"></svg></div>
+    <br />
+    <br />
+    <div class="story-text">
+      <div class="item">
+        <div class="square" id="square1"></div>
+        <div class="label">Total Number of Drawings</div>
+      </div>
+      <div class="item">
+        <div class="square" id="square2"></div>
+        <div class="label">Total Number of Recognized Drawings</div>
+      </div>
+    </div>
+    <br />
+    <br />
+    <br />
+  </body>
+  <script src="javascript/commonFunctions.js"></script>
+
+  <script src="javascript/svgtitlecontainer/svgtitlecontainer_data.js"></script>
+  <script src="javascript/svgtitlecontainer/svgtitlecontainer_functions.js"></script>
+  <script src="javascript/svgtitlecontainer/svgtitlecontainer.js"></script>
+
+  <script src="javascript/svgHowToReadData/howToReadData.js"></script>
+
+  <script src="javascript/countries/svgCountries_data.js"></script>
+  <script src="javascript/countries/svgCountries.js"></script>
+
+  <script src="javascript/recognized-true/svgRecognizedTrue.js"></script>
+
+  <script src="javascript/recognized-false/images.js"></script>
+  <script src="javascript/recognized-false/svgRecognizedFalse.js"></script>
+
+  <script src="javascript/different-ways/differentWays_data.js"></script>
+  <script src="javascript/different-ways/differentWays.js"></script>
+</html>

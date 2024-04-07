@@ -1,0 +1,154 @@
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+/* main heading */
+h1 {
+    margin: 0; 
+    font-size: 3rem;
+}
+
+h1 span {
+    display: block;
+    line-height: 0.75;
+}
+
+.title-container {
+    display: flex;
+    height: 100vh;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    border: 3px solid black;
+    width: 100%; 
+}
+
+.story-text {
+    width: 45%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: justify;
+    line-height: 1.5;
+    font-size: 1.2em;
+}
+
+.custom-underline{
+    position: relative;
+    text-decoration: none;
+    box-shadow: inset 0 -2px 0 #ffd43c;
+    color: #000;
+    cursor: pointer; 
+}
+
+.custom-underline:hover .tooltip-content {
+    visibility: visible;
+    opacity: 1;
+}
+
+.tooltip-content {
+    visibility: hidden;
+    opacity: 0;
+    width: 120px;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px; 
+}
+  
+.tooltip-content img {
+    width: 100%; 
+    border: 2px solid #ffd43c;
+}
+
+.decorated-p {
+    border-top: 2px solid #000; /* Adds a line above the text */
+    border-bottom: 2px solid #000; /* Adds a line below the text */
+    padding: 8px 0; /* Adds some spacing between the text and the lines */
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.intro-container {
+    display: flex;
+    max-width: 75%;
+    margin: auto;
+}
+
+.section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    grid-template-rows: repeat(3, auto);
+    gap: 10px;
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.section-name{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, auto); 
+    gap: 10px;
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+}
+
+.scale-image {
+    width: 75%;
+    height: auto;
+}
+
+/*svg title container*/
+#svg-title-container{
+    position: absolute;
+}
+
+/*svg countries*/
+#svg-countries-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#recognized-true-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#recognized-false-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#different-ways-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#countries-legend{
+    cursor: pointer;
+}
+.item{
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+}
+.square {
+    width: 30px;    
+    height: 30px; 
+    border: 2px solid black;   
+    margin-right: 6px;
+}
+#square1 {
+    background-color: #fff;
+}
+#square2 {
+    background-color: #ffd43c;
+}
