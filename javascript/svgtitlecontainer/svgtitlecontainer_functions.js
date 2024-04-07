@@ -1,20 +1,12 @@
 const tc_totalDuration = 750;
 
-const tc_createPath = (stroke) => {
-  let d = `M ${stroke[0][0]} ${stroke[1][0]}`;
-  for (let i = 1; i < stroke[0].length; i++) {
-    d += ` L ${stroke[0][i]} ${stroke[1][i]}`;
-  }
-  return d;
-};
-
 const tc_drawStroke = (data, group, index) => {
   if (index < data.length) {
     const stroke = data[index];
 
     const path = group
       .append("path")
-      .attr("d", tc_createPath(stroke))
+      .attr("d", createPath(stroke))
       .attr("fill", "none")
       .attr("stroke", "black")
       .attr("stroke-width", "2");

@@ -1,6 +1,11 @@
 const svgDifferentWays = d3.select("#different-ways");
 const svgDifferentWaysObj = { width: 1000, height: 450, strokeWidth: 3 };
 const totalDuration = 2000;
+const tabRowPadding = 100;
+const tabWidth =
+  (svgDifferentWaysObj.width - tabRowPadding * 2) /
+  Object.keys(shapeDrawings).length;
+const tabYPosition = 50;
 
 svgDifferentWays
   .attr("width", svgDifferentWaysObj.width)
@@ -25,28 +30,10 @@ svgDifferentWays
   .attr("stroke", "black")
   .attr("stroke-width", svgDifferentWaysObj.strokeWidth);
 
-const words2 = ["line", "square", "triangle", "circle"];
-
-const positions2 = [
-  { x: svgDifferentWaysObj.width / 2 - 120, y: 50 },
-  { x: svgDifferentWaysObj.width / 2, y: 50 },
-  { x: svgDifferentWaysObj.width / 2 + 120, y: 50 },
-  { x: svgDifferentWaysObj.width / 2 + 240, y: 50 },
-];
-
 const removePreviousDoodles = () => {
-  svgDifferentWays.selectAll(".square-group").remove();
-  svgDifferentWays.selectAll(".circle-group").remove();
-  svgDifferentWays.selectAll(".line-group").remove();
-  svgDifferentWays.selectAll(".triangle-group").remove();
-};
-
-const createPath = (stroke) => {
-  let d = `M ${stroke[0][0]} ${stroke[1][0]}`;
-  for (let i = 1; i < stroke[0].length; i++) {
-    d += ` L ${stroke[0][i]} ${stroke[1][i]}`;
-  }
-  return d;
+  Object.keys(shapeDrawings).forEach((word, index) => {
+    svgDifferentWays.selectAll(`.${word}-group`).remove();
+  });
 };
 
 const createDoodleGroup = (
@@ -58,12 +45,12 @@ const createDoodleGroup = (
 ) => {
   return svgDifferentWays
     .append("g")
-    .attr("class", groupClass)
-    .attr("id", groupId)
     .attr(
       "transform",
       `translate(${translateX}, ${translateY}) scale(${scaleFactor})`
-    );
+    )
+    .attr("class", groupClass)
+    .attr("id", groupId);
 };
 
 const appendPathsToGroups = (group, lineData, createPath) => {
@@ -107,11 +94,12 @@ const legendLine1 = svgRecognizedFalse
 
 legendLine1.attr("opacity", 0);
 
-words2.forEach((word, index) => {
+Object.keys(shapeDrawings).forEach((word, index) => {
+  var tabXPosition = tabRowPadding + tabWidth * index + tabWidth / 2;
   svgDifferentWays
     .append("text")
-    .attr("x", positions2[index].x)
-    .attr("y", positions2[index].y)
+    .attr("x", tabXPosition)
+    .attr("y", tabYPosition)
     .attr("id", word)
     .text(word)
     .style("cursor", "pointer")

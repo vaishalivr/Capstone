@@ -8,6 +8,14 @@ const resizeBar = (svgId, width, height) => {
     .attr("width", width);
 };
 
+const createPath = (stroke) => {
+  let d = `M ${stroke[0][0]} ${stroke[1][0]}`;
+  for (let i = 1; i < stroke[0].length; i++) {
+    d += ` L ${stroke[0][i]} ${stroke[1][i]}`;
+  }
+  return d;
+};
+
 const attachHoverEffectToGroup = (group, options) => {
   const bbox = group.node().getBBox();
   const hasHelpText = typeof options.helpText != "undefined";
@@ -28,8 +36,8 @@ const attachHoverEffectToGroup = (group, options) => {
     .append("rect")
     .attr("x", bbox.x)
     .attr("y", bbox.y)
-    .attr("width", bbox.width - 6)
-    .attr("height", bbox.height - 6)
+    .attr("width", bbox.width + 10)
+    .attr("height", bbox.height + 10)
     .attr("stroke", "#ffd43c")
     .attr("stroke-width", 6)
     .attr("fill", "none")
