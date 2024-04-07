@@ -109,83 +109,22 @@ words2.forEach((word, index) => {
     .text(word)
     .style("cursor", "pointer")
     .on("click", function () {
-      if (word == "line") {
-        removePreviousDoodles();
-        drawLegendLine();
-        resizeBar("#recognized-rect", 190, svgDifferentWaysObj.height);
-
-        const group1 = createDoodleGroup("line-group", 100, 100, 0.5);
-        const group2 = createDoodleGroup("line-group", 300, 100, 0.5);
-
-        const path1 = appendPathsToGroups(group1, line1, createPath);
-        const path2 = appendPathsToGroups(group2, line2, createPath);
-
-        const length1 = path1.node().getTotalLength();
-        const length2 = path2.node().getTotalLength();
-
-        animatePathStroke(path1, length1);
-        animatePathStroke(path2, length2);
-      }
-
-      if (word === "square") {
-        removePreviousDoodles();
-        drawLegendLine();
-        resizeBar("#recognized-rect", 200, svgDifferentWaysObj.height);
-
-        const group1 = createDoodleGroup("square-group", 100, 100, 0.5);
-        const group2 = createDoodleGroup("square-group", 300, 100, 0.5);
-
-        const path1 = appendPathsToGroups(group1, square1, createPath);
-        const path2 = appendPathsToGroups(group2, square2, createPath);
-
-        const length1 = path1.node().getTotalLength();
-        const length2 = path2.node().getTotalLength();
-
-        animatePathStroke(path1, length1);
-        animatePathStroke(path2, length2);
-      }
-
-      if (word == "triangle") {
-        console.log("triangle");
-        removePreviousDoodles();
-        drawLegendLine();
-        resizeBar("#recognized-rect", 330, svgDifferentWaysObj.height);
-
-        const group1 = createDoodleGroup("triangle-group", 100, 100, 0.5);
-        const group2 = createDoodleGroup("triangle-group", 300, 100, 0.5);
-
-        const path1 = appendPathsToGroups(group1, triangle1, createPath);
-        const path2 = appendPathsToGroups(group2, triangle2, createPath);
-
-        const length1 = path1.node().getTotalLength();
-        const length2 = path2.node().getTotalLength();
-
-        animatePathStroke(path1, length1);
-        animatePathStroke(path2, length2);
-      }
-
-      if (word == "circle") {
-        removePreviousDoodles();
-        drawLegendLine();
-        resizeBar("#recognized-rect", 390, svgDifferentWaysObj.height);
-
-        const group1 = createDoodleGroup("circle-group", 270, 150, 0.5);
-        const group2 = createDoodleGroup("circle-group", 600, 150, 0.5);
-
-        [group1, group2].forEach((group) => {
-          group
-            //.selectAll("circle") // Select all circles within the group
-            .on("mouseover", () => console.log("hello")); // Log 'hello' on mouseover
-        });
-
-        const path1 = appendPathsToGroups(group1, circle1, createPath);
-        const path2 = appendPathsToGroups(group2, circle2, createPath);
-
-        const length1 = path1.node().getTotalLength();
-        const length2 = path2.node().getTotalLength();
-
-        animatePathStroke(path1, length1);
-        animatePathStroke(path2, length2);
-      }
+      removePreviousDoodles();
+      drawLegendLine();
+      resizeBar(
+        "#recognized-rect",
+        shapeDrawings[word]["recognizedDrawingCount"],
+        svgDifferentWaysObj.height
+      );
+      shapeDrawings[word]["drawings"].forEach((drawing, index) => {
+        var group = createDoodleGroup(
+          word + "-group",
+          100 + index * 200,
+          100,
+          0.5
+        );
+        var path = appendPathsToGroups(group, drawing["strokes"], createPath);
+        animatePathStroke(path, path.node().getTotalLength());
+      });
     });
 });
