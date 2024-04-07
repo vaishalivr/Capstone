@@ -49,10 +49,17 @@ const createPath = (stroke) => {
   return d;
 };
 
-const createDoodleGroup = (groupClass, translateX, translateY, scaleFactor) => {
+const createDoodleGroup = (
+  groupId,
+  groupClass,
+  translateX,
+  translateY,
+  scaleFactor
+) => {
   return svgDifferentWays
     .append("g")
     .attr("class", groupClass)
+    .attr("id", groupId)
     .attr(
       "transform",
       `translate(${translateX}, ${translateY}) scale(${scaleFactor})`
@@ -118,6 +125,7 @@ words2.forEach((word, index) => {
       );
       shapeDrawings[word]["drawings"].forEach((drawing, index) => {
         var group = createDoodleGroup(
+          drawing["vectorId"],
           word + "-group",
           100 + index * 200,
           100,
@@ -125,6 +133,7 @@ words2.forEach((word, index) => {
         );
         var path = appendPathsToGroups(group, drawing["strokes"], createPath);
         animatePathStroke(path, path.node().getTotalLength());
+        attachHoverEffectToGroup(group, {});
       });
     });
 });
