@@ -1,3 +1,11 @@
+const capstoneGlobals = {
+  svgStyle: { width: 1000, height: 450, strokeWidth: 3 },
+  svgTab: {
+    rowPadding: 100,
+    yPosiiton: 50,
+  },
+};
+
 const resizeBar = (svgId, width, height) => {
   d3.select(svgId)
     .transition()
@@ -19,7 +27,7 @@ const createPath = (stroke) => {
 const scaleGroupToGridCell = (group, translateX, translateY) => {
   const bbox = group.node().getBBox();
   var xScale = Math.min(1, 90 / bbox.width);
-  var yScale = Math.min(1, 90 / bbox.height);
+  var yScale = Math.min(1000, 90 / bbox.height);
 
   group.attr(
     "transform",
@@ -87,8 +95,10 @@ const attachHoverEffectToGroup = (group, options) => {
 const svgTab = {
   title: "untitled",
   parentSvg: null,
-  position: [0, 0],
+  totalCount: 0,
+  index: 0,
   clickCallback: null,
+  _position: [0, 0],
   _underline: null,
   _svgElement: null,
   _clickCallback: (_self) => {
@@ -97,20 +107,32 @@ const svgTab = {
       _self._underline = _self.parentSvg
         .append("line")
         .attr("class", "svg-tab-underline")
-        .attr("x1", _self.position[0])
-        .attr("y1", _self.position[1] + 5)
-        .attr("x2", _self.position[0] + this.getComputedTextLength())
-        .attr("y2", _self.position[1] + 5)
+        .attr("x1", _self._position[0])
+        .attr("y1", _self._position[1] + 5)
+        .attr("x2", _self._position[0] + this.getComputedTextLength())
+        .attr("y2", _self._position[1] + 5)
         .attr("stroke", "#ffd43c")
         .attr("stroke-width", "3");
       _self.clickCallback(e);
     };
   },
   render: function () {
+    // calculate tab position
+    var tabWidth =
+      (capstoneGlobals.svgStyle.width - capstoneGlobals.svgTab.rowPadding * 2) /
+      this.totalCount;
+    this._position = [
+      capstoneGlobals.svgTab.rowPadding +
+        tabWidth * this.index +
+        tabWidth / 2 -
+        this.title.length,
+      capstoneGlobals.svgTab.yPosiiton,
+    ];
+    // render tab
     this._svgElement = this.parentSvg
       .append("text")
-      .attr("x", this.position[0])
-      .attr("y", this.position[1])
+      .attr("x", this._position[0])
+      .attr("y", this._position[1])
       .attr("id", this.title)
       .text(this.title)
       .style("cursor", "pointer")

@@ -1,11 +1,7 @@
 const svgDifferentWays = d3.select("#different-ways");
-const svgDifferentWaysObj = { width: 1000, height: 450, strokeWidth: 3 };
+const svgDifferentWaysObj = capstoneGlobals.svgStyle;
 const totalDuration = 2000;
 const tabRowPadding = 100;
-const tabWidth =
-  (svgDifferentWaysObj.width - tabRowPadding * 2) /
-  Object.keys(shapeDrawings).length;
-const tabYPosition = 50;
 
 svgDifferentWays
   .attr("width", svgDifferentWaysObj.width)
@@ -103,12 +99,11 @@ const legendLine1 = svgRecognizedFalse
 legendLine1.attr("opacity", 0);
 
 Object.keys(shapeDrawings).forEach((word, index) => {
-  var tabXPosition = tabRowPadding + tabWidth * index + tabWidth / 2;
-
   var wordTab = Object.create(svgTab);
   wordTab.title = word;
   wordTab.parentSvg = svgDifferentWays;
-  wordTab.position = [tabXPosition, tabYPosition];
+  wordTab.totalCount = Object.keys(shapeDrawings).length;
+  wordTab.index = index;
   wordTab.clickCallback = () => {
     resetSvg();
     drawLegendLine();

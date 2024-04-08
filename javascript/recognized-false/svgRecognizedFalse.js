@@ -12,7 +12,7 @@ svgRecognizedFalse
   .attr("y", svgRecognizedFalseObj.height - 60)
   .attr("width", 0)
   .attr("height", svgRecognizedFalseObj.height - 60)
-  .attr("fill", "#ffd43c")
+  .attr("fill", "url(#hashPattern)")
   .attr("stroke", "#ffd43c");
 
 svgRecognizedFalse
@@ -136,7 +136,8 @@ words1.forEach((word, index) => {
   var wordTab = Object.create(svgTab);
   wordTab.title = word;
   wordTab.parentSvg = svgRecognizedFalse;
-  wordTab.position = [positions1[index].x, positions1[index].y];
+  wordTab.totalCount = words1.length;
+  wordTab.index = index;
   wordTab.clickCallback = function (e) {
     // d3.selectAll("line:not(#legend-line):not(#lineAboveBar)").remove();
     d3.selectAll("g").remove();
