@@ -7,6 +7,10 @@ const numRows = 9;
 const numCols = 9;
 const rowSpacing = svgCountriesObj.height / (numRows - 1);
 const colSpacing = svgCountriesObj.width / (numCols - 1);
+svgCountries.attr(
+  "height",
+  svgCountriesObj.height + capstoneGlobals.levelGauge.height
+);
 let countryIndex = 0;
 let lastClickedRectId = null;
 
@@ -26,62 +30,63 @@ svgCountries
   .append("rect")
   .attr("id", "outerRect")
   .attr("width", svgCountriesObj.width)
-  .attr("height", svgCountriesObj.height)
+  .attr("height", svgCountriesObj.height + capstoneGlobals.levelGauge.height)
   .attr("fill", "none")
   .attr("stroke", "black");
 
-for (let row = 0; row < numRows - 1; row++) {
-  for (let col = 0; col < numCols - 1; col++) {
-    const x = (col + 0.5) * colSpacing;
-    const y = (row + 0.5) * rowSpacing;
+var countriesLevelGauge = Object.create(levelGaugeWidget);
+countriesLevelGauge.parentSvg = svgCountries;
+countriesLevelGauge.parentSvgHeight =
+  svgCountriesObj.height + capstoneGlobals.levelGauge.height;
+countriesLevelGauge.render();
 
-    if (countryIndex < countriesArray.length) {
-      let squareSize = countriesArray[countryIndex].Total * 2;
-      const rectId = `rect-${countryIndex}`;
+countriesArray.forEach((country, countryIndex) => {
+  const x = ((countryIndex % 8) + 0.5) * colSpacing;
+  const y = (Math.floor(countryIndex / 8) + 0.5) * rowSpacing;
 
-      svgCountries
-        .append("rect")
-        .attr("x", x - squareSize / 2)
-        .attr("y", y - squareSize / 2)
-        .attr("width", squareSize)
-        .attr("height", squareSize)
-        .attr("fill", "url(#hashPattern)")
+  let squareSize = countriesArray[countryIndex].Total * 2;
+  const rectId = `rect-${countryIndex}`;
+
+  svgCountries
+    .append("rect")
+    .attr("x", x - squareSize / 2)
+    .attr("y", y - squareSize / 2)
+    .attr("width", squareSize)
+    .attr("height", squareSize)
+    .attr("fill", "url(#hashPattern)")
+    .attr("stroke", "#ffd43c")
+    .attr("id", rectId)
+    .style("opacity", 0);
+
+  svgCountries
+    .append("text")
+    .attr("x", x)
+    .attr("y", y)
+    .attr("text-anchor", "middle")
+    .attr("dominant-baseline", "central")
+    .attr("font-size", "12px")
+    .text(countriesArray[countryIndex].Country)
+    .style("cursor", "pointer")
+    .on("click", function () {
+      const hashedLevel = 100 * countryIndex;
+      if (lastClickedRectId) {
+        d3.select(`#${lastClickedRectId}`).transition().style("opacity", 0);
+      }
+      d3.select(`#${rectId}`).transition().style("opacity", 1);
+      lastClickedRectId = rectId;
+      countriesLevelGauge.resize(hashedLevel, 100);
+
+      d3.select("#outerRect")
+        .transition()
+        .duration(100)
+        .attr("stroke-width", 9)
         .attr("stroke", "#ffd43c")
-        .attr("id", rectId)
-        .style("opacity", 0);
-
-      svgCountries
-        .append("text")
-        .attr("x", x)
-        .attr("y", y)
-        .attr("text-anchor", "middle")
-        .attr("dominant-baseline", "central")
-        .attr("font-size", "12px")
-        .text(countriesArray[countryIndex].Country)
-        .style("cursor", "pointer")
-        .on("click", function () {
-          if (lastClickedRectId) {
-            d3.select(`#${lastClickedRectId}`).transition().style("opacity", 0);
-          }
-          d3.select(`#${rectId}`).transition().style("opacity", 1);
-          lastClickedRectId = rectId;
-          console.log(rectId);
-
-          d3.select("#outerRect")
-            .transition()
-            .duration(100)
-            .attr("stroke-width", 9)
-            .attr("stroke", "#ffd43c")
-            .transition()
-            .duration(2000)
-            .attr("stroke-width", 1)
-            .attr("stroke", "black");
-        });
-
-      countryIndex++;
-    }
-  }
-}
+        .transition()
+        .duration(2000)
+        .attr("stroke-width", 1)
+        .attr("stroke", "black");
+    });
+});
 
 /////legend
 const countriesLegend = document.getElementById("countries-legend");

@@ -128,6 +128,7 @@ const levelGaugeWidget = {
   },
   resize: function (hashedLevel, solidLevel) {
     var totalLevels = hashedLevel + solidLevel;
+    console.log(totalLevels);
     this._hashedRect
       .transition()
       .duration(750)
