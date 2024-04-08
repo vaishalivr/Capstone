@@ -5,15 +5,10 @@ svgRecognizedFalse
   .attr("width", svgRecognizedFalseObj.width)
   .attr("height", svgRecognizedFalseObj.height);
 
-svgRecognizedFalse
-  .append("rect")
-  .attr("id", "unrecognized-rect")
-  .attr("x", 0)
-  .attr("y", svgRecognizedFalseObj.height - 60)
-  .attr("width", 0)
-  .attr("height", svgRecognizedFalseObj.height - 60)
-  .attr("fill", "url(#hashPattern)")
-  .attr("stroke", "#ffd43c");
+var svgRecognizedFalseGauge = Object.create(levelGaugeWidget);
+svgRecognizedFalseGauge.parentSvg = svgRecognizedFalse;
+svgRecognizedFalseGauge.parentSvgHeight = 800;
+svgRecognizedFalseGauge.render();
 
 svgRecognizedFalse
   .append("rect")
@@ -112,26 +107,6 @@ const appendRectsWithImagesAndText = (numRects, imagePaths, textArray) => {
   }
 };
 
-// const resizeUnrecognizedBar = (width) => {
-//   d3.select("#unrecognized-rect")
-//     .transition()
-//     .duration(750)
-//     .attr("x", 0)
-//     .attr("y", svgRecognizedFalseObj.height - 60)
-//     .attr("height", svgRecognizedFalseObj.height - 60)
-//     .attr("width", width);
-// };
-
-const drawBarChartLine = () => {
-  svgRecognizedFalse
-    .append("line")
-    .attr("x1", 0)
-    .attr("y1", svgRecognizedFalseObj.height - 60)
-    .attr("x2", svgRecognizedFalseObj.width)
-    .attr("y2", svgRecognizedFalseObj.height - 60)
-    .attr("stroke", "black");
-};
-
 words1.forEach((word, index) => {
   var wordTab = Object.create(svgTab);
   wordTab.title = word;
@@ -143,8 +118,7 @@ words1.forEach((word, index) => {
     d3.selectAll("g").remove();
 
     if (e.target.id == "Dishwasher") {
-      resizeBar("#unrecognized-rect", 130, svgRecognizedFalseObj.height);
-      drawBarChartLine();
+      svgRecognizedFalseGauge.resize(90, 200);
       appendRectsWithImagesAndText(24, imagePathDishwasher, [
         "Counter top Dishwashers",
         "Tap Shower",
@@ -153,8 +127,7 @@ words1.forEach((word, index) => {
       ]);
     }
     if (e.target.id == "Fans") {
-      resizeBar("#unrecognized-rect", 161, svgRecognizedFalseObj.height);
-      drawBarChartLine();
+      svgRecognizedFalseGauge.resize(161, 200);
       appendRectsWithImagesAndText(24, imagePathFan, [
         "Hand Fan",
         "Pedestal Fan",
@@ -163,16 +136,14 @@ words1.forEach((word, index) => {
       ]);
     }
     if (e.target.id == "House") {
-      resizeBar("#unrecognized-rect", 22.42, svgRecognizedFalseObj.height);
-      drawBarChartLine();
+      svgRecognizedFalseGauge.resize(22.42, 200);
       appendRectsWithImagesAndText(12, imagePathHouse, [
         "Flat Roofed",
         "Houses with Scene",
       ]);
     }
     if (e.target.id == "Blackberry") {
-      resizeBar("#unrecognized-rect", 113, svgRecognizedFalseObj.height);
-      drawBarChartLine();
+      svgRecognizedFalseGauge.resize(113, 200);
       appendRectsWithImagesAndText(12, imagePathBlackberry, ["Fruit", "Phone"]);
     }
   };

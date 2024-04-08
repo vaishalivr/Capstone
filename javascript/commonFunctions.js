@@ -4,6 +4,9 @@ const capstoneGlobals = {
     rowPadding: 100,
     yPosiiton: 50,
   },
+  levelGauge: {
+    height: 60,
+  },
 };
 
 const resizeBar = (svgId, width, height) => {
@@ -92,6 +95,56 @@ const attachHoverEffectToGroup = (group, options) => {
     });
 };
 
+const levelGaugeWidget = {
+  parentSvg: null,
+  parentSvgHeight: 0,
+  _hashedRect: null,
+  _solidRect: null,
+  render: function () {
+    this.parentSvg
+      .append("line")
+      .attr("class", "svg-levelGauge-line")
+      .attr("x1", 0)
+      .attr("y1", this.parentSvgHeight - capstoneGlobals.levelGauge.height)
+      .attr("x2", capstoneGlobals.svgStyle.width)
+      .attr("y2", this.parentSvgHeight - capstoneGlobals.levelGauge.height)
+      .attr("stroke", "black");
+    this._hashedRect = this.parentSvg
+      .append("rect")
+      .attr("x", 0)
+      .attr("y", this.parentSvgHeight - capstoneGlobals.levelGauge.height)
+      .attr("width", 0)
+      .attr("height", capstoneGlobals.levelGauge.height)
+      .attr("fill", "url(#hashPattern)")
+      .attr("stroke", "#ffd43c");
+    this._solidRect = this.parentSvg
+      .append("rect")
+      .attr("x", 0)
+      .attr("y", this.parentSvgHeight - capstoneGlobals.levelGauge.height)
+      .attr("width", 0)
+      .attr("height", capstoneGlobals.levelGauge.height)
+      .attr("fill", "#ffd43c")
+      .attr("stroke", "#ffd43c");
+  },
+  resize: function (hashedLevel, solidLevel) {
+    var totalLevels = hashedLevel + solidLevel;
+    this._hashedRect
+      .transition()
+      .duration(750)
+      .attr(
+        "width",
+        (capstoneGlobals.svgStyle.width * hashedLevel) / totalLevels
+      );
+    this._solidRect
+      .transition()
+      .duration(750)
+      .attr("x", (capstoneGlobals.svgStyle.width * hashedLevel) / totalLevels)
+      .attr(
+        "width",
+        (capstoneGlobals.svgStyle.width * solidLevel) / totalLevels
+      );
+  },
+};
 const svgTab = {
   title: "untitled",
   parentSvg: null,

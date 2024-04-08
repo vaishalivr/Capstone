@@ -153,9 +153,7 @@ h1 span {
     background-color: #ffd43c;
 }
 .hashed-square {
-    background-image: 
-
-        linear-gradient(135deg, #ffd43c 16%, #fff 16%,  #fff 33%, #ffd43c 33%, #ffd43c 66%, #fff 66%, #fff 84%, #ffd43c 84%);
+    background-image: linear-gradient(135deg, #ffd43c 16%, #fff 16%,  #fff 33%, #ffd43c 33%, #ffd43c 66%, #fff 66%, #fff 84%, #ffd43c 84%);
     background-size: 8px 8px;;
     background-position: 0px 0px;
 }

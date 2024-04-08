@@ -7,15 +7,10 @@ svgDifferentWays
   .attr("width", svgDifferentWaysObj.width)
   .attr("height", svgDifferentWaysObj.height);
 
-svgDifferentWays
-  .append("rect")
-  .attr("id", "recognized-rect")
-  .attr("x", 0)
-  .attr("y", svgDifferentWaysObj.height - 60)
-  .attr("width", 0)
-  .attr("height", svgDifferentWaysObj.height - 60)
-  .attr("fill", "#ffd43c")
-  .attr("stroke", "#ffd43c");
+var differentWaysLevelGauge = Object.create(levelGaugeWidget);
+differentWaysLevelGauge.parentSvg = svgDifferentWays;
+differentWaysLevelGauge.parentSvgHeight = 450;
+differentWaysLevelGauge.render();
 
 svgDifferentWays
   .append("rect")
@@ -66,16 +61,6 @@ const appendPathsToGroups = (group, lineData, createPath) => {
     .attr("stroke-width", "2");
 };
 
-const drawLegendLine = () => {
-  svgDifferentWays
-    .append("line")
-    .attr("x1", 0)
-    .attr("y1", svgDifferentWaysObj.height - 60)
-    .attr("x2", svgDifferentWaysObj.width)
-    .attr("y2", svgDifferentWaysObj.height - 60)
-    .attr("stroke", "black");
-};
-
 const animatePathStroke = (path, length) => {
   return path
     .attr("stroke-dasharray", length + " " + length)
@@ -106,11 +91,10 @@ Object.keys(shapeDrawings).forEach((word, index) => {
   wordTab.index = index;
   wordTab.clickCallback = () => {
     resetSvg();
-    drawLegendLine();
-    resizeBar(
-      "#recognized-rect",
-      shapeDrawings[word]["recognizedDrawingCount"],
-      svgDifferentWaysObj.height
+
+    differentWaysLevelGauge.resize(
+      200,
+      shapeDrawings[word]["recognizedDrawingCount"]
     );
 
     shapeDrawings[word]["drawings"].forEach((drawing, index) => {
