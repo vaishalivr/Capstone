@@ -1,6 +1,7 @@
 const shapeDrawings = {
   square: {
-    recognizedDrawingCount: 200,
+    recognizedDrawingCount: 120538,
+    unrecognizedDrawingCount: 4607,
     drawings: [
       {
         vectorId: "square-N",
@@ -31,7 +32,8 @@ const shapeDrawings = {
     ],
   },
   line: {
-    recognizedDrawingCount: 190,
+    recognizedDrawingCount: 140874,
+    unrecognizedDrawingCount: 2675,
     drawings: [
       {
         vectorId: "line-N",
@@ -56,7 +58,8 @@ const shapeDrawings = {
     ],
   },
   circle: {
-    recognizedDrawingCount: 390,
+    recognizedDrawingCount: 118808,
+    unrecognizedDrawingCount: 4068,
     drawings: [
       {
         vectorId: "circle-N",
@@ -95,7 +98,8 @@ const shapeDrawings = {
     ],
   },
   triangle: {
-    recognizedDrawingCount: 330,
+    recognizedDrawingCount: 120500,
+    unrecognizedDrawingCount: 2670,
     drawings: [
       {
         vectorId: "triangle-S",

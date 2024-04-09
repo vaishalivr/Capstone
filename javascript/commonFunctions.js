@@ -103,67 +103,83 @@ const levelGaugeWidget = {
   _hashedText: null,
   _solidText: null,
   render: function () {
-    this.parentSvg
-      .append("line")
-      .attr("class", "svg-levelGauge-line")
-      .attr("x1", 0)
-      .attr("y1", this.parentSvgHeight - capstoneGlobals.levelGauge.height)
-      .attr("x2", capstoneGlobals.svgStyle.width)
-      .attr("y2", this.parentSvgHeight - capstoneGlobals.levelGauge.height)
-      .attr("stroke", "black");
+    // this.parentSvg
+    //   .append("line")
+    //   .attr("class", "svg-levelGauge-line")
+    //   .attr("x1", 0)
+    //   .attr("y1", this.parentSvgHeight - capstoneGlobals.levelGauge.height)
+    //   .attr("x2", capstoneGlobals.svgStyle.width)
+    //   .attr("y2", this.parentSvgHeight - capstoneGlobals.levelGauge.height)
+    //   .attr("stroke", "black");
 
     var hashedGroup = this.parentSvg.append("g");
-    this._hashedRect = hashedGroup
+    hashedGroup
       .append("rect")
       .attr("x", 0)
-      .attr("y", this.parentSvgHeight - capstoneGlobals.levelGauge.height)
+      .attr("y", this.parentSvgHeight - (capstoneGlobals.levelGauge.height / 2))
+      .attr("width", capstoneGlobals.svgStyle.width)
+      .attr("height", capstoneGlobals.levelGauge.height / 2)
+      .attr("fill", "url(#hashPattern)")
+      .attr("stroke", "#ffd43c")
+      .attr("opacity", 0.25);
+    this._hashedRect = hashedGroup.append("rect")
+      .attr("x", 0)
+      .attr("y", this.parentSvgHeight - (capstoneGlobals.levelGauge.height / 2))
       .attr("width", 0)
-      .attr("height", capstoneGlobals.levelGauge.height)
+      .attr("height", capstoneGlobals.levelGauge.height / 2)
       .attr("fill", "url(#hashPattern)")
       .attr("stroke", "#ffd43c");
     this._hashedText = hashedGroup
       .append("text")
-      .attr("x", 0)
-      .attr("y", this.parentSvgHeight - capstoneGlobals.levelGauge.height + 25);
+      .attr("x", 20)
+      .attr("y", this.parentSvgHeight - (capstoneGlobals.levelGauge.height / 2) + 25)
+      .attr("class", "level-gauge-indicator-text");
 
     var solidGroup = this.parentSvg.append("g");
+    solidGroup
+      .append("rect")
+      .attr("x", 0)
+      .attr("y", this.parentSvgHeight - capstoneGlobals.levelGauge.height)
+      .attr("width", capstoneGlobals.svgStyle.width)
+      .attr("height", capstoneGlobals.levelGauge.height / 2)
+      .attr("fill", "#ffd43c")
+      .attr("stroke", "#ffd43c").attr("opacity", 0.25);
     this._solidRect = solidGroup
       .append("rect")
       .attr("x", 0)
       .attr("y", this.parentSvgHeight - capstoneGlobals.levelGauge.height)
       .attr("width", 0)
-      .attr("height", capstoneGlobals.levelGauge.height)
+      .attr("height", capstoneGlobals.levelGauge.height / 2)
       .attr("fill", "#ffd43c")
       .attr("stroke", "#ffd43c");
     this._solidText = solidGroup
       .append("text")
-      .attr("x", 0)
-      .attr("y", this.parentSvgHeight - capstoneGlobals.levelGauge.height + 25);
+      .attr("x", 20)
+      .attr("y", this.parentSvgHeight - capstoneGlobals.levelGauge.height + 25).attr("class", "level-gauge-indicator-text");;
   },
   resize: function (hashedLevel, solidLevel) {
     var totalLevels = hashedLevel.value + solidLevel.value;
+    var hashedLevelPercentage = (hashedLevel.value / totalLevels) * 100;
+    var solidLevelPercentage = (solidLevel.value / totalLevels) * 100;
     this._hashedText.selectAll("tspan").remove();
     this._solidText.selectAll("tspan").remove();
-    this._hashedText
-      .attr(
-        "x",
-        (capstoneGlobals.svgStyle.width * hashedLevel.value) / totalLevels - 120
-      )
-      .append("tspan")
-      .attr(
-        "x",
-        (capstoneGlobals.svgStyle.width * hashedLevel.value) / totalLevels - 120
-      )
-      .attr("dy", "0.25em")
-      .text(hashedLevel["label"]);
-    this._hashedText
-      .append("tspan")
-      .attr(
-        "x",
-        (capstoneGlobals.svgStyle.width * hashedLevel.value) / totalLevels - 120
-      )
-      .attr("dy", "1em")
-      .text(hashedLevel.value);
+    this._hashedText.text(hashedLevelPercentage + " unrecognized drawings");
+
+    //   .append("tspan")
+    //   .attr(
+    //     "x",
+    //     (capstoneGlobals.svgStyle.width * hashedLevel.value) / totalLevels + 20
+    //   )
+    //   .attr("dy", "0.25em")
+    //   .text(hashedLevel["label"]);
+    // this._hashedText
+    //   .append("tspan")
+    //   .attr(
+    //     "x",
+    //     (capstoneGlobals.svgStyle.width * hashedLevel.value) / totalLevels + 20
+    //   )
+    //   .attr("dy", "1em")
+    //   .text(hashedLevel.value);
     this._hashedRect
       .transition()
       .duration(750)
@@ -171,37 +187,34 @@ const levelGaugeWidget = {
         "width",
         (capstoneGlobals.svgStyle.width * hashedLevel.value) / totalLevels
       );
-    this._solidText
-      .attr(
-        "x",
-        (capstoneGlobals.svgStyle.width * hashedLevel.value) / totalLevels + 20
-      )
-      .append("tspan")
-      .text(solidLevel["label"])
-      .attr(
-        "x",
-        (capstoneGlobals.svgStyle.width * hashedLevel.value) / totalLevels + 20
-      )
-      .attr("dy", "0.25em");
-    this._solidText
-      .append("tspan")
-      .text(solidLevel.value)
-      .attr(
-        "x",
-        (capstoneGlobals.svgStyle.width * hashedLevel.value) / totalLevels + 20
-      )
-      .attr("dy", "1em");
+    // this._solidText
+    //   .attr(
+    //     "x",
+    //     (capstoneGlobals.svgStyle.width * hashedLevel.value) / totalLevels + 20
+    //   )
+    //   .append("tspan")
+    //   .text(solidLevel["label"])
+    //   .attr(
+    //     "x",
+    //     (capstoneGlobals.svgStyle.width * hashedLevel.value) / totalLevels + 20
+    //   )
+    //   .attr("dy", "0.25em");
+    // this._solidText
+    //   .append("tspan")
+    //   .text(solidLevel.value)
+    //   .attr(
+    //     "x",
+    //     (capstoneGlobals.svgStyle.width * hashedLevel.value) / totalLevels + 20
+    //   )
+    //   .attr("dy", "1em");
     this._solidRect
       .transition()
       .duration(750)
       .attr(
-        "x",
-        (capstoneGlobals.svgStyle.width * hashedLevel.value) / totalLevels
-      )
-      .attr(
         "width",
         (capstoneGlobals.svgStyle.width * solidLevel.value) / totalLevels
       );
+    this._solidText.text(solidLevelPercentage + " recognized drawings");
   },
 };
 const svgTab = {
@@ -235,9 +248,9 @@ const svgTab = {
       this.totalCount;
     this._position = [
       capstoneGlobals.svgTab.rowPadding +
-        tabWidth * this.index +
-        tabWidth / 2 -
-        this.title.length,
+      tabWidth * this.index +
+      tabWidth / 2 -
+      this.title.length,
       capstoneGlobals.svgTab.yPosiiton,
     ];
     // render tab
@@ -249,6 +262,9 @@ const svgTab = {
       .text(this.title)
       .style("cursor", "pointer")
       .on("click", this._clickCallback(this));
+  },
+  dispatchClick: function () {
+    this._svgElement.dispatch("click");
   },
   reset: function () {
     this._underline.remove();

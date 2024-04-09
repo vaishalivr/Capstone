@@ -107,6 +107,8 @@ const appendRectsWithImagesAndText = (numRects, imagePaths, textArray) => {
   }
 };
 
+var defaultStart = true;
+
 words1.forEach((word, index) => {
   var wordTab = Object.create(svgTab);
   wordTab.title = word;
@@ -160,4 +162,8 @@ words1.forEach((word, index) => {
     }
   };
   wordTab.render();
+  if (defaultStart) {
+    wordTab.dispatchClick();
+    defaultStart = false;
+  }
 });

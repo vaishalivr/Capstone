@@ -83,6 +83,7 @@ const legendLine1 = svgRecognizedFalse
 
 legendLine1.attr("opacity", 0);
 
+var defaultStart = true;
 Object.keys(shapeDrawings).forEach((word, index) => {
   var wordTab = Object.create(svgTab);
   wordTab.title = word;
@@ -93,7 +94,7 @@ Object.keys(shapeDrawings).forEach((word, index) => {
     resetSvg();
 
     differentWaysLevelGauge.resize(
-      { value: 200, label: "unrecognized" },
+      { value: shapeDrawings[word]["unrecognizedDrawingCount"], label: "unrecognized" },
       {
         value: shapeDrawings[word]["recognizedDrawingCount"],
         label: "recognized",
@@ -115,4 +116,8 @@ Object.keys(shapeDrawings).forEach((word, index) => {
     });
   };
   wordTab.render();
+  if (defaultStart) {
+    wordTab.dispatchClick();
+    defaultStart = false;
+  }
 });
