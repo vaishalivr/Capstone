@@ -115,10 +115,13 @@ words1.forEach((word, index) => {
   wordTab.index = index;
   wordTab.clickCallback = function (e) {
     // d3.selectAll("line:not(#legend-line):not(#lineAboveBar)").remove();
-    d3.selectAll("g").remove();
+    svgRecognizedFalse.selectAll("g.row-group").remove();
 
     if (e.target.id == "Dishwasher") {
-      svgRecognizedFalseGauge.resize(90, 200);
+      svgRecognizedFalseGauge.resize(
+        { value: 90, label: "unrecognized" },
+        { value: 200, label: "recognized" }
+      );
       appendRectsWithImagesAndText(24, imagePathDishwasher, [
         "Counter top Dishwashers",
         "Tap Shower",
@@ -127,7 +130,10 @@ words1.forEach((word, index) => {
       ]);
     }
     if (e.target.id == "Fans") {
-      svgRecognizedFalseGauge.resize(161, 200);
+      svgRecognizedFalseGauge.resize(
+        { value: 161, label: "unrecognized" },
+        { value: 200, label: "recognized" }
+      );
       appendRectsWithImagesAndText(24, imagePathFan, [
         "Hand Fan",
         "Pedestal Fan",
@@ -136,14 +142,20 @@ words1.forEach((word, index) => {
       ]);
     }
     if (e.target.id == "House") {
-      svgRecognizedFalseGauge.resize(22.42, 200);
+      svgRecognizedFalseGauge.resize(
+        { value: 22.42, label: "unrecognized" },
+        { value: 200, label: "recognized" }
+      );
       appendRectsWithImagesAndText(12, imagePathHouse, [
         "Flat Roofed",
         "Houses with Scene",
       ]);
     }
     if (e.target.id == "Blackberry") {
-      svgRecognizedFalseGauge.resize(113, 200);
+      svgRecognizedFalseGauge.resize(
+        { value: 113, label: "unrecognized" },
+        { value: 200, label: "recognized" }
+      );
       appendRectsWithImagesAndText(12, imagePathBlackberry, ["Fruit", "Phone"]);
     }
   };

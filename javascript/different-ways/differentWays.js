@@ -93,8 +93,11 @@ Object.keys(shapeDrawings).forEach((word, index) => {
     resetSvg();
 
     differentWaysLevelGauge.resize(
-      200,
-      shapeDrawings[word]["recognizedDrawingCount"]
+      { value: 200, label: "unrecognized" },
+      {
+        value: shapeDrawings[word]["recognizedDrawingCount"],
+        label: "recognized",
+      }
     );
 
     shapeDrawings[word]["drawings"].forEach((drawing, index) => {

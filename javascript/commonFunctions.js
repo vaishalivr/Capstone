@@ -100,6 +100,8 @@ const levelGaugeWidget = {
   parentSvgHeight: 0,
   _hashedRect: null,
   _solidRect: null,
+  _hashedText: null,
+  _solidText: null,
   render: function () {
     this.parentSvg
       .append("line")
@@ -109,7 +111,9 @@ const levelGaugeWidget = {
       .attr("x2", capstoneGlobals.svgStyle.width)
       .attr("y2", this.parentSvgHeight - capstoneGlobals.levelGauge.height)
       .attr("stroke", "black");
-    this._hashedRect = this.parentSvg
+
+    var hashedGroup = this.parentSvg.append("g");
+    this._hashedRect = hashedGroup
       .append("rect")
       .attr("x", 0)
       .attr("y", this.parentSvgHeight - capstoneGlobals.levelGauge.height)
@@ -117,7 +121,13 @@ const levelGaugeWidget = {
       .attr("height", capstoneGlobals.levelGauge.height)
       .attr("fill", "url(#hashPattern)")
       .attr("stroke", "#ffd43c");
-    this._solidRect = this.parentSvg
+    this._hashedText = hashedGroup
+      .append("text")
+      .attr("x", 0)
+      .attr("y", this.parentSvgHeight - capstoneGlobals.levelGauge.height + 25);
+
+    var solidGroup = this.parentSvg.append("g");
+    this._solidRect = solidGroup
       .append("rect")
       .attr("x", 0)
       .attr("y", this.parentSvgHeight - capstoneGlobals.levelGauge.height)
@@ -125,24 +135,72 @@ const levelGaugeWidget = {
       .attr("height", capstoneGlobals.levelGauge.height)
       .attr("fill", "#ffd43c")
       .attr("stroke", "#ffd43c");
+    this._solidText = solidGroup
+      .append("text")
+      .attr("x", 0)
+      .attr("y", this.parentSvgHeight - capstoneGlobals.levelGauge.height + 25);
   },
   resize: function (hashedLevel, solidLevel) {
-    var totalLevels = hashedLevel + solidLevel;
-    console.log(totalLevels);
+    var totalLevels = hashedLevel.value + solidLevel.value;
+    this._hashedText.selectAll("tspan").remove();
+    this._solidText.selectAll("tspan").remove();
+    this._hashedText
+      .attr(
+        "x",
+        (capstoneGlobals.svgStyle.width * hashedLevel.value) / totalLevels - 120
+      )
+      .append("tspan")
+      .attr(
+        "x",
+        (capstoneGlobals.svgStyle.width * hashedLevel.value) / totalLevels - 120
+      )
+      .attr("dy", "0.25em")
+      .text(hashedLevel["label"]);
+    this._hashedText
+      .append("tspan")
+      .attr(
+        "x",
+        (capstoneGlobals.svgStyle.width * hashedLevel.value) / totalLevels - 120
+      )
+      .attr("dy", "1em")
+      .text(hashedLevel.value);
     this._hashedRect
       .transition()
       .duration(750)
       .attr(
         "width",
-        (capstoneGlobals.svgStyle.width * hashedLevel) / totalLevels
+        (capstoneGlobals.svgStyle.width * hashedLevel.value) / totalLevels
       );
+    this._solidText
+      .attr(
+        "x",
+        (capstoneGlobals.svgStyle.width * hashedLevel.value) / totalLevels + 20
+      )
+      .append("tspan")
+      .text(solidLevel["label"])
+      .attr(
+        "x",
+        (capstoneGlobals.svgStyle.width * hashedLevel.value) / totalLevels + 20
+      )
+      .attr("dy", "0.25em");
+    this._solidText
+      .append("tspan")
+      .text(solidLevel.value)
+      .attr(
+        "x",
+        (capstoneGlobals.svgStyle.width * hashedLevel.value) / totalLevels + 20
+      )
+      .attr("dy", "1em");
     this._solidRect
       .transition()
       .duration(750)
-      .attr("x", (capstoneGlobals.svgStyle.width * hashedLevel) / totalLevels)
+      .attr(
+        "x",
+        (capstoneGlobals.svgStyle.width * hashedLevel.value) / totalLevels
+      )
       .attr(
         "width",
-        (capstoneGlobals.svgStyle.width * solidLevel) / totalLevels
+        (capstoneGlobals.svgStyle.width * solidLevel.value) / totalLevels
       );
   },
 };

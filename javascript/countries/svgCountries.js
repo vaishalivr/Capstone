@@ -74,7 +74,10 @@ countriesArray.forEach((country, countryIndex) => {
       }
       d3.select(`#${rectId}`).transition().style("opacity", 1);
       lastClickedRectId = rectId;
-      countriesLevelGauge.resize(hashedLevel, 100);
+      countriesLevelGauge.resize(
+        { value: hashedLevel, label: "unrecognized" },
+        { value: 100, label: "recognized" }
+      );
 
       d3.select("#outerRect")
         .transition()
