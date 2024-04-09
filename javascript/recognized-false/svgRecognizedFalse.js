@@ -121,8 +121,8 @@ words1.forEach((word, index) => {
 
     if (e.target.id == "Dishwasher") {
       svgRecognizedFalseGauge.resize(
-        { value: 90, label: "unrecognized" },
-        { value: 200, label: "recognized" }
+        { value: 21945, label: "unrecognized" },
+        { value: 147814, label: "recognized" }
       );
       appendRectsWithImagesAndText(24, imagePathDishwasher, [
         "Counter top Dishwashers",
@@ -133,8 +133,8 @@ words1.forEach((word, index) => {
     }
     if (e.target.id == "Fans") {
       svgRecognizedFalseGauge.resize(
-        { value: 161, label: "unrecognized" },
-        { value: 200, label: "recognized" }
+        { value: 21964, label: "unrecognized" },
+        { value: 114194, label: "recognized" }
       );
       appendRectsWithImagesAndText(24, imagePathFan, [
         "Hand Fan",
@@ -145,8 +145,8 @@ words1.forEach((word, index) => {
     }
     if (e.target.id == "House") {
       svgRecognizedFalseGauge.resize(
-        { value: 22.42, label: "unrecognized" },
-        { value: 200, label: "recognized" }
+        { value: 3037, label: "unrecognized" },
+        { value: 132383, label: "recognized" }
       );
       appendRectsWithImagesAndText(12, imagePathHouse, [
         "Flat Roofed",
@@ -155,8 +155,8 @@ words1.forEach((word, index) => {
     }
     if (e.target.id == "Blackberry") {
       svgRecognizedFalseGauge.resize(
-        { value: 113, label: "unrecognized" },
-        { value: 200, label: "recognized" }
+        { value: 14417, label: "unrecognized" },
+        { value: 113736, label: "recognized" }
       );
       appendRectsWithImagesAndText(12, imagePathBlackberry, ["Fruit", "Phone"]);
     }

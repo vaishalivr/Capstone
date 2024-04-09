@@ -132,7 +132,7 @@ const levelGaugeWidget = {
     this._hashedText = hashedGroup
       .append("text")
       .attr("x", 20)
-      .attr("y", this.parentSvgHeight - (capstoneGlobals.levelGauge.height / 2) + 25)
+      .attr("y", this.parentSvgHeight - (capstoneGlobals.levelGauge.height / 2) + 20)
       .attr("class", "level-gauge-indicator-text");
 
     var solidGroup = this.parentSvg.append("g");
@@ -155,31 +155,14 @@ const levelGaugeWidget = {
     this._solidText = solidGroup
       .append("text")
       .attr("x", 20)
-      .attr("y", this.parentSvgHeight - capstoneGlobals.levelGauge.height + 25).attr("class", "level-gauge-indicator-text");;
+      .attr("y", this.parentSvgHeight - capstoneGlobals.levelGauge.height + 20).attr("class", "level-gauge-indicator-text");;
   },
   resize: function (hashedLevel, solidLevel) {
     var totalLevels = hashedLevel.value + solidLevel.value;
     var hashedLevelPercentage = ((hashedLevel.value / totalLevels) * 100).toFixed(2);
     var solidLevelPercentage = ((solidLevel.value / totalLevels) * 100).toFixed(2);
-    this._hashedText.selectAll("tspan").remove();
-    this._solidText.selectAll("tspan").remove();
-    this._hashedText.text(hashedLevelPercentage + "% unrecognized drawings");
 
-    //   .append("tspan")
-    //   .attr(
-    //     "x",
-    //     (capstoneGlobals.svgStyle.width * hashedLevel.value) / totalLevels + 20
-    //   )
-    //   .attr("dy", "0.25em")
-    //   .text(hashedLevel["label"]);
-    // this._hashedText
-    //   .append("tspan")
-    //   .attr(
-    //     "x",
-    //     (capstoneGlobals.svgStyle.width * hashedLevel.value) / totalLevels + 20
-    //   )
-    //   .attr("dy", "1em")
-    //   .text(hashedLevel.value);
+    this._hashedText.text(hashedLevelPercentage + "% unrecognized drawings");
     this._hashedRect
       .transition()
       .duration(750)
@@ -187,26 +170,7 @@ const levelGaugeWidget = {
         "width",
         (capstoneGlobals.svgStyle.width * hashedLevel.value) / totalLevels
       );
-    // this._solidText
-    //   .attr(
-    //     "x",
-    //     (capstoneGlobals.svgStyle.width * hashedLevel.value) / totalLevels + 20
-    //   )
-    //   .append("tspan")
-    //   .text(solidLevel["label"])
-    //   .attr(
-    //     "x",
-    //     (capstoneGlobals.svgStyle.width * hashedLevel.value) / totalLevels + 20
-    //   )
-    //   .attr("dy", "0.25em");
-    // this._solidText
-    //   .append("tspan")
-    //   .text(solidLevel.value)
-    //   .attr(
-    //     "x",
-    //     (capstoneGlobals.svgStyle.width * hashedLevel.value) / totalLevels + 20
-    //   )
-    //   .attr("dy", "1em");
+      
     this._solidRect
       .transition()
       .duration(750)
