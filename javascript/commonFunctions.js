@@ -159,11 +159,11 @@ const levelGaugeWidget = {
   },
   resize: function (hashedLevel, solidLevel) {
     var totalLevels = hashedLevel.value + solidLevel.value;
-    var hashedLevelPercentage = (hashedLevel.value / totalLevels) * 100;
-    var solidLevelPercentage = (solidLevel.value / totalLevels) * 100;
+    var hashedLevelPercentage = ((hashedLevel.value / totalLevels) * 100).toFixed(2);
+    var solidLevelPercentage = ((solidLevel.value / totalLevels) * 100).toFixed(2);
     this._hashedText.selectAll("tspan").remove();
     this._solidText.selectAll("tspan").remove();
-    this._hashedText.text(hashedLevelPercentage + " unrecognized drawings");
+    this._hashedText.text(hashedLevelPercentage + "% unrecognized drawings");
 
     //   .append("tspan")
     //   .attr(
@@ -214,7 +214,7 @@ const levelGaugeWidget = {
         "width",
         (capstoneGlobals.svgStyle.width * solidLevel.value) / totalLevels
       );
-    this._solidText.text(solidLevelPercentage + " recognized drawings");
+    this._solidText.text(solidLevelPercentage + "% recognized drawings");
   },
 };
 const svgTab = {
