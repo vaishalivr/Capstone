@@ -1,23 +1,15 @@
 const svgRecognizedFalse = d3.select("#recognized-false");
 const svgRecognizedFalseObj = { width: 1000, height: 800, strokeWidth: 3 };
 
-svgRecognizedFalse
-  .attr("width", svgRecognizedFalseObj.width)
-  .attr("height", svgRecognizedFalseObj.height);
+var recognizedFalseInfographic = Object.create(infographicContainer);
+recognizedFalseInfographic.svg = svgRecognizedFalse;
+recognizedFalseInfographic.dimensions = { width: 1000, height: 800 };
+recognizedFalseInfographic.render();
 
 var svgRecognizedFalseGauge = Object.create(levelGaugeWidget);
 svgRecognizedFalseGauge.parentSvg = svgRecognizedFalse;
 svgRecognizedFalseGauge.parentSvgHeight = 800;
 svgRecognizedFalseGauge.render();
-
-svgRecognizedFalse
-  .append("rect")
-  .attr("id", "outerRect1")
-  .attr("width", svgRecognizedFalseObj.width)
-  .attr("height", svgRecognizedFalseObj.height)
-  .attr("fill", "none")
-  .attr("stroke", "black")
-  .attr("stroke-width", svgRecognizedFalseObj.strokeWidth);
 
 const words1 = ["House", "Dishwasher", "Fans", "Blackberry"];
 
@@ -49,24 +41,20 @@ const groupAnnotationText = svgRecognizedFalse
 groupAnnotationText.attr("opacity", 0);
 
 const appendRectsWithImagesAndText = (numRects, imagePaths, textArray) => {
-  svgRecognizedFalse.selectAll("g.row-group").remove();
+  recognizedFalseInfographic.resetGraphic();
 
   const rectsPerRow = 6;
   const padding = 10;
   const rectSize = 90;
-  const verticalSpacing = 150;
+  const verticalSpacing = 120;
 
-  const totalWidth = rectsPerRow * rectSize + (rectsPerRow - 1) * padding;
-
-  const startXOffset = (svgRecognizedFalseObj.width - totalWidth) / 2;
-  const startYOffset = 120;
   const numRows = Math.ceil(numRects / rectsPerRow);
 
   for (let row = 0; row < numRows; row++) {
-    const yRowStart = startYOffset + row * verticalSpacing;
+    const yRowStart = row * verticalSpacing;
 
-    const rowGroup = svgRecognizedFalse
-      .append("g")
+    const rowGroup = d3
+      .create("svg:g")
       .attr("class", "row-group")
       .on("mouseover", function () {
         legendLine.style("opacity", 1);
@@ -80,7 +68,7 @@ const appendRectsWithImagesAndText = (numRects, imagePaths, textArray) => {
       });
 
     for (let col = 0; col < rectsPerRow; col++) {
-      const x = startXOffset + col * (rectSize + padding);
+      const x = col * (rectSize + padding);
 
       rowGroup
         .append("rect")
@@ -102,8 +90,9 @@ const appendRectsWithImagesAndText = (numRects, imagePaths, textArray) => {
           .attr("preserveAspectRatio", "xMidYMid meet");
       }
     }
-
+    recognizedFalseInfographic.addGraphicComponent(rowGroup);
     attachHoverEffectToGroup(rowGroup, {});
+    recognizedFalseInfographic.alignGraphicStage();
   }
 };
 

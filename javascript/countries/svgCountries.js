@@ -1,8 +1,14 @@
 const svgCountries = d3.select("#svg-countries");
 const svgCountriesObj = { width: 1000, height: 750 };
-svgCountries
-  .attr("width", svgCountriesObj.width)
-  .attr("height", svgCountriesObj.height);
+// svgCountries
+//   .attr("width", svgCountriesObj.width)
+//   .attr("height", svgCountriesObj.height);
+
+const countriesInfographic = Object.create(infographicContainer);
+countriesInfographic.svg = svgCountries;
+countriesInfographic.dimensions = { width: 1000, height: 750 };
+countriesInfographic.render();
+
 const numRows = 9;
 const numCols = 9;
 const rowSpacing = svgCountriesObj.height / (numRows - 1);
@@ -26,13 +32,12 @@ svgCountries
   .attr("stroke", "#ffd43c")
   .attr("stroke-width", 2);
 
-svgCountries
-  .append("rect")
-  .attr("id", "outerRect")
-  .attr("width", svgCountriesObj.width)
-  .attr("height", svgCountriesObj.height + capstoneGlobals.levelGauge.height)
-  .attr("fill", "none")
-  .attr("stroke", "black");
+// svgCountries
+//   .append("rect")
+//   .attr("id", "outerRect")
+//   .attr("width", svgCountriesObj.width)
+//   .attr("height", svgCountriesObj.height + capstoneGlobals.levelGauge.height)
+//   .attr("fill", "#fff");
 
 var countriesLevelGauge = Object.create(levelGaugeWidget);
 countriesLevelGauge.parentSvg = svgCountries;
@@ -79,7 +84,8 @@ countriesArray.forEach((country, countryIndex) => {
         { value: 100, label: "recognized" }
       );
 
-      d3.select("#outerRect")
+      svgCountries
+        .select(".infographic-bg")
         .transition()
         .duration(100)
         .attr("stroke-width", 9)
@@ -92,8 +98,7 @@ countriesArray.forEach((country, countryIndex) => {
 });
 
 /////legend
-const countriesLegend = document.getElementById("countries-legend");
-countriesLegend.addEventListener("click", function () {
+d3.select("#countries-legend").on("click", function () {
   svgCountries.selectAll("#animationPath").remove();
   svgCountries.selectAll(".animatedText").remove();
   svgCountries.selectAll(".curve").remove();
@@ -177,7 +182,8 @@ countriesLegend.addEventListener("click", function () {
               .style("font-family", "'Permanent Marker', cursive")
               .text("# of entries from Netherlands compared to US");
 
-            d3.select("#outerRect")
+            svgCountries
+              .select(".infographic-bg")
               .transition()
               .style("opacity", 1)
               .attr("stroke-width", 5)
@@ -187,7 +193,8 @@ countriesLegend.addEventListener("click", function () {
               const rectId = "rect-17";
               text17.remove();
               d3.select(`#${rectId}`).transition().style("opacity", 0);
-              d3.select("#outerRect")
+              svgCountries
+                .select(".infographic-bg")
                 .style("opacity", 1)
                 .attr("stroke-width", 1)
                 .attr("stroke", "black");
@@ -211,7 +218,8 @@ countriesLegend.addEventListener("click", function () {
               .style("font-family", "'Permanent Marker', cursive")
               .text("# of entries from Estonia compared to US");
 
-            d3.select("#outerRect")
+            svgCountries
+              .select(".infographic-bg")
               .transition()
               .style("opacity", 1)
               .attr("stroke-width", 5)
@@ -221,7 +229,8 @@ countriesLegend.addEventListener("click", function () {
               const rectId = "rect-46";
               text46.remove();
               d3.select(`#${rectId}`).transition().style("opacity", 0);
-              d3.select("#outerRect")
+              svgCountries
+                .select(".infographic-bg")
                 .style("opacity", 1)
                 .attr("stroke-width", 1)
                 .attr("stroke", "black");

@@ -3,23 +3,14 @@ const svgDifferentWaysObj = capstoneGlobals.svgStyle;
 const totalDuration = 2000;
 const tabRowPadding = 100;
 
-svgDifferentWays
-  .attr("width", svgDifferentWaysObj.width)
-  .attr("height", svgDifferentWaysObj.height);
+const differentWaysInfographic = Object.create(infographicContainer);
+differentWaysInfographic.svg = svgDifferentWays;
+differentWaysInfographic.render();
 
 var differentWaysLevelGauge = Object.create(levelGaugeWidget);
 differentWaysLevelGauge.parentSvg = svgDifferentWays;
 differentWaysLevelGauge.parentSvgHeight = 450;
 differentWaysLevelGauge.render();
-
-svgDifferentWays
-  .append("rect")
-  .attr("id", "outerRect")
-  .attr("width", svgDifferentWaysObj.width)
-  .attr("height", svgDifferentWaysObj.height)
-  .attr("fill", "none")
-  .attr("stroke", "black")
-  .attr("stroke-width", svgDifferentWaysObj.strokeWidth);
 
 const resetSvg = () => {
   Object.keys(shapeDrawings).forEach((word, index) => {
@@ -33,23 +24,8 @@ const removePreviousDoodles = () => {
   });
 };
 
-const createDoodleGroup = (
-  groupId,
-  groupClass,
-  translateX,
-  translateY,
-  scaleFactor
-) => {
-  return (
-    svgDifferentWays
-      .append("g")
-      // .attr(
-      //   "transform",
-      //   `translate(${translateX}, ${translateY}) scale(${scaleFactor})`
-      // )
-      .attr("class", groupClass)
-      .attr("id", groupId)
-  );
+const createDoodleGroup = (groupId, groupClass) => {
+  return d3.create("svg:g").attr("class", groupClass).attr("id", groupId);
 };
 
 const appendPathsToGroups = (group, lineData, createPath) => {
@@ -91,10 +67,13 @@ Object.keys(shapeDrawings).forEach((word, index) => {
   wordTab.totalCount = Object.keys(shapeDrawings).length;
   wordTab.index = index;
   wordTab.clickCallback = () => {
-    resetSvg();
+    differentWaysInfographic.resetGraphic();
 
     differentWaysLevelGauge.resize(
-      { value: shapeDrawings[word]["unrecognizedDrawingCount"], label: "unrecognized" },
+      {
+        value: shapeDrawings[word]["unrecognizedDrawingCount"],
+        label: "unrecognized",
+      },
       {
         value: shapeDrawings[word]["recognizedDrawingCount"],
         label: "recognized",
@@ -102,18 +81,14 @@ Object.keys(shapeDrawings).forEach((word, index) => {
     );
 
     shapeDrawings[word]["drawings"].forEach((drawing, index) => {
-      var group = createDoodleGroup(
-        drawing["vectorId"],
-        word + "-group",
-        100 + index * 200,
-        100,
-        0.5
-      );
+      var group = createDoodleGroup(drawing["vectorId"], word + "-group");
       var path = appendPathsToGroups(group, drawing["strokes"], createPath);
+      differentWaysInfographic.addGraphicComponent(group);
       animatePathStroke(path, path.node().getTotalLength());
       attachHoverEffectToGroup(group, {});
-      scaleGroupToGridCell(group, 100 + index * 200, 100);
+      scaleGroupToGridCell(group, index * 200, 0);
     });
+    differentWaysInfographic.alignGraphicStage();
   };
   wordTab.render();
   if (defaultStart) {
