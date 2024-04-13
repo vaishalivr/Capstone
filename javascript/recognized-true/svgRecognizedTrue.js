@@ -82,22 +82,22 @@ words.forEach((word, index) => {
 
       if (this.id === "dishwasher") {
         const imagePaths = [
-          "/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/recognized_false/dishwasher/training/counter_6290128794288128.png",
-          "/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/recognized_false/dishwasher/training/shower_6592988111175680.png",
-          "/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/recognized_false/dishwasher/training/person_5253290134601728.png",
-          "/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/recognized_false/dishwasher/training/sink_6205822780571648.png",
+          "./media/recognized_false/dishwasher/training/counter_6290128794288128.png",
+          "./media/recognized_false/dishwasher/training/shower_6592988111175680.png",
+          "./media/recognized_false/dishwasher/training/person_5253290134601728.png",
+          "./media/recognized_false/dishwasher/training/sink_6205822780571648.png",
         ];
         appendRectsWithImages("dishwasher", 4, imagePaths);
       }
 
       if (this.id == "fans") {
         const imagePaths = [
-          "/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/recognized_true/fan/fan_4577771776901120.png",
-          "/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/recognized_true/fan/fan_4678906005159936.png",
-          "/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/recognized_true/fan/fan_5584477730373632.png",
-          "/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/recognized_true/fan/fan_6085005014990848.png",
-          "/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/recognized_true/fan/fan_6449103636529152.png",
-          "/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/recognized_true/fan/fan_6503565348569088.png",
+          "./media/recognized_true/fan/fan_4577771776901120.png",
+          "./media/recognized_true/fan/fan_4678906005159936.png",
+          "./media/recognized_true/fan/fan_5584477730373632.png",
+          "./media/recognized_true/fan/fan_6085005014990848.png",
+          "./media/recognized_true/fan/fan_6449103636529152.png",
+          "./media/recognized_true/fan/fan_6503565348569088.png",
         ];
         appendRectsWithImages(
           "fans",
@@ -117,12 +117,12 @@ words.forEach((word, index) => {
       if (this.id == "necklace") {
         console.log(this.id);
         const imagePaths = [
-          "/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/recognized_true/necklace/necklace_4682831118729216.png",
-          "/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/recognized_true/necklace/necklace_4788198762872832.png",
-          "/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/recognized_true/necklace/necklace_5286072449761280.png",
-          "/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/recognized_true/necklace/necklace_5337218526740480.png",
-          "/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/recognized_true/necklace/necklace_5486335764725760.png",
-          "/Users/vaishaliverma/Documents/Visuals/google-quick-draw-v2/media/recognized_true/necklace/necklace_5960691955531776.png",
+          "./media/recognized_true/necklace/necklace_4682831118729216.png",
+          "./media/recognized_true/necklace/necklace_4788198762872832.png",
+          "./media/recognized_true/necklace/necklace_5286072449761280.png",
+          "./media/recognized_true/necklace/necklace_5337218526740480.png",
+          "./media/recognized_true/necklace/necklace_5486335764725760.png",
+          "./media/recognized_true/necklace/necklace_5960691955531776.png",
         ];
         appendRectsWithImages(
           "necklace",

@@ -9,16 +9,6 @@ const capstoneGlobals = {
   },
 };
 
-const resizeBar = (svgId, width, height) => {
-  d3.select(svgId)
-    .transition()
-    .duration(750)
-    .attr("x", 0)
-    .attr("y", height - 60)
-    .attr("height", height - 60)
-    .attr("width", width);
-};
-
 const createPath = (stroke) => {
   let d = `M ${stroke[0][0]} ${stroke[1][0]}`;
   for (let i = 1; i < stroke[0].length; i++) {
@@ -140,7 +130,7 @@ const infographicContainer = {
       .attr("width", this.dimensions.width)
       .attr("height", this.dimensions.height)
       .attr("fill", this.styles.bgcolor)
-      .attr("opacity", 0.2);
+      .attr("opacity", 0.4);
     this._graphicStage = this.svg
       .append("g")
       .on("change", this._changeGraphicHandler(this));
@@ -155,15 +145,6 @@ const levelGaugeWidget = {
   _hashedText: null,
   _solidText: null,
   render: function () {
-    // this.parentSvg
-    //   .append("line")
-    //   .attr("class", "svg-levelGauge-line")
-    //   .attr("x1", 0)
-    //   .attr("y1", this.parentSvgHeight - capstoneGlobals.levelGauge.height)
-    //   .attr("x2", capstoneGlobals.svgStyle.width)
-    //   .attr("y2", this.parentSvgHeight - capstoneGlobals.levelGauge.height)
-    //   .attr("stroke", "black");
-
     var hashedGroup = this.parentSvg.append("g");
     hashedGroup
       .append("rect")
@@ -171,8 +152,8 @@ const levelGaugeWidget = {
       .attr("y", this.parentSvgHeight - capstoneGlobals.levelGauge.height / 2)
       .attr("width", capstoneGlobals.svgStyle.width)
       .attr("height", capstoneGlobals.levelGauge.height / 2)
-      .attr("fill", "#f25757")
-      .attr("stroke", "#f25757")
+      .attr("fill", "url(#hashPattern)")
+      .attr("stroke", "#f2e863")
       .attr("opacity", 0.25);
     this._hashedRect = hashedGroup
       .append("rect")
@@ -180,8 +161,9 @@ const levelGaugeWidget = {
       .attr("y", this.parentSvgHeight - capstoneGlobals.levelGauge.height / 2)
       .attr("width", 0)
       .attr("height", capstoneGlobals.levelGauge.height / 2)
-      .attr("fill", "#f25757")
-      .attr("stroke", "#f25757");
+      .attr("fill", "url(#hashPattern)")
+      .attr("stroke", "#f2e863")
+      .attr("stroke-width", "2");
     this._hashedText = hashedGroup
       .append("text")
       .attr("x", 20)
@@ -208,7 +190,8 @@ const levelGaugeWidget = {
       .attr("width", 0)
       .attr("height", capstoneGlobals.levelGauge.height / 2)
       .attr("fill", "#f2e863")
-      .attr("stroke", "#f2e863");
+      .attr("stroke", "#f2e863")
+      .attr("stroke-width", "2");
     this._solidText = solidGroup
       .append("text")
       .attr("x", 20)

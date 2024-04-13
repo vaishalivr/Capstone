@@ -1,8 +1,5 @@
 const svgCountries = d3.select("#svg-countries");
 const svgCountriesObj = { width: 1000, height: 750 };
-// svgCountries
-//   .attr("width", svgCountriesObj.width)
-//   .attr("height", svgCountriesObj.height);
 
 const countriesInfographic = Object.create(infographicContainer);
 countriesInfographic.svg = svgCountries;
@@ -31,13 +28,6 @@ svgCountries
   .attr("d", "M 0,8 l 8,-8 M -2,2 l 4,-4 M 6,10 l 4,-4")
   .attr("stroke", "#ffd43c")
   .attr("stroke-width", 2);
-
-// svgCountries
-//   .append("rect")
-//   .attr("id", "outerRect")
-//   .attr("width", svgCountriesObj.width)
-//   .attr("height", svgCountriesObj.height + capstoneGlobals.levelGauge.height)
-//   .attr("fill", "#fff");
 
 var countriesLevelGauge = Object.create(levelGaugeWidget);
 countriesLevelGauge.parentSvg = svgCountries;
@@ -97,8 +87,7 @@ countriesArray.forEach((country, countryIndex) => {
     });
 });
 
-/////legend
-d3.select("#countries-legend").on("click", function () {
+const countriesPlayButton = new PlayButton(svgCountries, function () {
   svgCountries.selectAll("#animationPath").remove();
   svgCountries.selectAll(".animatedText").remove();
   svgCountries.selectAll(".curve").remove();
