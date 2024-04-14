@@ -9,7 +9,6 @@ differentWaysInfographic.render();
 
 var differentWaysLevelGauge = Object.create(levelGaugeWidget);
 differentWaysLevelGauge.parentSvg = svgDifferentWays;
-differentWaysLevelGauge.parentSvgHeight = 450;
 differentWaysLevelGauge.render();
 
 const resetSvg = () => {

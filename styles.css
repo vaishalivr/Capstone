@@ -116,30 +116,17 @@ div.svg-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-basis: 50%;
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
 }
-#svg-countries-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+div.svg-container svg {
+  scroll-snap-align: start;
+  height: 90vh;
 }
-#recognized-true-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-#recognized-false-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-#different-ways-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-#countries-legend {
-  cursor: pointer;
-}
+
 .item {
   display: flex;
   align-items: center;

@@ -121,14 +121,12 @@ const infographicContainer = {
     }
   },
   render: function () {
-    this.svg
-      .attr("width", this.dimensions.width)
-      .attr("height", this.dimensions.height);
+    this.svg.attr("width", this.dimensions.width);
     this._background = this.svg
       .append("rect")
       .attr("class", "infographic-bg")
       .attr("width", this.dimensions.width)
-      .attr("height", this.dimensions.height)
+      .attr("height", parseInt(this.svg.attr("height")))
       .attr("fill", this.styles.bgcolor)
       .attr("opacity", 0.4);
     this._graphicStage = this.svg
@@ -145,6 +143,7 @@ const levelGaugeWidget = {
   _hashedText: null,
   _solidText: null,
   render: function () {
+    this.parentSvgHeight = parseInt(this.parentSvg.style("height"));
     var hashedGroup = this.parentSvg.append("g");
     hashedGroup
       .append("rect")
