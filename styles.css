@@ -125,6 +125,7 @@ div.svg-container {
 div.svg-container svg {
   scroll-snap-align: start;
   height: 90vh;
+  max-height: 800;
 }
 
 .item {

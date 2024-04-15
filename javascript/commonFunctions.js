@@ -96,8 +96,8 @@ const infographicContainer = {
       var bbox = _self._graphicStage.node().getBBox();
       _self._graphicStage.attr(
         "transform",
-        `translate(${(_self.svg.width - bbox.width) / 2}, ${
-          (_self.svg.height - bbox.height) / 2
+        `translate(${(_self.getDimensions().width - bbox.width) / 2}, ${
+          (_self.getDimensions().height - bbox.height) / 2
         })`
       );
     };
@@ -106,9 +106,9 @@ const infographicContainer = {
     var bbox = this._graphicStage.node().getBBox();
     this._graphicStage.attr(
       "transform",
-      `translate(${(parseInt(this.svg.style("width")) - bbox.width) / 2}, ${
-        (parseInt(this.svg.style("height")) - bbox.height) / 2
-      })`
+      `translate(${
+        (this._getNumericPropertyValue("width") - bbox.width) / 2
+      }, ${(this._getNumericPropertyValue("height") - bbox.height) / 2})`
     );
   },
   addGraphicComponent: function (component) {
@@ -126,12 +126,26 @@ const infographicContainer = {
       .append("rect")
       .attr("class", "infographic-bg")
       .attr("width", this.dimensions.width)
-      .attr("height", parseInt(this.svg.attr("height")))
+      .attr("height", this._getNumericPropertyValue("height"))
       .attr("fill", this.styles.bgcolor)
       .attr("opacity", 0.4);
     this._graphicStage = this.svg
       .append("g")
       .on("change", this._changeGraphicHandler(this));
+  },
+  _getNumericPropertyValue: function (propertyName) {
+    var propertyValue = 0;
+    propertyValue = parseInt(this.svg.attr(propertyName));
+    if (isNaN(propertyValue)) {
+      propertyValue = parseInt(this.svg.style(propertyName));
+    }
+    return propertyValue;
+  },
+  getDimensions: function () {
+    return {
+      width: this._getNumericPropertyValue("width"),
+      height: this._getNumericPropertyValue("height"),
+    };
   },
 };
 

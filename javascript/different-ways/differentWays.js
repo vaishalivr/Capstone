@@ -11,6 +11,14 @@ var differentWaysLevelGauge = Object.create(levelGaugeWidget);
 differentWaysLevelGauge.parentSvg = svgDifferentWays;
 differentWaysLevelGauge.render();
 
+const basicShapeTooltip = new FixedTooltip(svgDifferentWays, {
+  position: {
+    x: differentWaysInfographic.getDimensions().width * 0.2,
+    y: differentWaysInfographic.getDimensions().height - 100,
+  },
+  size: differentWaysInfographic.getDimensions().width * 0.6,
+});
+
 const resetSvg = () => {
   Object.keys(shapeDrawings).forEach((word, index) => {
     svgDifferentWays.selectAll(`.${word}-group`).remove();
@@ -23,8 +31,17 @@ const removePreviousDoodles = () => {
   });
 };
 
-const createDoodleGroup = (groupId, groupClass) => {
-  return d3.create("svg:g").attr("class", groupClass).attr("id", groupId);
+const createDoodleGroup = (groupId, groupClass, doodleHelpText) => {
+  return d3
+    .create("svg:g")
+    .attr("class", groupClass)
+    .attr("id", groupId)
+    .on("mouseover", function () {
+      basicShapeTooltip.showWithText(doodleHelpText);
+    })
+    .on("mouseout", function () {
+      basicShapeTooltip.hide();
+    });
 };
 
 const appendPathsToGroups = (group, lineData, createPath) => {
@@ -45,18 +62,6 @@ const animatePathStroke = (path, length) => {
     .ease(d3.easeLinear)
     .attr("stroke-dashoffset", 0);
 };
-
-const legendLine1 = svgRecognizedFalse
-  .append("line")
-  .attr("x1", 200)
-  .attr("y1", 690)
-  .attr("x2", 800) // why??
-  .attr("y2", 690)
-  .attr("stroke", "#ffd43c")
-  .attr("stroke-width", 6)
-  .attr("id", "legend-line");
-
-legendLine1.attr("opacity", 0);
 
 var defaultStart = true;
 Object.keys(shapeDrawings).forEach((word, index) => {
@@ -80,7 +85,11 @@ Object.keys(shapeDrawings).forEach((word, index) => {
     );
 
     shapeDrawings[word]["drawings"].forEach((drawing, index) => {
-      var group = createDoodleGroup(drawing["vectorId"], word + "-group");
+      var group = createDoodleGroup(
+        drawing["vectorId"],
+        word + "-group",
+        drawing["totalCount"]
+      );
       var path = appendPathsToGroups(group, drawing["strokes"], createPath);
       differentWaysInfographic.addGraphicComponent(group);
       animatePathStroke(path, path.node().getTotalLength());

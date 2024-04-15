@@ -1,44 +1,30 @@
 const svgRecognizedFalse = d3.select("#recognized-false");
 const svgRecognizedFalseObj = { width: 1000, height: 800, strokeWidth: 3 };
 
+// Inforgraphic Container
 var recognizedFalseInfographic = Object.create(infographicContainer);
 recognizedFalseInfographic.svg = svgRecognizedFalse;
 recognizedFalseInfographic.dimensions = { width: 1000, height: 800 };
 recognizedFalseInfographic.render();
 
+// Level Gauge
 var svgRecognizedFalseGauge = Object.create(levelGaugeWidget);
 svgRecognizedFalseGauge.parentSvg = svgRecognizedFalse;
-svgRecognizedFalseGauge.parentSvgHeight = 800;
+svgRecognizedFalseGauge.parentSvgHeight = parseInt(
+  svgRecognizedFalse.attr("height")
+);
 svgRecognizedFalseGauge.render();
 
+// Fixed Tooltip
+var categoryTooltip = new FixedTooltip(svgRecognizedFalse, {
+  position: {
+    x: recognizedFalseInfographic.getDimensions().width * 0.2,
+    y: recognizedFalseInfographic.getDimensions().height - 100,
+  },
+  size: recognizedFalseInfographic.getDimensions().width * 0.6,
+});
+
 const words1 = ["House", "Dishwasher", "Fans", "Blackberry"];
-
-const positions1 = [
-  { x: svgRecognizedTrueObj.width / 2 - 120, y: 50 },
-  { x: svgRecognizedTrueObj.width / 2 - 30, y: 50 },
-  { x: svgRecognizedTrueObj.width / 2 + 120, y: 50 },
-  { x: svgRecognizedTrueObj.width / 2 + 240, y: 50 },
-];
-
-const legendLine = svgRecognizedFalse
-  .append("line")
-  .attr("x1", 200)
-  .attr("y1", 690)
-  .attr("x2", 800) // why??
-  .attr("y2", 690)
-  .attr("stroke", "#ffd43c")
-  .attr("stroke-width", 6)
-  .attr("id", "legend-line");
-
-legendLine.attr("opacity", 0);
-
-const groupAnnotationText = svgRecognizedFalse
-  .append("text")
-  .text("")
-  .attr("x", 500)
-  .attr("y", 720);
-
-groupAnnotationText.attr("opacity", 0);
 
 const appendRectsWithImagesAndText = (numRects, imagePaths, textArray) => {
   recognizedFalseInfographic.resetGraphic();
@@ -57,14 +43,10 @@ const appendRectsWithImagesAndText = (numRects, imagePaths, textArray) => {
       .create("svg:g")
       .attr("class", "row-group")
       .on("mouseover", function () {
-        legendLine.style("opacity", 1);
-        groupAnnotationText.style("opacity", 1).text(textArray[row]);
-        // d3.select(this).select("rect.encompassing").style("opacity", 1);
+        categoryTooltip.showWithText(textArray[row]);
       })
       .on("mouseout", function () {
-        legendLine.style("opacity", 0);
-        groupAnnotationText.style("opacity", 0).text("");
-        // d3.select(this).select("rect.encompassing").style("opacity", 0);
+        categoryTooltip.hide();
       });
 
     for (let col = 0; col < rectsPerRow; col++) {
@@ -105,7 +87,6 @@ words1.forEach((word, index) => {
   wordTab.totalCount = words1.length;
   wordTab.index = index;
   wordTab.clickCallback = function (e) {
-    // d3.selectAll("line:not(#legend-line):not(#lineAboveBar)").remove();
     svgRecognizedFalse.selectAll("g.row-group").remove();
 
     if (e.target.id == "Dishwasher") {
