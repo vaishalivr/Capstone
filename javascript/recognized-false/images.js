@@ -72,6 +72,13 @@ const imagePathHouse = [
   "./media/recognized_false/house/nature/nature_5825157144772608.png",
   "./media/recognized_false/house/nature/nature_6308918068248576.png",
   "./media/recognized_false/house/nature/nature_6638331892858880.png",
+
+  "./media/recognized_false/house/horse/horse1.png",
+  "./media/recognized_false/house/horse/horse2.png",
+  "./media/recognized_false/house/horse/horse3.png",
+  "./media/recognized_false/house/horse/horse4.png",
+  "./media/recognized_false/house/horse/horse5.png",
+  "./media/recognized_false/house/horse/horse6.png",
 ];
 
 const imagePathBlackberry = [

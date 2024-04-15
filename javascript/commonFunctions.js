@@ -29,6 +29,7 @@ const scaleGroupToGridCell = (group, translateX, translateY) => {
 };
 
 const attachHoverEffectToGroup = (group, options) => {
+  //console.log(options);
   const bbox = group.node().getBBox();
   const hasHelpText = typeof options.helpText != "undefined";
   var tooltipText;
@@ -36,6 +37,8 @@ const attachHoverEffectToGroup = (group, options) => {
   if (hasHelpText) {
     tooltipText = group
       .append("text")
+      .attr("x", 0)
+      .attr("y", 0)
       .attr("x", bbox.x + bbox.width / 2)
       .attr("y", bbox.y + bbox.height + 30)
       .text(options.helpText)
@@ -48,8 +51,8 @@ const attachHoverEffectToGroup = (group, options) => {
     .append("rect")
     .attr("x", bbox.x)
     .attr("y", bbox.y)
-    .attr("width", bbox.width + 10)
-    .attr("height", bbox.height + 10)
+    .attr("width", bbox.width)
+    .attr("height", bbox.height)
     .attr("stroke", "#ffd43c")
     .attr("stroke-width", 6)
     .attr("fill", "none")

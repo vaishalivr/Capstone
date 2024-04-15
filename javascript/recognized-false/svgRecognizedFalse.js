@@ -98,7 +98,7 @@ words1.forEach((word, index) => {
         "Counter top Dishwashers",
         "Tap Shower",
         "Person Washing Dishes",
-        "Sink",
+        "Washing Dishes in Sink",
       ]);
     }
     if (e.target.id == "Fans") {
@@ -119,8 +119,9 @@ words1.forEach((word, index) => {
         { value: 132383, label: "recognized" }
       );
       appendRectsWithImagesAndText(12, imagePathHouse, [
-        "Flat Roofed",
+        "Flat Roofed Houses",
         "Houses with Scene",
+        "Horses as House",
       ]);
     }
     if (e.target.id == "Blackberry") {
@@ -128,7 +129,10 @@ words1.forEach((word, index) => {
         { value: 14417, label: "unrecognized" },
         { value: 113736, label: "recognized" }
       );
-      appendRectsWithImagesAndText(12, imagePathBlackberry, ["Fruit", "Phone"]);
+      appendRectsWithImagesAndText(12, imagePathBlackberry, [
+        "Blackberry Fruit",
+        "Blackberry Phone",
+      ]);
     }
   };
   wordTab.render();
