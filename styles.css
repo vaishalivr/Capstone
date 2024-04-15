@@ -118,6 +118,7 @@ div.svg-container {
   align-items: center;
   flex-basis: 50%;
   height: 100vh;
+  max-height: 1200px;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
 }
@@ -125,7 +126,7 @@ div.svg-container {
 div.svg-container svg {
   scroll-snap-align: start;
   height: 90vh;
-  max-height: 800;
+  max-height: 1000px;
 }
 
 .item {

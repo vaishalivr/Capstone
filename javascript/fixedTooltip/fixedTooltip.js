@@ -17,7 +17,8 @@ function FixedTooltip(svgContainer, options = {}) {
     .attr("y2", 0);
   this._helpText = this._group
     .append("text")
-    .attr("y", 20)
+    .attr("y", 30)
+    .attr("text-anchor", "start")
     .attr("font-family", "Just Me Again Down Here")
     .attr("font-size", "1.8rem");
   this.showWithText = function (helpText) {
@@ -25,7 +26,7 @@ function FixedTooltip(svgContainer, options = {}) {
     this._helpText.text(helpText);
     this._helpText.attr(
       "x",
-      (options.size - this._helpText.getComputedTextLength()) / 2
+      (options.size - this._helpText.node().getComputedTextLength()) / 2
     );
   };
   this.hide = function () {
