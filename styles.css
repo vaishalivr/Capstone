@@ -17,6 +17,7 @@ h1 span {
 .title-container {
   display: flex;
   height: 100vh;
+  max-height: 900px;
 }
 
 .title {
@@ -24,6 +25,7 @@ h1 span {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  max-height: 900px;
   text-align: center;
   width: 100%;
 }
