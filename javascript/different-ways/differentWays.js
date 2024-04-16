@@ -1,10 +1,10 @@
 const svgDifferentWays = d3.select("#different-ways");
-const svgDifferentWaysObj = capstoneGlobals.svgStyle;
 const totalDuration = 2000;
 const tabRowPadding = 100;
 
 const differentWaysInfographic = Object.create(infographicContainer);
 differentWaysInfographic.svg = svgDifferentWays;
+differentWaysInfographic.height = "450px";
 differentWaysInfographic.render();
 
 var differentWaysLevelGauge = Object.create(levelGaugeWidget);

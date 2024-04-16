@@ -1,5 +1,7 @@
-function PlayButton(svg, clickCallback) {
+function PlayButton(svg, options, clickCallback) {
   this.svg = svg;
+  this._containerWidth = options["containerWidth"];
+  this._containerHeight = options["containerHeight"];
   this.clickCallback = clickCallback;
   this._clickCallback = function (_self) {
     return function (e) {
@@ -10,19 +12,19 @@ function PlayButton(svg, clickCallback) {
   this._group = this.svg.append("g");
   this._rect = this._group
     .append("rect")
-    .attr("width", this.svg.attr("width"))
-    .attr("height", this.svg.attr("height"))
+    .attr("width", this._containerWidth)
+    .attr("height", this._containerHeight)
     .attr("x", 0)
     .attr("y", 0)
     .attr("fill", "#fff")
     .attr("opacity", 0);
   this._polygonStart = [
-    this.svg.attr("width") / 2 - 50,
-    this.svg.attr("height") / 2 - 50,
+    this._containerWidth / 2 - 50,
+    this._containerHeight / 2 - 50,
   ];
   this._polygonEnd = [
-    parseInt(this.svg.attr("width")) / 2 + 50,
-    parseInt(this.svg.attr("height")) / 2 + 50,
+    this._containerWidth / 2 + 50,
+    this._containerHeight / 2 + 50,
   ];
   this._group
     .append("polygon")

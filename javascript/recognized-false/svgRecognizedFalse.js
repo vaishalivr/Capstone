@@ -4,7 +4,7 @@ const svgRecognizedFalseObj = { width: 1000, height: 800, strokeWidth: 3 };
 // Inforgraphic Container
 var recognizedFalseInfographic = Object.create(infographicContainer);
 recognizedFalseInfographic.svg = svgRecognizedFalse;
-recognizedFalseInfographic.dimensions = { width: 1000, height: 800 };
+recognizedFalseInfographic.height = "750px";
 recognizedFalseInfographic.render();
 
 // Level Gauge

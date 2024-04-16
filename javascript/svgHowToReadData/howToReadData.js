@@ -1,75 +1,82 @@
 var svgHowToReadData = d3.select("#howToReadData");
-//var g = svgHowToReadData.append("g").attr("transform", `translate(240,0)`);
 
 const howToReadInfographic = Object.create(infographicContainer);
 howToReadInfographic.svg = svgHowToReadData;
+howToReadInfographic.height = "450px";
 howToReadInfographic.render();
 
-const playButton = new PlayButton(svgHowToReadData, function (e) {
-  animatedGroup.selectAll("*").remove();
-  let delay = 0;
-  const segmentDuration = 300;
-  const pauseDuration = 50;
+const playButton = new PlayButton(
+  svgHowToReadData,
+  {
+    containerWidth: howToReadInfographic.getDimensions().width,
+    containerHeight: howToReadInfographic.getDimensions().height,
+  },
+  function (e) {
+    animatedGroup.selectAll("*").remove();
+    let delay = 0;
+    const segmentDuration = 300;
+    const pauseDuration = 50;
 
-  sampleData.drawing.forEach((stroke) => {
-    stroke[0].forEach((_, index) => {
-      if (index < stroke[0].length - 1) {
-        var startPoint = [stroke[0][index], stroke[1][index] + yOffset];
-        var endPoint = [stroke[0][index + 1], stroke[1][index + 1] + yOffset];
+    sampleData.drawing.forEach((stroke) => {
+      stroke[0].forEach((_, index) => {
+        if (index < stroke[0].length - 1) {
+          var startPoint = [stroke[0][index], stroke[1][index] + yOffset];
+          var endPoint = [stroke[0][index + 1], stroke[1][index + 1] + yOffset];
 
-        var startText = animatedGroup
-          .append("text")
-          .attr("x", startXTextPosition)
-          .attr("y", startYTextPosition)
-          .text(`(${startPoint[0]}, ${startPoint[1] - yOffset})`)
-          .attr("font-size", "18px")
-          .attr("opacity", 0);
+          var startText = animatedGroup
+            .append("text")
+            .attr("x", startXTextPosition)
+            .attr("y", startYTextPosition)
+            .text(`(${startPoint[0]}, ${startPoint[1] - yOffset})`)
+            .attr("font-size", "18px")
+            .attr("opacity", 0);
 
-        var endText = animatedGroup
-          .append("text")
-          .attr("x", endXTextPosition)
-          .attr("y", endYTextPosition)
-          .text(`(${endPoint[0]}, ${endPoint[1] - yOffset})`)
-          .attr("font-size", "18px")
-          .attr("opacity", 0);
+          var endText = animatedGroup
+            .append("text")
+            .attr("x", endXTextPosition)
+            .attr("y", endYTextPosition)
+            .text(`(${endPoint[0]}, ${endPoint[1] - yOffset})`)
+            .attr("font-size", "18px")
+            .attr("opacity", 0);
 
-        var line = d3
-          .line()
-          .x(function (d) {
-            return d[0];
-          })
-          .y(function (d) {
-            return d[1];
-          });
+          var line = d3
+            .line()
+            .x(function (d) {
+              return d[0];
+            })
+            .y(function (d) {
+              return d[1];
+            });
 
-        animatedGroup
-          .append("path")
-          .attr("d", line([startPoint, endPoint]))
-          .attr("stroke", "black")
-          .attr("stroke-width", 2)
-          .attr("fill", "none")
-          .attr("stroke-linecap", "round")
-          .attr("stroke-dasharray", 1000)
-          .attr("stroke-dashoffset", 1000)
-          .transition()
-          .delay(delay)
-          .duration(segmentDuration)
-          .ease(d3.easeLinear)
-          .attr("stroke-dashoffset", 0)
-          .on("start", function () {
-            startText.attr("opacity", 1);
-            endText.attr("opacity", 1);
-          })
-          .on("end", function () {
-            startText.transition().duration(pauseDuration).attr("opacity", 0);
-            endText.transition().duration(pauseDuration).attr("opacity", 0);
-          });
+          animatedGroup
+            .append("path")
+            .attr("d", line([startPoint, endPoint]))
+            .attr("stroke", "black")
+            .attr("stroke-width", 2)
+            .attr("fill", "none")
+            .attr("stroke-linecap", "round")
+            .attr("stroke-dasharray", 1000)
+            .attr("stroke-dashoffset", 1000)
+            .transition()
+            .delay(delay)
+            .duration(segmentDuration)
+            .ease(d3.easeLinear)
+            .attr("stroke-dashoffset", 0)
+            .on("start", function () {
+              startText.attr("opacity", 1);
+              endText.attr("opacity", 1);
+            })
+            .on("end", function () {
+              startText.transition().duration(pauseDuration).attr("opacity", 0);
+              endText.transition().duration(pauseDuration).attr("opacity", 0);
+            });
 
-        delay += segmentDuration + pauseDuration;
-      }
+          delay += segmentDuration + pauseDuration;
+        }
+      });
     });
-  });
-});
+  }
+);
 
 const startXTextPosition = 460;
 const startYTextPosition = 220;

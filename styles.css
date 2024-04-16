@@ -18,6 +18,13 @@ h1 span {
   display: flex;
   height: 100vh;
   max-height: 900px;
+  min-height: 450px;
+}
+
+.title-container svg {
+  position: absolute;
+  max-height: 900px;
+  min-height: 450px;
 }
 
 .title {
@@ -26,6 +33,7 @@ h1 span {
   align-items: center;
   height: 100vh;
   max-height: 900px;
+  min-height: 450px;
   text-align: center;
   width: 100%;
 }
@@ -108,19 +116,14 @@ h1 span {
   height: auto;
 }
 
-/*svg title container*/
-#svg-title-container {
-  position: absolute;
-}
-
 /*svg countries*/
 div.svg-container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-basis: 50%;
-  height: 100vh;
-  max-height: 1200px;
+  padding-top: 100px;
+  padding-bottom: 100px;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
 }
@@ -128,7 +131,9 @@ div.svg-container {
 div.svg-container svg {
   scroll-snap-align: start;
   height: 90vh;
+  width: 1000px;
   max-height: 1000px;
+  min-height: 450px;
 }
 
 .item {

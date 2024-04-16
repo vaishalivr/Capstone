@@ -2,6 +2,7 @@ const svgSmallDifferences = d3.select("#smallDifferences");
 
 var smallDifferencesInfographic = Object.create(infographicContainer);
 smallDifferencesInfographic.svg = svgSmallDifferences;
+smallDifferencesInfographic.height = "500px";
 smallDifferencesInfographic.render();
 
 const sentences = [
