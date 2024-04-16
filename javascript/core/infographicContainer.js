@@ -51,4 +51,12 @@ const infographicContainer = {
   getDimensions: function () {
     return getSvgDimensions(this.svg);
   },
+  initIntersectionObserver: function (callback) {
+    this.observer = new IntersectionObserver(callback, {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.35,
+    });
+    this.observer.observe(this.svg.node());
+  },
 };

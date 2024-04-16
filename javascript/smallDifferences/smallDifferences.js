@@ -64,11 +64,38 @@ const sentences = [
   },
 ];
 
+const smallDiffObserver = new IntersectionObserver(
+  function (entries, observer) {
+    entries.forEach((entry) => {
+      var target_id = d3.select(entry.target).attr("id");
+      if (entry.isIntersecting) {
+        d3.select(`#${target_id} > rect`)
+          .transition()
+          .duration(2500)
+          .attr(
+            "width",
+            d3.select(`#${target_id} > text`).node().getBBox().width *
+              parseFloat(
+                d3.select(`#${target_id} > text`).attr("data-surprise-lvl")
+              )
+          );
+      } else {
+        d3.select(`#${target_id} > rect`).attr("width", 0);
+      }
+    });
+  },
+  {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.75,
+  }
+);
+
 for (let i = 0; i < sentences.length; i++) {
-  const sentenceGroup = svgSmallDifferences
+  var sentenceGroup = svgSmallDifferences
     .append("g")
     .attr("id", `sentenceGroup${i}`);
-  const textElement = sentenceGroup
+  let textElement = sentenceGroup
     .append("text")
     .text(sentences[i].sentence)
     .attr("font-family", "'Just Me Again Down Here', cursive")
@@ -78,17 +105,18 @@ for (let i = 0; i < sentences.length; i++) {
     .attr(
       "transform",
       `rotate(${sentences[i].rotate}, ${sentences[i].x}, ${sentences[i].y})`
-    );
-  const bbox = textElement.node().getBBox();
+    )
+    .attr("data-surprise-lvl", sentences[i].surprise_lvl);
+  let bbox = textElement.node().getBBox();
   sentenceGroup
     .insert("rect", ":first-child")
     .attr("x", bbox.x)
     .attr("y", bbox.y)
-    .attr("width", bbox.width * `${sentences[i].surprise_lvl}`)
-    .attr("height", bbox.height)
     .attr(
       "transform",
       `rotate(${sentences[i].rotate}, ${sentences[i].x}, ${sentences[i].y})`
     )
-    .attr("fill", "#ffd43c");
+    .attr("fill", "#ffd43c")
+    .attr("height", bbox.height);
+  smallDiffObserver.observe(sentenceGroup.node());
 }

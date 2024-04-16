@@ -36,7 +36,7 @@ function PlayButton(svg, options, clickCallback) {
         this._polygonStart[1] + 50
       }`
     )
-    .attr("fill", "#f2e863")
+    .attr("fill", "#ffd43c")
     .style("cursor", "pointer")
     .on("click", this._clickCallback(this));
 }

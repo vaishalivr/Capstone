@@ -16,7 +16,7 @@ const levelGaugeWidget = {
       .attr("width", getSvgDimensions(this.parentSvg).width)
       .attr("height", this._style.height / 2)
       .attr("fill", "url(#hashPattern)")
-      .attr("stroke", "#f2e863")
+      .attr("stroke", "#ffd43c")
       .attr("opacity", 0.25);
     this._hashedRect = hashedGroup
       .append("rect")
@@ -25,7 +25,7 @@ const levelGaugeWidget = {
       .attr("width", 0)
       .attr("height", this._style.height / 2)
       .attr("fill", "url(#hashPattern)")
-      .attr("stroke", "#f2e863")
+      .attr("stroke", "#ffd43c")
       .attr("stroke-width", "2");
     this._hashedText = hashedGroup
       .append("text")
@@ -40,8 +40,8 @@ const levelGaugeWidget = {
       .attr("y", this.parentSvgHeight - this._style.height)
       .attr("width", getSvgDimensions(this.parentSvg).width)
       .attr("height", this._style.height / 2)
-      .attr("fill", "#f2e863")
-      .attr("stroke", "#f2e863")
+      .attr("fill", "#ffd43c")
+      .attr("stroke", "#ffd43c")
       .attr("opacity", 0.45);
     this._solidRect = solidGroup
       .append("rect")
@@ -49,8 +49,8 @@ const levelGaugeWidget = {
       .attr("y", this.parentSvgHeight - this._style.height)
       .attr("width", 0)
       .attr("height", this._style.height / 2)
-      .attr("fill", "#f2e863")
-      .attr("stroke", "#f2e863")
+      .attr("fill", "#ffd43c")
+      .attr("stroke", "#ffd43c")
       .attr("stroke-width", "2");
     this._solidText = solidGroup
       .append("text")

@@ -5,78 +5,14 @@ howToReadInfographic.svg = svgHowToReadData;
 howToReadInfographic.height = "450px";
 howToReadInfographic.render();
 
-const playButton = new PlayButton(
-  svgHowToReadData,
-  {
-    containerWidth: howToReadInfographic.getDimensions().width,
-    containerHeight: howToReadInfographic.getDimensions().height,
-  },
-  function (e) {
-    animatedGroup.selectAll("*").remove();
-    let delay = 0;
-    const segmentDuration = 300;
-    const pauseDuration = 50;
+// const playButton = new PlayButton(
+//   svgHowToReadData,
+//   {
+//     containerWidth: howToReadInfographic.getDimensions().width,
+//     containerHeight: howToReadInfographic.getDimensions().height,
+//   },
 
-    sampleData.drawing.forEach((stroke) => {
-      stroke[0].forEach((_, index) => {
-        if (index < stroke[0].length - 1) {
-          var startPoint = [stroke[0][index], stroke[1][index] + yOffset];
-          var endPoint = [stroke[0][index + 1], stroke[1][index + 1] + yOffset];
-
-          var startText = animatedGroup
-            .append("text")
-            .attr("x", startXTextPosition)
-            .attr("y", startYTextPosition)
-            .text(`(${startPoint[0]}, ${startPoint[1] - yOffset})`)
-            .attr("font-size", "18px")
-            .attr("opacity", 0);
-
-          var endText = animatedGroup
-            .append("text")
-            .attr("x", endXTextPosition)
-            .attr("y", endYTextPosition)
-            .text(`(${endPoint[0]}, ${endPoint[1] - yOffset})`)
-            .attr("font-size", "18px")
-            .attr("opacity", 0);
-
-          var line = d3
-            .line()
-            .x(function (d) {
-              return d[0];
-            })
-            .y(function (d) {
-              return d[1];
-            });
-
-          animatedGroup
-            .append("path")
-            .attr("d", line([startPoint, endPoint]))
-            .attr("stroke", "black")
-            .attr("stroke-width", 2)
-            .attr("fill", "none")
-            .attr("stroke-linecap", "round")
-            .attr("stroke-dasharray", 1000)
-            .attr("stroke-dashoffset", 1000)
-            .transition()
-            .delay(delay)
-            .duration(segmentDuration)
-            .ease(d3.easeLinear)
-            .attr("stroke-dashoffset", 0)
-            .on("start", function () {
-              startText.attr("opacity", 1);
-              endText.attr("opacity", 1);
-            })
-            .on("end", function () {
-              startText.transition().duration(pauseDuration).attr("opacity", 0);
-              endText.transition().duration(pauseDuration).attr("opacity", 0);
-            });
-
-          delay += segmentDuration + pauseDuration;
-        }
-      });
-    });
-  }
-);
+// );
 
 const startXTextPosition = 460;
 const startYTextPosition = 220;
@@ -152,9 +88,102 @@ staticGroup
   .text("Start Point")
   .attr("font-size", "18px");
 
+animatedGroup
+  .append("text")
+  .attr("id", "howToRead-startPosition-hint")
+  .attr("x", startXTextPosition)
+  .attr("y", startYTextPosition)
+  .attr("font-size", "18px")
+  .attr("opacity", 0);
+
 staticGroup
   .append("text")
   .attr("x", startXTextPosition - 100)
-  .attr("y", startYTextPosition + 60)
+  .attr("y", endYTextPosition)
   .text("End Point")
   .attr("font-size", "18px");
+
+animatedGroup
+  .append("text")
+  .attr("id", "howToRead-endPosition-hint")
+  .attr("x", startXTextPosition)
+  .attr("y", endYTextPosition)
+  .attr("font-size", "18px")
+  .attr("opacity", 0);
+
+howToReadInfographic.initIntersectionObserver(function (entries, observer) {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      let delay = 75;
+      const segmentDuration = 300;
+      const pauseDuration = 50;
+
+      sampleData.drawing.forEach((stroke) => {
+        stroke[0].forEach((_, index) => {
+          if (index < stroke[0].length - 1) {
+            var startPoint = [stroke[0][index], stroke[1][index] + yOffset];
+            var endPoint = [
+              stroke[0][index + 1],
+              stroke[1][index + 1] + yOffset,
+            ];
+
+            var line = d3
+              .line()
+              .x(function (d) {
+                return d[0];
+              })
+              .y(function (d) {
+                return d[1];
+              });
+
+            animatedGroup
+              .append("path")
+              .attr("class", "house-drawing-bold-path")
+              .attr(
+                "data-start-position",
+                `(${startPoint[0]}, ${startPoint[1] - yOffset})`
+              )
+              .attr(
+                "data-end-position",
+                `(${endPoint[0]}, ${endPoint[1] - yOffset})`
+              )
+              .attr("d", line([startPoint, endPoint]))
+              .attr("stroke", "black")
+              .attr("stroke-width", 2)
+              .attr("fill", "none")
+              .attr("stroke-linecap", "round")
+              .attr("stroke-dasharray", 1000)
+              .attr("stroke-dashoffset", 1000)
+              .transition()
+              .delay(delay)
+              .duration(segmentDuration)
+              .ease(d3.easeLinear)
+              .attr("stroke-dashoffset", 0)
+              .on("start", function () {
+                d3.select("#howToRead-startPosition-hint")
+                  .text(d3.select(this).attr("data-start-position"))
+                  .attr("opacity", 1);
+                d3.select("#howToRead-endPosition-hint")
+                  .text(d3.select(this).attr("data-end-position"))
+                  .attr("opacity", 1);
+              })
+              .on("end", function (e) {
+                d3.select("#howToRead-startPosition-hint")
+                  .transition()
+                  .duration(pauseDuration)
+                  .attr("opacity", 0);
+                d3.select("#howToRead-endPosition-hint")
+                  .transition()
+                  .duration(pauseDuration)
+                  .attr("opacity", 0);
+              });
+
+            delay += segmentDuration + pauseDuration;
+          }
+        });
+      });
+    } else {
+      d3.selectAll(".house-drawing-bold-path").remove();
+    }
+  });
+});
