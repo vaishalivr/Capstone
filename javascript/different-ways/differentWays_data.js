@@ -5,7 +5,7 @@ const shapeDrawings = {
     drawings: [
       {
         vectorId: "square-N",
-        totalCount: 45,
+        totalCount: 26722,
         strokes: [
           [
             [0, 49, 104, 215, 250, 243, 241, 245, 255, 162, 18, 17, 13, 4],
@@ -15,7 +15,7 @@ const shapeDrawings = {
       },
       {
         vectorId: "square-S",
-        totalCount: 50,
+        totalCount: 26078,
         strokes: [
           [
             [
@@ -37,7 +37,7 @@ const shapeDrawings = {
     drawings: [
       {
         vectorId: "line-N",
-        totalCount: 51,
+        totalCount: 39934,
         strokes: [
           [
             [0, 171, 217, 255],
@@ -47,7 +47,7 @@ const shapeDrawings = {
       },
       {
         vectorId: "line-S",
-        totalCount: 52,
+        totalCount: 31221,
         strokes: [
           [
             [255, 184, 58, 21, 0],
@@ -63,7 +63,7 @@ const shapeDrawings = {
     drawings: [
       {
         vectorId: "circle-N",
-        totalCount: 53,
+        totalCount: 59657,
         strokes: [
           [
             [
@@ -81,7 +81,7 @@ const shapeDrawings = {
       },
       {
         vectorId: "circle-S",
-        totalCount: 55,
+        totalCount: 20264,
         strokes: [
           [
             [
@@ -103,7 +103,7 @@ const shapeDrawings = {
     drawings: [
       {
         vectorId: "triangle-S",
-        totalCount: 56,
+        totalCount: 36689,
         strokes: [
           [
             [110, 105, 18, 0, 36, 212, 253, 255, 247, 211, 153, 135, 123, 90],
@@ -113,7 +113,7 @@ const shapeDrawings = {
       },
       {
         vectorId: "triangle-N",
-        totalCount: 57,
+        totalCount: 30156,
         strokes: [
           [
             [0, 63, 73, 107, 114, 140, 181, 212, 206, 157, 123, 80, 50, 2],
