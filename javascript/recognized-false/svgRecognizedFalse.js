@@ -24,7 +24,7 @@ var categoryTooltip = new FixedTooltip(svgRecognizedFalse, {
   size: recognizedFalseInfographic.getDimensions().width * 0.6,
 });
 
-const words1 = ["House", "Dishwasher", "Fans", "Blackberry"];
+const words1 = ["Blackberry", "Dishwasher", "Fans", "House"];
 
 const appendRectsWithImagesAndText = (numRects, imagePaths, textArray) => {
   recognizedFalseInfographic.resetGraphic();
@@ -118,7 +118,7 @@ words1.forEach((word, index) => {
         { value: 3037, label: "unrecognized" },
         { value: 132383, label: "recognized" }
       );
-      appendRectsWithImagesAndText(12, imagePathHouse, [
+      appendRectsWithImagesAndText(18, imagePathHouse, [
         "Flat Roofed Houses",
         "Houses with Scene",
         "Horses as House",
