@@ -174,7 +174,8 @@ for (let i = 0; i < sentences.length; i++) {
         })`
       )
       .append("text")
-      .text("0%");
+      .text("0%")
+      .style("font-size", "1rem");
     annotationGroup
       .append("g")
       .attr(
@@ -184,7 +185,8 @@ for (let i = 0; i < sentences.length; i++) {
         })`
       )
       .append("text")
-      .text("100%");
+      .text("100%")
+      .style("font-size", "1rem");
     annotationGroup
       .append("path")
       .attr("d", curve(curvePoints))
