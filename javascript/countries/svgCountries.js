@@ -42,7 +42,7 @@ countriesArray.forEach((country, countryIndex) => {
   let squareSize = Math.floor(
     Math.sqrt(countriesArray[countryIndex].Total) * square_proportion
   );
-  console.log(squareSize);
+
   const rectId = `rect-${countryIndex}`;
 
   svgCountries
@@ -98,151 +98,141 @@ countriesArray.forEach((country, countryIndex) => {
     });
 });
 
-// const countriesPlayButton = new PlayButton(
-//   svgCountries,
-//   {
-//     containerWidth: countriesInfographic.getDimensions().width,
-//     containerHeight: countriesInfographic.getDimensions().height,
-//   },
-//   function (e) {
-//     svgCountries.selectAll("#animationPath").remove();
-//     svgCountries.selectAll(".animatedText").remove();
-//     svgCountries.selectAll(".curve").remove();
+const countriesPlayButton = new PlayButton(
+  svgCountries,
+  {
+    containerWidth: countriesInfographic.getDimensions().width,
+    containerHeight: countriesInfographic.getDimensions().height,
+  },
+  function (e) {
+    svgCountries.selectAll("#animationPath").remove();
+    svgCountries.selectAll(".animatedText").remove();
+    svgCountries.selectAll(".curve").remove();
 
-//     const pathData = `M 0 0 H ${svgContainerWidth} V ${countryGridHeight} H 0 V 0`;
-//     const perimeter = 2 * (svgContainerWidth + countryGridHeight);
+    const pathData = `M 0 0 H ${svgContainerWidth} V ${countryGridHeight} H 0 V 0`;
+    const perimeter = 2 * (svgContainerWidth + countryGridHeight);
 
-//     const animationPath = svgCountries
-//       .append("path")
-//       .attr("d", pathData)
-//       .attr("fill", "none")
-//       .attr("stroke", "#ffd43c")
-//       .attr("stroke-width", 9)
-//       .attr("id", "animationPath")
-//       .attr("stroke-dasharray", perimeter)
-//       .attr("stroke-dashoffset", perimeter);
+    const animationPath = svgCountries
+      .append("path")
+      .attr("d", pathData)
+      .attr("fill", "none")
+      .attr("stroke", "#ffd43c")
+      .attr("stroke-width", 9)
+      .attr("id", "animationPath")
+      .attr("stroke-dasharray", perimeter)
+      .attr("stroke-dashoffset", perimeter);
 
-//     animationPath
-//       .transition()
-//       .duration(3000)
-//       .ease(d3.easeLinear)
-//       .attr("stroke-dashoffset", 0)
-//       .on("end", function () {
-//         d3.transition()
-//           .delay(1000)
-//           .on("start", function () {
-//             let text = svgCountries
-//               .append("text")
-//               .attr("class", "animatedText")
-//               .attr("x", 900)
-//               .attr("y", 90)
-//               .attr("text-anchor", "middle")
-//               .attr("dominant-baseline", "central")
-//               .attr("fill", "black")
-//               .style("font-family", "'Permanent Marker', cursive")
-//               .text("# of entries from US");
+    animationPath
+      .transition()
+      .duration(3000)
+      .ease(d3.easeLinear)
+      .attr("stroke-dashoffset", 0)
+      .on("end", function () {
+        d3.transition()
+          .delay(1000)
+          .on("start", function () {
+            let text = svgCountries
+              .append("text")
+              .attr("class", "animatedText")
+              .attr("x", 900)
+              .attr("y", 90)
+              .attr("text-anchor", "middle")
+              .attr("dominant-baseline", "central")
+              .attr("fill", "black")
+              .style("font-family", "'Permanent Marker', cursive")
+              .text("# of entries from US");
 
-//             const textX = 900;
-//             const textY = 70;
-//             const lineY = 0;
+            const textX = 900;
+            const textY = 70;
+            const lineY = 0;
 
-//             const controlPointX1 = textX;
-//             const controlPointY1 = textY - 20;
-//             const controlPointX2 = textX;
-//             const controlPointY2 = lineY + (textY - lineY) / 2;
+            const controlPointX1 = textX;
+            const controlPointY1 = textY - 20;
+            const controlPointX2 = textX;
+            const controlPointY2 = lineY + (textY - lineY) / 2;
 
-//             let curve = svgCountries
-//               .append("path")
-//               .attr(
-//                 "d",
-//                 `M ${textX} ${textY}
-//                      C ${controlPointX1} ${controlPointY1},
-//                        ${controlPointX2} ${controlPointY2},
-//                        ${textX} ${lineY}`
-//               )
-//               .attr("stroke", "black")
-//               .attr("stroke-width", 1)
-//               .attr("fill", "none")
-//               .attr("class", "curve");
+            let curve = svgCountries
+              .append("path")
+              .attr(
+                "d",
+                `M ${textX} ${textY}
+                     C ${controlPointX1} ${controlPointY1},
+                       ${controlPointX2} ${controlPointY2},
+                       ${textX} ${lineY}`
+              )
+              .attr("stroke", "black")
+              .attr("stroke-width", 1)
+              .attr("fill", "none")
+              .attr("class", "curve");
 
-//             setTimeout(() => {
-//               animationPath.remove();
-//               text.remove();
-//               curve.remove();
-//             }, 2500);
+            setTimeout(() => {
+              animationPath.remove();
+              text.remove();
+              curve.remove();
+            }, 2500);
 
-//             setTimeout(() => {
-//               let rectId = "rect-17";
-//               d3.select(`#${rectId}`).transition().style("opacity", 1);
-//             }, 2000);
+            setTimeout(() => {
+              let rectId = "rect-17";
+              d3.select(`#${rectId}`).transition().style("opacity", 1);
+            }, 2000);
 
-//             setTimeout(() => {
-//               let text17 = svgCountries
-//                 .append("text")
-//                 .attr("class", "animatedText")
-//                 .attr("x", 300)
-//                 .attr("y", 280)
-//                 .attr("text-anchor", "middle")
-//                 .attr("dominant-baseline", "central")
-//                 .attr("fill", "black")
-//                 .style("font-family", "'Permanent Marker', cursive")
-//                 .text("# of entries from Netherlands compared to US");
+            setTimeout(() => {
+              let text17 = svgCountries
+                .append("text")
+                .attr("class", "animatedText")
+                .attr("x", 300)
+                .attr("y", 280)
+                .attr("text-anchor", "middle")
+                .attr("dominant-baseline", "central")
+                .attr("fill", "black")
+                .style("font-family", "'Permanent Marker', cursive")
+                .text("# of entries from Netherlands compared to US");
 
-//               svgCountries
-//                 .select(".infographic-bg")
-//                 .transition()
-//                 .style("opacity", 1)
-//                 .attr("stroke-width", 5)
-//                 .attr("stroke", "#ffd43c");
+              svgCountries
+                .select(".infographic-bg")
+                .transition()
+                .attr("stroke-width", 5)
+                .attr("stroke", "#ffd43c");
 
-//               setTimeout(() => {
-//                 const rectId = "rect-17";
-//                 text17.remove();
-//                 d3.select(`#${rectId}`).transition().style("opacity", 0);
-//                 svgCountries
-//                   .select(".infographic-bg")
-//                   .style("opacity", 1)
-//                   .attr("stroke-width", 1)
-//                   .attr("stroke", "black");
-//               }, 4000);
-//             }, 4000);
+              setTimeout(() => {
+                const rectId = "rect-17";
+                text17.remove();
+                d3.select(`#${rectId}`).transition().style("opacity", 0);
+                svgCountries.select(".infographic-bg").attr("stroke-width", 0);
+              }, 4000);
+            }, 4000);
 
-//             setTimeout(() => {
-//               let rectId = "rect-46";
-//               d3.select(`#${rectId}`).transition().style("opacity", 1);
-//             }, 9000);
+            setTimeout(() => {
+              let rectId = "rect-46";
+              d3.select(`#${rectId}`).transition().style("opacity", 1);
+            }, 9000);
 
-//             setTimeout(() => {
-//               let text46 = svgCountries
-//                 .append("text")
-//                 .attr("class", "animatedText")
-//                 .attr("x", 800)
-//                 .attr("y", 520)
-//                 .attr("text-anchor", "middle")
-//                 .attr("dominant-baseline", "central")
-//                 .attr("fill", "black")
-//                 .style("font-family", "'Permanent Marker', cursive")
-//                 .text("# of entries from Estonia compared to US");
+            setTimeout(() => {
+              let text46 = svgCountries
+                .append("text")
+                .attr("class", "animatedText")
+                .attr("x", 800)
+                .attr("y", 520)
+                .attr("text-anchor", "middle")
+                .attr("dominant-baseline", "central")
+                .attr("fill", "black")
+                .style("font-family", "'Permanent Marker', cursive")
+                .text("# of entries from Estonia compared to US");
 
-//               svgCountries
-//                 .select(".infographic-bg")
-//                 .transition()
-//                 .style("opacity", 1)
-//                 .attr("stroke-width", 5)
-//                 .attr("stroke", "#ffd43c");
+              svgCountries
+                .select(".infographic-bg")
+                .transition()
+                .attr("stroke-width", 5)
+                .attr("stroke", "#ffd43c");
 
-//               setTimeout(() => {
-//                 const rectId = "rect-46";
-//                 text46.remove();
-//                 d3.select(`#${rectId}`).transition().style("opacity", 0);
-//                 svgCountries
-//                   .select(".infographic-bg")
-//                   .style("opacity", 1)
-//                   .attr("stroke-width", 1)
-//                   .attr("stroke", "black");
-//               }, 6000);
-//             }, 10000);
-//           });
-//       });
-//   }
-// );
+              setTimeout(() => {
+                const rectId = "rect-46";
+                text46.remove();
+                d3.select(`#${rectId}`).transition().style("opacity", 0);
+                svgCountries.select(".infographic-bg").attr("stroke-width", 0);
+              }, 6000);
+            }, 10000);
+          });
+      });
+  }
+);

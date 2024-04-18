@@ -118,8 +118,8 @@ h1 span {
 
 /*svg container*/
 div.infographic-container {
-  padding-top: 100px;
-  padding-bottom: 100px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 div.svg-container {
@@ -138,6 +138,17 @@ div.svg-container svg {
   width: 1000px;
   max-height: 1000px;
   min-height: 450px;
+}
+
+div.svg-container svg text {
+  font-family: "Just Me Again Down Here", cursive;
+  font-size: 1.3rem;
+}
+
+.annotation-group {
+  opacity: 0;
+  fill: #aaa;
+  stroke: #aaa;
 }
 
 div.infographic-container .svg-caption {

@@ -32,7 +32,34 @@ for (let i = 0; i < rows; i++) {
       .attr("fill", "none")
       .attr("stroke-width", "6");
   }
+  strokePaths.forEach((stroke) => {
+    svgCallToAction
+      .append("line")
+      .attr("x1", stroke.startPosition.x)
+      .attr("y1", stroke.startPosition.y)
+      .attr("x2", stroke.endPosition.x)
+      .attr("y2", stroke.endPosition.y)
+      .attr("stroke-width", 50)
+      .attr("stroke", "#FFD43C")
+      .attr("stroke-linecap", "round");
+  });
 }
+
+const footerObserver = new IntersectionObserver(
+  function (entries, observer) {
+    entries.forEach((entry) => {
+      console.log(entry);
+    });
+  },
+  {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.75,
+  }
+);
+footerObserver.observe(document.getElementById("endOfPageBg1"));
+footerObserver.observe(document.getElementById("endOfPageBg2"));
+footerObserver.observe(document.getElementById("endOfPageBg3"));
 
 // const paths = [
 //   { d: "M109 484L809 252", x1: 109, y1: 484, x2: 809, y2: 252 },
