@@ -20,30 +20,6 @@ const sentences = [
     rotate: "10",
     surprise_lvl: "1.2",
     annotation: { text: "my surprise level", position: { x: 750, y: 75 } },
-    // annotations: [
-    //   {
-    //     note: {
-    //       title: "my surprise level",
-    //       bgPadding: 0,
-    //       wrap: 1000,
-    //     },
-    //     connector: {
-    //       end: "dot",
-    //       endScale: 2,
-    //       type: "curve",
-    //       curve: d3.curveBasis,
-    //       points: [
-    //         [0, 0],
-    //         [-5, -10],
-    //       ],
-    //     },
-
-    //     dy: -10,
-    //     dx: -100,
-    //     notePadding: 0,
-    //     textWrap: 150,
-    //   },
-    // ],
   },
   {
     sentence: "night sky at 4pm",

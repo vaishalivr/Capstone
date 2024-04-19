@@ -14,6 +14,20 @@ h1 span {
   line-height: 0.75;
 }
 
+svg text {
+  font-family: "Just Me Again Down Here", cursive;
+  font-size: 1.3rem;
+}
+
+.formatted-code {
+  margin: 0px 0px;
+  font-size: x-small;
+}
+
+.code-highlighter {
+  background-color: #ffd43c;
+}
+
 .title-container {
   display: flex;
   height: 100vh;
@@ -140,11 +154,6 @@ div.svg-container svg {
   min-height: 450px;
 }
 
-div.svg-container svg text {
-  font-family: "Just Me Again Down Here", cursive;
-  font-size: 1.3rem;
-}
-
 .annotation-group {
   opacity: 0;
   fill: #aaa;
@@ -166,6 +175,7 @@ div.infographic-container .svg-caption {
   align-items: center;
   margin-bottom: 6px;
 }
+
 .square {
   width: 30px;
   height: 30px;
@@ -178,6 +188,7 @@ div.infographic-container .svg-caption {
 #square2 {
   background-color: #ffd43c;
 }
+
 .hashed-square {
   background-image: linear-gradient(
     135deg,
@@ -193,6 +204,7 @@ div.infographic-container .svg-caption {
   background-size: 8px 8px;
   background-position: 0px 0px;
 }
+
 .level-gauge-indicator-text {
   font-family: "Arial, Helvetica, sans-serif";
   font-size: 14px;

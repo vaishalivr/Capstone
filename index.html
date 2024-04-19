@@ -415,21 +415,36 @@
     </div>
     <div class="story-text">
       <p>Let's take a look at the sample data for a house.</p>
-      <p>
-    <pre style="margin:0px 0px;"><code>
-    "word" : "house",
-    "countrycode" : "US",
-    "timestamp" : "2017-03-11 19:09:26.08877 UTC",
-    "recognized" : true,
-    "key_id" : "5054419760578560"
-    "drawing" : 
-    </code></pre>  
-      </p>
-      <!-- "drawing" : [[[9,9,13,19,23,41,62,129,145,164,166,161,141,132,0],[108,212,239,252,255,255,253,236,231,220,189,164,100,85,108]],
-    [[3,3,14,44,63,75,100,135],[107,92,68,22,1,0,16,72]],[[27,22,25,37,60,65,63,22],[157,162,203,210,210,203,148,148]],
-    [[13,49,74],[185,187,184]],[[38,42],[156,212]]] -->
+
+      <pre class="formatted-code">
+          <code>
+            "word" : "house",
+            "countrycode" : "US",
+            "timestamp" : "2017-03-11 19:09:26.08877 UTC",
+            "recognized" : true,
+            "key_id" : "5054419760578560"
+            "drawing" : [</code>
+          <code id="sample-drawing-stroke-0">    [
+                [9,9,13,19,23,41,62,129,145,164,166,161,141,132,0],
+                [108,212,239,252,255,255,253,236,231,220,189,164,100,85,108]
+              ],</code>
+          <code id="sample-drawing-stroke-1">    [
+                [3,3,14,44,63,75,100,135],[107,92,68,22,1,0,16,72]
+              ],</code>
+          <code id="sample-drawing-stroke-2">    [
+                [27,22,25,37,60,65,63,22],[157,162,203,210,210,203,148,148]
+              ],</code>
+          <code id="sample-drawing-stroke-3">    [
+                [13,49,74],[185,187,184]
+              ],</code>
+          <code id="sample-drawing-stroke-4">    [
+                [38,42],[156,212]
+              ]</code>
+          <code> ]
+          </code>
+        </pre>
     </div>
-    <div class="infographic-container" style="padding-top:5px;">
+    <div class="infographic-container" style="padding-top: 5px">
       <div class="svg-container">
         <svg id="howToReadData"></svg>
       </div>
@@ -513,23 +528,22 @@
     <br />
     <br />
     <div class="infographic-container">
-    <div id="recognized-false-container" class="svg-container">
-      <svg id="recognized-false"></svg>
+      <div id="recognized-false-container" class="svg-container">
+        <svg id="recognized-false"></svg>
+      </div>
+      <div class="svg-caption">
+        <p style="font-size: smaller">
+          <em
+            >Methodology: Drawings that were unrecognized (recognized: false,
+            the meta data with every drawing) were considered from House,
+            Dishwasher, Fan and Blackberry datasets. This trimmed dataset was
+            then curated manually and visualized above.
+          </em>
+        </p>
+      </div>
     </div>
-    <div class="svg-caption">
-      <p style="font-size: smaller">
-        <em
-          >Methodology: Drawings that were unrecognized (recognized: false, the
-          meta data with every drawing) were considered from House, Dishwasher,
-          Fan and Blackberry datasets. This trimmed dataset was then curated
-          manually and visualized above.
-        </em>
-      </p>
-    </div>
-  </div>
     <br />
     <div class="story-text">
-      
       <p>A horse for a house?</p>
       <p>
         To find the reason for a horse showing up from countries such as Egypt,
@@ -549,31 +563,35 @@
     <br />
     <br />
     <div class="infographic-container">
-    <div id="different-ways-container" class="svg-container">
-      <svg id="different-ways"></svg>
+      <div id="different-ways-container" class="svg-container">
+        <svg id="different-ways"></svg>
+      </div>
+      <div class="svg-caption">
+        <p style="font-size: smaller">
+          <em
+            >Methodology: Drawing area was divied into 4 quadrants. Direction of
+            markers of the first stroke was calculated to calculate the percent
+            of direction.
+          </em>
+        </p>
+      </div>
     </div>
-    <div class="svg-caption">
-      <p style="font-size: smaller">
-        <em
-          >Methodology: Drawing area was divied into 4 quadrants. Direction of
-          markers of the first stroke was calculated to calculate the percent of
-          direction.
-        </em>
-      </p>
+    <div
+      class="infographic-container"
+      style="max-height: 850px; overflow-y: scroll"
+    >
+      <div
+        id="call-to-action-container"
+        class="svg-container"
+        style="position: absolute; z-index: 10; left: 0; right: 0; margin: auto"
+      >
+        <svg id="call-to-action" style="height: 850"></svg>
+      </div>
+      <div style="height: 500px" id="endOfPageBg1"></div>
+      <div style="height: 500px" id="endOfPageBg2"></div>
+      <div style="height: 500px" id="endOfPageBg3"></div>
     </div>
-  </div>
-  <div class="infographic-container" style="max-height:850px;overflow-y: scroll;">
-    <div id="call-to-action-container" class="svg-container" style="position:absolute;z-index:10;left:0;right:0;margin:auto;">
-      <svg id="call-to-action" style="height:850;">
-      </svg>
-    </div>
-    <div style="height:500px;" id="endOfPageBg1"></div>
-      <div style="height:500px;" id="endOfPageBg2"></div>
-      <div style="height:500px;" id="endOfPageBg3"></div>
-    
-  </div>
   </body>
-  <script src="javascript/core/d3-annotation.min.js"></script>
   <script src="javascript/commonFunctions.js"></script>
   <script src="javascript/core/playButton.js"></script>
   <script src="javascript/core/fixedTooltip.js"></script>

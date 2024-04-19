@@ -115,10 +115,14 @@ howToReadInfographic.initIntersectionObserver(function (entries, observer) {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
       let delay = 75;
-      const segmentDuration = 300;
-      const pauseDuration = 50;
+      const segmentDuration = 1000;
+      const pauseDuration = 10;
 
-      sampleData.drawing.forEach((stroke) => {
+      sampleData.drawing.forEach((stroke, strokeIndex) => {
+        d3.select(`#sample-drawing-stroke-${strokeIndex}`)
+          .transition()
+          .delay(delay)
+          .attr("class", "code-highlighter");
         stroke[0].forEach((_, index) => {
           if (index < stroke[0].length - 1) {
             var startPoint = [stroke[0][index], stroke[1][index] + yOffset];
@@ -157,7 +161,6 @@ howToReadInfographic.initIntersectionObserver(function (entries, observer) {
               .transition()
               .delay(delay)
               .duration(segmentDuration)
-              .ease(d3.easeLinear)
               .attr("stroke-dashoffset", 0)
               .on("start", function () {
                 d3.select("#howToRead-startPosition-hint")
@@ -170,20 +173,24 @@ howToReadInfographic.initIntersectionObserver(function (entries, observer) {
               .on("end", function (e) {
                 d3.select("#howToRead-startPosition-hint")
                   .transition()
-                  .duration(pauseDuration)
+                  .delay(delay)
                   .attr("opacity", 0);
                 d3.select("#howToRead-endPosition-hint")
                   .transition()
-                  .duration(pauseDuration)
+                  .delay(delay)
                   .attr("opacity", 0);
               });
-
             delay += segmentDuration + pauseDuration;
           }
         });
+        d3.select(`#sample-drawing-stroke-${strokeIndex}`)
+          .transition()
+          .delay(delay)
+          .attr("class", null);
       });
     } else {
       d3.selectAll(".house-drawing-bold-path").remove();
+      d3.selectAll(".code-highlighter").attr("class", null);
     }
   });
 });
