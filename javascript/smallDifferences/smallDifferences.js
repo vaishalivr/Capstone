@@ -161,7 +161,7 @@ for (let i = 0; i < sentences.length; i++) {
         })`
       )
       .append("text")
-      .text("100%")
+      .text("120%")
       .style("font-size", "1rem");
     annotationGroup
       .append("path")

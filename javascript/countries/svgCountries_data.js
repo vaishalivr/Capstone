@@ -166,7 +166,7 @@ const countriesArray = [
     Counts: { recognized: 851, unrecognized: 81 },
   },
   {
-    Country: "Korea, Republic of",
+    Country: "Korea",
     Total: 6852,
     Counts: { recognized: 6553, unrecognized: 299 },
   },
@@ -234,10 +234,10 @@ const countriesArray = [
     Country: "Romania",
     Total: 3966,
     Counts: { recognized: 3405, unrecognized: 561 },
-    helpText: "# of entries frpm Romania compared to US",
+    helpText: "# of entries from Romania compared to US",
   },
   {
-    Country: "Russian Federation",
+    Country: "Russia",
     Total: 13058,
     Counts: { recognized: 11822, unrecognized: 1236 },
   },
@@ -287,7 +287,7 @@ const countriesArray = [
     Counts: { recognized: 1940, unrecognized: 158 },
   },
   {
-    Country: "Taiwan, Province of China",
+    Country: "Taiwan",
     Total: 3290,
     Counts: { recognized: 3022, unrecognized: 268 },
   },
@@ -302,7 +302,7 @@ const countriesArray = [
     Counts: { recognized: 2912, unrecognized: 335 },
   },
   {
-    Country: "United Arab Emirates",
+    Country: "UAE",
     Total: 3144,
     Counts: { recognized: 2708, unrecognized: 436 },
   },
@@ -312,9 +312,14 @@ const countriesArray = [
     Counts: { recognized: 36098, unrecognized: 4801 },
   },
   {
-    Country: "Viet Nam",
+    Country: "Vietnam",
     Total: 3602,
     Counts: { recognized: 3158, unrecognized: 444 },
+  },
+  {
+    Country: "Zimbabwe",
+    Total: 1700,
+    Counts: { recognized: 2456, unrecognized: 763 },
   },
   {
     Country: "United States",

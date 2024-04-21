@@ -40,7 +40,9 @@ svg text {
   max-height: 900px;
   min-height: 450px;
 }
-
+.title-container svg text{
+  font-size: 3rem;
+}
 .title {
   display: flex;
   justify-content: center;

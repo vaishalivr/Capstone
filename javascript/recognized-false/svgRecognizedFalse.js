@@ -110,7 +110,7 @@ words1.forEach((word, index) => {
         "Hand Fan",
         "Pedestal Fan",
         "Taylor Swift Fan",
-        "Exhause Fan",
+        "Exhaust Fan",
       ]);
     }
     if (e.target.id == "House") {

@@ -1,13 +1,6 @@
 const svgTitleContainer = d3.select("#svg-title-container");
 svgTitleContainer.attr("width", "50%").attr("height", "100%");
 
-// const tc_rect = svgTitleContainer
-//   .append("rect")
-//   .attr("width", "100%")
-//   .attr("height", "100%")
-//   .attr("fill", "none")
-//   .attr("stroke", "black");
-
 const tc_houseGroup = svgTitleContainer
   .append("g")
   .attr("transform", "translate(10, 12) scale(0.5)");
