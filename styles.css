@@ -136,6 +136,15 @@ div.infographic-container {
   padding-bottom: 30px;
 }
 
+div.infographic-tool-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 50%;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+}
+
 div.svg-container {
   display: flex;
   justify-content: center;
@@ -152,6 +161,12 @@ div.svg-container svg {
   width: 1000px;
   max-height: 1000px;
   min-height: 450px;
+}
+
+.play-btn__svg {
+  transition: 1s;
+  fill: #f4edd3;
+  opacity: 0.5;
 }
 
 .annotation-group {

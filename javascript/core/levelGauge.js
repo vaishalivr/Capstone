@@ -58,6 +58,12 @@ const levelGaugeWidget = {
       .attr("y", this.parentSvgHeight - this._style.height + 20)
       .attr("class", "level-gauge-indicator-text");
   },
+  reset: function () {
+    this._hashedText.text("");
+    this._solidText.text("");
+    this._hashedRect.attr("width", 0);
+    this._solidRect.attr("width", 0);
+  },
   resize: function (hashedLevel, solidLevel) {
     var totalLevels = hashedLevel.value + solidLevel.value;
     var hashedLevelPercentage = (

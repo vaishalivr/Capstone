@@ -1,12 +1,12 @@
 const svgCountries = d3.select("#svg-countries");
-const square_proportion = 1000 / Math.sqrt(258671);
+const square_proportion = 1000 / Math.sqrt(baseDataPoint.Total);
 const countriesInfographic = Object.create(infographicContainer);
 countriesInfographic.svg = svgCountries;
 countriesInfographic.height = "800px";
 countriesInfographic.render();
 
 const svgContainerWidth = countriesInfographic.getDimensions().width;
-const countryGridHeight = 750;
+const countryGridHeight = 740;
 
 const numRows = 9;
 const numCols = 9;
@@ -27,15 +27,30 @@ svgCountries
   .attr("stroke", "#ffd43c")
   .attr("stroke-width", 2);
 
+svgCountries
+  .append("rect")
+  .attr("x", 0)
+  .attr("y", 0)
+  .attr("width", countriesInfographic.getDimensions().width)
+  .attr("height", countryGridHeight)
+  .attr("id", "country-us-size-rect")
+  .attr("fill", "none")
+  .attr("stroke", "#ffd43c")
+  .attr("stroke-width", 6);
+
 var countriesLevelGauge = Object.create(levelGaugeWidget);
 countriesLevelGauge.parentSvg = svgCountries;
 countriesLevelGauge.render();
-// {
-//   Country: "United States",
-//   Total: 258671,
-//   Counts: { recognized: 231319, unrecognized: 27352 },
-// }
+
+countriesLevelGauge.resize(
+  { value: baseDataPoint.Counts.unrecognized, label: "unrecognized" },
+  { value: baseDataPoint.Counts.recognized, label: "recognized" }
+);
+
 countriesArray.forEach((country, countryIndex) => {
+  if ("skipDrawing" in country && country.skipDrawing) {
+    return;
+  }
   const x = ((countryIndex % 8) + 0.5) * colSpacing;
   const y = (Math.floor(countryIndex / 8) + 0.5) * rowSpacing;
 
@@ -45,7 +60,7 @@ countriesArray.forEach((country, countryIndex) => {
 
   const rectId = `rect-${countryIndex}`;
 
-  svgCountries
+  var dataPointRect = svgCountries
     .append("rect")
     .attr("x", x - squareSize / 2)
     .attr("y", y - squareSize / 2)
@@ -55,48 +70,179 @@ countriesArray.forEach((country, countryIndex) => {
     .attr("stroke", "#ffd43c")
     .attr("stroke-width", "6px")
     .attr("id", rectId)
-    .style("opacity", 0);
+    .attr("opacity", 0);
 
-  svgCountries
+  var dataPointText = svgCountries
     .append("text")
+    .attr("id", `data-point-text-${countryIndex}`)
+    .attr("class", "country-data-point-text")
     .attr("x", x)
     .attr("y", y)
     .attr("text-anchor", "middle")
     .attr("dominant-baseline", "central")
     .attr("font-size", "12px")
     .attr("data-bg-rect", rectId)
-    .text(countriesArray[countryIndex].Country)
+    .text(country.Country)
     .style("cursor", "pointer")
     .on("click", function () {
+      d3.selectAll(".country-data-point-text").attr("opacity", 0.25);
+      d3.select(this).attr("opacity", 1);
       var bgRectId = d3.select(this).attr("data-bg-rect");
-      const hashedLevel =
-        countriesArray[countryIndex]["Counts"]["unrecognized"];
+      const hashedLevel = country["Counts"]["unrecognized"];
       if (lastClickedRectId) {
-        d3.select(`#${lastClickedRectId}`).transition().style("opacity", 0);
+        d3.select(`#${lastClickedRectId}`).transition().attr("opacity", 0);
       }
-      d3.select(`#${bgRectId}`).transition().style("opacity", 1);
+      d3.select(`#${bgRectId}`).transition().attr("opacity", 1);
       lastClickedRectId = bgRectId;
       countriesLevelGauge.resize(
         { value: hashedLevel, label: "unrecognized" },
         {
-          value: countriesArray[countryIndex]["Counts"]["recognized"],
+          value: country["Counts"]["recognized"],
           label: "recognized",
         }
       );
 
-      svgCountries
-        .select(".infographic-bg")
+      d3.select("#country-us-size-rect")
         .transition()
         .duration(5000)
         .ease(d3.easeLinear)
-        .attr("stroke-width", "6px")
+        .attr("stroke-width", 6)
         .attr("stroke", "#ffd43c")
         .transition()
         .duration(3000)
         .ease(d3.easeLinear)
         .attr("stroke-width", 0);
     });
+
+  if ("helpText" in country) {
+    var dataPointHelpText = svgCountries
+      .append("text")
+      .attr("id", `data-point-help-text-${countryIndex}`)
+      .attr("class", "animatedText")
+      .attr("text-anchor", "middle")
+      .attr("dominant-baseline", "central")
+      .attr("fill", "#aaa")
+      .style("font-family", "'Permanent Marker', cursive")
+      .style("font-size", "1rem")
+      .text(country.helpText)
+      .attr("opacity", 0);
+
+    dataPointHelpText.attr(
+      "x",
+      parseInt(dataPointRect.attr("x")) +
+        (dataPointHelpText.node().getComputedTextLength() -
+          parseInt(dataPointRect.attr("width"))) /
+          2
+    );
+
+    dataPointHelpText.attr(
+      "y",
+      parseInt(dataPointRect.attr("y")) +
+        parseInt(dataPointRect.attr("height")) +
+        20
+    );
+  }
 });
+
+const animateInfographic = function (e) {
+  svgCountries.selectAll("#animationPath").remove();
+  svgCountries.selectAll(".animatedText").attr("opacity", 0);
+  svgCountries.selectAll(".curve").remove();
+  d3.select("#country-us-size-rect").attr("stroke-width", 0);
+
+  countriesLevelGauge.reset();
+
+  const pathData = `M 0 0 H ${svgContainerWidth} V ${countryGridHeight} H 0 V 0`;
+  const perimeter = 2 * (svgContainerWidth + countryGridHeight);
+
+  const animationPath = svgCountries
+    .append("path")
+    .attr("d", pathData)
+    .attr("fill", "none")
+    .attr("stroke", "#ffd43c")
+    .attr("stroke-width", 9)
+    .attr("id", "animationPath")
+    .attr("stroke-dasharray", perimeter)
+    .attr("stroke-dashoffset", perimeter);
+
+  animationPath
+    .transition()
+    .duration(3000)
+    .ease(d3.easeLinear)
+    .attr("stroke-dashoffset", 0)
+    .on("end", function () {
+      countriesLevelGauge.resize(
+        { value: baseDataPoint.Counts.unrecognized, label: "unrecognized" },
+        { value: baseDataPoint.Counts.recognized, label: "recognized" }
+      );
+      d3.transition()
+        .delay(1000)
+        .on("start", function () {
+          let text = svgCountries
+            .append("text")
+            .attr("class", "animatedText")
+            .attr("x", 900)
+            .attr("y", 90)
+            .attr("text-anchor", "middle")
+            .attr("dominant-baseline", "central")
+            .attr("fill", "#aaa")
+            .style("font-family", "'Permanent Marker', cursive")
+            .style("font-size", "1rem")
+            .text("# of entries from US");
+
+          const textX = 900;
+          const textY = 70;
+          const lineY = 0;
+
+          const controlPointX1 = textX;
+          const controlPointY1 = textY - 20;
+          const controlPointX2 = textX;
+          const controlPointY2 = lineY + (textY - lineY) / 2;
+
+          let curve = svgCountries
+            .append("path")
+            .attr(
+              "d",
+              `M ${textX} ${textY}
+                   C ${controlPointX1} ${controlPointY1},
+                     ${controlPointX2} ${controlPointY2},
+                     ${textX} ${lineY}`
+            )
+            .attr("stroke", "black")
+            .attr("stroke-width", 1)
+            .attr("fill", "none")
+            .attr("class", "curve");
+
+          setTimeout(() => {
+            animationPath.remove();
+            text.remove();
+            curve.remove();
+          }, 2500);
+
+          setTimeout(() => {
+            d3.select("#data-point-text-17").dispatch("click");
+            d3.select("#data-point-help-text-17").attr("opacity", 1);
+          }, 2500);
+
+          setTimeout(() => {
+            d3.select("#data-point-help-text-17").attr("opacity", 0);
+            d3.select(`#rect-17`).transition().attr("opacity", 0);
+          }, 6000);
+
+          setTimeout(() => {
+            d3.select("#data-point-text-46").dispatch("click");
+            d3.select("#data-point-help-text-46").attr("opacity", 1);
+          }, 6000);
+
+          setTimeout(() => {
+            d3.select("#data-point-help-text-46").attr("opacity", 0);
+            d3.select(`#rect-46`).transition().attr("opacity", 0);
+            countriesLevelGauge.reset();
+            d3.selectAll(".country-data-point-text").attr("opacity", 1);
+          }, 10000);
+        });
+    });
+};
 
 const countriesPlayButton = new PlayButton(
   svgCountries,
@@ -104,135 +250,21 @@ const countriesPlayButton = new PlayButton(
     containerWidth: countriesInfographic.getDimensions().width,
     containerHeight: countriesInfographic.getDimensions().height,
   },
-  function (e) {
-    svgCountries.selectAll("#animationPath").remove();
-    svgCountries.selectAll(".animatedText").remove();
-    svgCountries.selectAll(".curve").remove();
-
-    const pathData = `M 0 0 H ${svgContainerWidth} V ${countryGridHeight} H 0 V 0`;
-    const perimeter = 2 * (svgContainerWidth + countryGridHeight);
-
-    const animationPath = svgCountries
-      .append("path")
-      .attr("d", pathData)
-      .attr("fill", "none")
-      .attr("stroke", "#ffd43c")
-      .attr("stroke-width", 9)
-      .attr("id", "animationPath")
-      .attr("stroke-dasharray", perimeter)
-      .attr("stroke-dashoffset", perimeter);
-
-    animationPath
-      .transition()
-      .duration(3000)
-      .ease(d3.easeLinear)
-      .attr("stroke-dashoffset", 0)
-      .on("end", function () {
-        d3.transition()
-          .delay(1000)
-          .on("start", function () {
-            let text = svgCountries
-              .append("text")
-              .attr("class", "animatedText")
-              .attr("x", 900)
-              .attr("y", 90)
-              .attr("text-anchor", "middle")
-              .attr("dominant-baseline", "central")
-              .attr("fill", "black")
-              .style("font-family", "'Permanent Marker', cursive")
-              .text("# of entries from US");
-
-            const textX = 900;
-            const textY = 70;
-            const lineY = 0;
-
-            const controlPointX1 = textX;
-            const controlPointY1 = textY - 20;
-            const controlPointX2 = textX;
-            const controlPointY2 = lineY + (textY - lineY) / 2;
-
-            let curve = svgCountries
-              .append("path")
-              .attr(
-                "d",
-                `M ${textX} ${textY}
-                     C ${controlPointX1} ${controlPointY1},
-                       ${controlPointX2} ${controlPointY2},
-                       ${textX} ${lineY}`
-              )
-              .attr("stroke", "black")
-              .attr("stroke-width", 1)
-              .attr("fill", "none")
-              .attr("class", "curve");
-
-            setTimeout(() => {
-              animationPath.remove();
-              text.remove();
-              curve.remove();
-            }, 2500);
-
-            setTimeout(() => {
-              let rectId = "rect-17";
-              d3.select(`#${rectId}`).transition().style("opacity", 1);
-            }, 2000);
-
-            setTimeout(() => {
-              let text17 = svgCountries
-                .append("text")
-                .attr("class", "animatedText")
-                .attr("x", 300)
-                .attr("y", 280)
-                .attr("text-anchor", "middle")
-                .attr("dominant-baseline", "central")
-                .attr("fill", "black")
-                .style("font-family", "'Permanent Marker', cursive")
-                .text("# of entries from Netherlands compared to US");
-
-              svgCountries
-                .select(".infographic-bg")
-                .transition()
-                .attr("stroke-width", 5)
-                .attr("stroke", "#ffd43c");
-
-              setTimeout(() => {
-                const rectId = "rect-17";
-                text17.remove();
-                d3.select(`#${rectId}`).transition().style("opacity", 0);
-                svgCountries.select(".infographic-bg").attr("stroke-width", 0);
-              }, 4000);
-            }, 4000);
-
-            setTimeout(() => {
-              let rectId = "rect-46";
-              d3.select(`#${rectId}`).transition().style("opacity", 1);
-            }, 9000);
-
-            setTimeout(() => {
-              let text46 = svgCountries
-                .append("text")
-                .attr("class", "animatedText")
-                .attr("x", 800)
-                .attr("y", 520)
-                .attr("text-anchor", "middle")
-                .attr("dominant-baseline", "central")
-                .attr("fill", "black")
-                .style("font-family", "'Permanent Marker', cursive")
-                .text("# of entries from Estonia compared to US");
-
-              svgCountries
-                .select(".infographic-bg")
-                .transition()
-                .attr("stroke-width", 5)
-                .attr("stroke", "#ffd43c");
-
-              setTimeout(() => {
-                const rectId = "rect-46";
-                text46.remove();
-                d3.select(`#${rectId}`).transition().style("opacity", 0);
-                svgCountries.select(".infographic-bg").attr("stroke-width", 0);
-              }, 6000);
-            }, 10000);
-          });
-      });
-  }
+  animateInfographic
 );
+
+d3.select("#country-infographic-container-play").on(
+  "click",
+  animateInfographic
+);
+
+d3.select("#country-infographic-container-reset").on("click", function (e) {
+  svgCountries.selectAll("#animationPath").remove();
+  svgCountries.selectAll(".animatedText").attr("opacity", 0);
+  svgCountries.selectAll(".curve").remove();
+  d3.select("#country-us-size-rect").attr("stroke-width", 6);
+  countriesLevelGauge.resize(
+    { value: baseDataPoint.Counts.unrecognized, label: "unrecognized" },
+    { value: baseDataPoint.Counts.recognized, label: "recognized" }
+  );
+});

@@ -88,6 +88,7 @@ const countriesArray = [
     Country: "Estonia",
     Total: 1270,
     Counts: { recognized: 1078, unrecognized: 192 },
+    helpText: "# of entries frpm Estonia compared to US",
   },
   {
     Country: "Finland",
@@ -233,6 +234,7 @@ const countriesArray = [
     Country: "Romania",
     Total: 3966,
     Counts: { recognized: 3405, unrecognized: 561 },
+    helpText: "# of entries frpm Romania compared to US",
   },
   {
     Country: "Russian Federation",
@@ -314,4 +316,17 @@ const countriesArray = [
     Total: 3602,
     Counts: { recognized: 3158, unrecognized: 444 },
   },
+  {
+    Country: "United States",
+    Total: 258671,
+    Counts: { recognized: 231319, unrecognized: 27352 },
+    skipDrawing: true,
+  },
 ];
+
+const baseDataPoint = {
+  Country: "United States",
+  Total: 258671,
+  Counts: { recognized: 231319, unrecognized: 27352 },
+  helpText: "# of entries frpm US",
+};
