@@ -5,10 +5,10 @@ callToActionInfographic.svg = svgCallToAction;
 callToActionInfographic.render();
 
 const rows = 3;
-const columns = 5;
+const columns = 6;
 
 const rectSize = 90;
-const padding = 60;
+const padding = 45;
 
 const gridWidth = columns * rectSize + (columns - 1) * padding;
 const gridHeight = rows * rectSize + (rows - 1) * padding;
@@ -17,10 +17,32 @@ const startX = (callToActionInfographic.getDimensions().width - gridWidth) / 2;
 const startY =
   (callToActionInfographic.getDimensions().height - gridHeight) / 2;
 
+const cta_imageurl = [
+  "/Users/vaishaliverma/Documents/Visuals/Capstone/media/call_to_action/asparagus.png",
+  "/Users/vaishaliverma/Documents/Visuals/Capstone/media/call_to_action/barn.png",
+  "/Users/vaishaliverma/Documents/Visuals/Capstone/media/call_to_action/baseball_bat.png",
+  "/Users/vaishaliverma/Documents/Visuals/Capstone/media/call_to_action/baseball.png",
+  "/Users/vaishaliverma/Documents/Visuals/Capstone/media/call_to_action/blackberry.png",
+  "/Users/vaishaliverma/Documents/Visuals/Capstone/media/call_to_action/blueberry.png",
+  "/Users/vaishaliverma/Documents/Visuals/Capstone/media/call_to_action/broccoli.png",
+  "/Users/vaishaliverma/Documents/Visuals/Capstone/media/call_to_action/cello.png",
+  "/Users/vaishaliverma/Documents/Visuals/Capstone/media/call_to_action/clarinet.png",
+  "/Users/vaishaliverma/Documents/Visuals/Capstone/media/call_to_action/fireplace.png",
+  "/Users/vaishaliverma/Documents/Visuals/Capstone/media/call_to_action/flamingo.png",
+  "/Users/vaishaliverma/Documents/Visuals/Capstone/media/call_to_action/oven.png",
+  "/Users/vaishaliverma/Documents/Visuals/Capstone/media/call_to_action/panda.png",
+  "/Users/vaishaliverma/Documents/Visuals/Capstone/media/call_to_action/penguin.png",
+  "/Users/vaishaliverma/Documents/Visuals/Capstone/media/call_to_action/power_outlet.png",
+  "/Users/vaishaliverma/Documents/Visuals/Capstone/media/call_to_action/raccoon.png",
+  "/Users/vaishaliverma/Documents/Visuals/Capstone/media/call_to_action/snowflake.png",
+  "/Users/vaishaliverma/Documents/Visuals/Capstone/media/call_to_action/snowman.png",
+];
+
 for (let i = 0; i < rows; i++) {
   for (let j = 0; j < columns; j++) {
     const x = startX + j * (rectSize + padding);
     const y = startY + i * (rectSize + padding);
+    const rectId = `rect-${i}-${j}`;
 
     svgCallToAction
       .append("rect")
@@ -30,7 +52,19 @@ for (let i = 0; i < rows; i++) {
       .attr("height", rectSize)
       .attr("stroke", "#ffd43c")
       .attr("fill", "none")
-      .attr("stroke-width", "6");
+      .attr("stroke-width", "6")
+      .attr("id", rectId);
+
+    if (cta_imageurl.length > i * columns + j) {
+      svgCallToAction
+        .append("image")
+        .attr("x", x)
+        .attr("y", y)
+        .attr("width", rectSize)
+        .attr("height", rectSize)
+        .attr("xlink:href", cta_imageurl[i * columns + j])
+        .attr("preserveAspectRatio", "xMidYMid slice");
+    }
   }
   strokePaths.forEach((stroke) => {
     svgCallToAction
