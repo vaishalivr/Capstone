@@ -149,6 +149,7 @@ const animateInfographic = function (e) {
   svgCountries.selectAll(".animatedText").attr("opacity", 0);
   svgCountries.selectAll(".curve").remove();
   d3.select("#country-us-size-rect").attr("stroke-width", 0);
+  d3.select("#svg-countries-toolbar").style("opacity", 0);
 
   countriesLevelGauge.reset();
 
@@ -239,6 +240,7 @@ const animateInfographic = function (e) {
             d3.select(`#rect-46`).transition().attr("opacity", 0);
             countriesLevelGauge.reset();
             d3.selectAll(".country-data-point-text").attr("opacity", 1);
+            d3.select("#svg-countries-toolbar").style("opacity", 1);
           }, 10000);
         });
     });

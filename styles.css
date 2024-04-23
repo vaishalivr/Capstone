@@ -306,3 +306,6 @@ div.infographic-container .svg-caption {
 #section3 {
   background-color: #555;
 }
+.infographic-tool-container svg {
+  opacity: 0;
+}

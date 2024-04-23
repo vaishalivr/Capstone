@@ -111,86 +111,97 @@ animatedGroup
   .attr("font-size", "18px")
   .attr("opacity", 0);
 
-howToReadInfographic.initIntersectionObserver(function (entries, observer) {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      let delay = 75;
-      const segmentDuration = 1000;
-      const pauseDuration = 10;
+const animateHowToReadData = function (e) {
+  d3.selectAll(".house-drawing-bold-path").remove();
+  d3.selectAll(".code-highlighter").attr("class", null);
+  d3.select("#howToReadDataToolbar").style("opacity", 0);
 
-      sampleData.drawing.forEach((stroke, strokeIndex) => {
-        d3.select(`#sample-drawing-stroke-${strokeIndex}`)
+  let delay = 75;
+  const segmentDuration = 1000;
+  const pauseDuration = 10;
+
+  sampleData.drawing.forEach((stroke, strokeIndex) => {
+    d3.select(`#sample-drawing-stroke-${strokeIndex}`)
+      .transition()
+      .delay(delay)
+      .attr("class", "code-highlighter");
+    stroke[0].forEach((_, index) => {
+      if (index < stroke[0].length - 1) {
+        var startPoint = [stroke[0][index], stroke[1][index] + yOffset];
+        var endPoint = [stroke[0][index + 1], stroke[1][index + 1] + yOffset];
+
+        var line = d3
+          .line()
+          .x(function (d) {
+            return d[0];
+          })
+          .y(function (d) {
+            return d[1];
+          });
+
+        animatedGroup
+          .append("path")
+          .attr("class", "house-drawing-bold-path")
+          .attr(
+            "data-start-position",
+            `(${startPoint[0]}, ${startPoint[1] - yOffset})`
+          )
+          .attr(
+            "data-end-position",
+            `(${endPoint[0]}, ${endPoint[1] - yOffset})`
+          )
+          .attr("d", line([startPoint, endPoint]))
+          .attr("stroke", "black")
+          .attr("stroke-width", 2)
+          .attr("fill", "none")
+          .attr("stroke-linecap", "round")
+          .attr("stroke-dasharray", 1000)
+          .attr("stroke-dashoffset", 1000)
           .transition()
           .delay(delay)
-          .attr("class", "code-highlighter");
-        stroke[0].forEach((_, index) => {
-          if (index < stroke[0].length - 1) {
-            var startPoint = [stroke[0][index], stroke[1][index] + yOffset];
-            var endPoint = [
-              stroke[0][index + 1],
-              stroke[1][index + 1] + yOffset,
-            ];
-
-            var line = d3
-              .line()
-              .x(function (d) {
-                return d[0];
-              })
-              .y(function (d) {
-                return d[1];
-              });
-
-            animatedGroup
-              .append("path")
-              .attr("class", "house-drawing-bold-path")
-              .attr(
-                "data-start-position",
-                `(${startPoint[0]}, ${startPoint[1] - yOffset})`
-              )
-              .attr(
-                "data-end-position",
-                `(${endPoint[0]}, ${endPoint[1] - yOffset})`
-              )
-              .attr("d", line([startPoint, endPoint]))
-              .attr("stroke", "black")
-              .attr("stroke-width", 2)
-              .attr("fill", "none")
-              .attr("stroke-linecap", "round")
-              .attr("stroke-dasharray", 1000)
-              .attr("stroke-dashoffset", 1000)
+          .duration(segmentDuration)
+          .attr("stroke-dashoffset", 0)
+          .on("start", function () {
+            d3.select("#howToRead-startPosition-hint")
+              .text(d3.select(this).attr("data-start-position"))
+              .attr("opacity", 1);
+            d3.select("#howToRead-endPosition-hint")
+              .text(d3.select(this).attr("data-end-position"))
+              .attr("opacity", 1);
+          })
+          .on("end", function (e) {
+            d3.select("#howToRead-startPosition-hint")
               .transition()
               .delay(delay)
-              .duration(segmentDuration)
-              .attr("stroke-dashoffset", 0)
-              .on("start", function () {
-                d3.select("#howToRead-startPosition-hint")
-                  .text(d3.select(this).attr("data-start-position"))
-                  .attr("opacity", 1);
-                d3.select("#howToRead-endPosition-hint")
-                  .text(d3.select(this).attr("data-end-position"))
-                  .attr("opacity", 1);
-              })
-              .on("end", function (e) {
-                d3.select("#howToRead-startPosition-hint")
-                  .transition()
-                  .delay(delay)
-                  .attr("opacity", 0);
-                d3.select("#howToRead-endPosition-hint")
-                  .transition()
-                  .delay(delay)
-                  .attr("opacity", 0);
-              });
-            delay += segmentDuration + pauseDuration;
-          }
-        });
-        d3.select(`#sample-drawing-stroke-${strokeIndex}`)
-          .transition()
-          .delay(delay)
-          .attr("class", null);
-      });
-    } else {
-      d3.selectAll(".house-drawing-bold-path").remove();
-      d3.selectAll(".code-highlighter").attr("class", null);
-    }
+              .attr("opacity", 0);
+            d3.select("#howToRead-endPosition-hint")
+              .transition()
+              .delay(delay)
+              .attr("opacity", 0);
+          });
+        delay += segmentDuration + pauseDuration;
+      }
+    });
+    d3.select(`#sample-drawing-stroke-${strokeIndex}`)
+      .transition()
+      .delay(delay)
+      .attr("class", null);
   });
-});
+  d3.select("#howToReadDataToolbar")
+    .transition()
+    .delay(delay)
+    .style("opacity", 1);
+};
+d3.select("#howto-infographic-container-play").on(
+  "click",
+  animateHowToReadData
+);
+
+const howToReadDataPlayButton = new PlayButton(
+  svgHowToReadData,
+  {
+    containerWidth: howToReadInfographic.getDimensions().width,
+    containerHeight: howToReadInfographic.getDimensions().height,
+  },
+  animateHowToReadData
+);
