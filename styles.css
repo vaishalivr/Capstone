@@ -252,7 +252,7 @@ div.infographic-container .svg-caption {
 }
 .background-text {
   padding: 50px;
-  width: 50vw;
+  width: 55vw;
   background-position: 0px 0px;
   margin: auto;
   justify-content: left;
@@ -263,9 +263,9 @@ div.infographic-container .svg-caption {
   content: "";
   position: absolute;
   height: 60%;
-  width: 100%;
-  top: 20vh;
-  left: 0;
+  width: 75%;
+  top: 25vh;
+  left: 12%;
   background: #ffd43c;
   z-index: -1;
   clip-path: url(#clip); /* applying clip animation */
@@ -279,7 +279,7 @@ div.infographic-container .svg-caption {
   white-space: nowrap;
   text-overflow: none;
   font-family: "Just Me Again Down Here", cursive;
-  font-size: 4rem;
+  font-size: 3.5rem;
 }
 .foreground {
   position: absolute;
