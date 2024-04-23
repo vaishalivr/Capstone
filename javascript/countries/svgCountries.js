@@ -183,7 +183,7 @@ const animateInfographic = function (e) {
             .append("text")
             .attr("class", "animatedText")
             .attr("x", 900)
-            .attr("y", 90)
+            .attr("y", 80)
             .attr("text-anchor", "middle")
             .attr("dominant-baseline", "central")
             .attr("fill", "#aaa")
@@ -191,33 +191,24 @@ const animateInfographic = function (e) {
             .style("font-size", "1rem")
             .text("# of entries from US");
 
-          const textX = 900;
-          const textY = 70;
-          const lineY = 0;
+          var curve = d3.line().curve(d3.curveNatural);
+          var curvePoints = [
+            [960, 90],
+            [965, 105],
+            [990, 110],
+          ];
 
-          const controlPointX1 = textX;
-          const controlPointY1 = textY - 20;
-          const controlPointX2 = textX;
-          const controlPointY2 = lineY + (textY - lineY) / 2;
-
-          let curve = svgCountries
+          let curvePointer = svgCountries
             .append("path")
-            .attr(
-              "d",
-              `M ${textX} ${textY}
-                   C ${controlPointX1} ${controlPointY1},
-                     ${controlPointX2} ${controlPointY2},
-                     ${textX} ${lineY}`
-            )
-            .attr("stroke", "black")
-            .attr("stroke-width", 1)
+            .attr("d", curve(curvePoints))
+            .attr("stroke-width", 2)
             .attr("fill", "none")
-            .attr("class", "curve");
+            .attr("stroke", "#aaa");
 
           setTimeout(() => {
             animationPath.remove();
             text.remove();
-            curve.remove();
+            curvePointer.remove();
           }, 2500);
 
           setTimeout(() => {
