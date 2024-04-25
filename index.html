@@ -37,6 +37,8 @@
       </div>
     </div>
     <div class="story-text">
+      <h4>Analysing hand drawn doodles to explore cultural variations</h4>
+      <h4>Vaishali Verma</h4>
       <p>
         What if you were told to draw a
         <span class="custom-underline"
@@ -51,7 +53,7 @@
       </p>
 
       <p>
-        What if you were told to draw a
+        Or a
         <span class="custom-underline"
           >nail
           <span class="tooltip-content"
@@ -64,7 +66,7 @@
       </p>
 
       <p>
-        What if you were told to draw a
+        Or a
         <span class="custom-underline"
           >fan
           <span class="tooltip-content"
@@ -145,25 +147,16 @@
         </span>
         that most people think of.
       </p>
-      <br />
       <p class="decorated-p">
-        The image that comes to mind when these words are mentioned, has a lot
-        to do with the version of these words we’ve grown up with.
+        Who can say if the images you have in mind as you read these words are
+        the same images I had in mind as I typed them.
       </p>
       <p>
-        Here I try to explore more cases of these gentle out-of-context
-        misunderstandings to find hope and find similar company of real people
-        from across the world.
-      </p>
-      <p>
-        A while ago I got to experience this first hand. We moved from India to
-        East Coast of the United States. While making this move, we had
-        accomodated for the change in climate, food, friends and finally a
-        house.
-      </p>
-
-      <p>
-        But there is some see it to believe it stuff that made a big difference:
+        Recently, I moved from India to Boston and while making this move I had
+        accounted for change in climate, food, friends, their accent and home.
+        Everything that had a physical attribute and could be measured, was
+        measured using rules and scales. There was still a lot of
+        see-it-to-believe-it stuff that was out of my calculations.
       </p>
     </div>
     <div class="infographic-container">
@@ -173,55 +166,50 @@
     </div>
     <div class="story-text">
       <p>
-        And this was not it. Initial conversations with my new friends made me
-        realize there is a small delta of understanding between what they say
-        and what I know.
+        The above situations left me surprised more than I could imagine and
+        defied all my traditional measurement systems. And these were just a
+        few.
       </p>
-      <br />
       <p class="decorated-p">
-        We had missed taking into account the culture and lifestyle of this new
-        place and its people.
+        I had clearly missed taking into account the culture and lifestyle of
+        this new place and its people.
       </p>
       <p>
-        And so I attempt to explore a doodle dataset from
+        I try to explain this delta, the triangle of difference that I developed
+        while navigating the World, to show how our cultures shape our
+        instincts. This story is an attempt to explore more cases of these
+        gentle differences to find similar company of people from across the
+        World.
+      </p>
+      <p>
+        I found these people when I attempted to explore
         <a
           href="https://quickdraw.withgoogle.com/"
           target="_blank"
           class="custom-underline"
           >Google's Quick Draw</a
         >
-        which is the largest published doodle dataset generated as a product of
-        one of its AI experiment.
-      </p>
-      <p>
-        The attempt here is to analyze these drawings from a human lense. And by
-        doing that, trying to learn how people see their world.
-      </p>
-      <p>
-        This game challenges players to draw a representation of an object
-        within 20 seconds, while the game's neural network tries to recognize
-        the drawing in real-time. By collecting drawings from people around the
-        world, this AI tries to enhance its ability to understand
-        human-generated visual content.
-      </p>
-      <br />
-      <p class="decorated-p">
-        A Neural Network is a series of algorithms that tries to recognize
-        underlying relationships in a set of data through a process that mimics
-        the way the human brain operates.
+        dataset a game in which a person has 20 seconds to draw to prompts like
+        ‘asparagus’ and ‘fireplace’. It’s fun but the real use of this data is
+        to train machines to mimic human brain. Just like the human brain is
+        made up of neurons and synapses, a neural network which is a type of
+        artificial intelligence that consists of ‘nodes’ or neurons connected by
+        ‘lines’ or weights in a kind of web. By collecting drawings from people
+        around the World, this AI tries to enhance its ability to understand
+        human generated visual content.
       </p>
     </div>
     <div class="story-text">
       <p>
-        The data is not represented as the drawing itself. The drawing for each
-        category is stored in a (dot)NDJSON format as an array of strokes where
-        each stroke is a sequence of x and y coordinates. It represents the
-        vector drawing commands to recreate the drawing.
+        <u>
+          While humans remember visuals by what they represent, this AI stores
+          every visual in a series of vector array along with other meta
+          data.</u
+        >
+        This is an example of a house and how its vectors are plotted.
       </p>
     </div>
     <div class="story-text">
-      <p>Let's take a look at the sample data for a house.</p>
-
       <pre class="formatted-code">
           <code>
             "word" : "house",
@@ -249,6 +237,7 @@
           <code> ]
           </code>
         </pre>
+      <p style="font-size: medium"><em>Click Play</em></p>
     </div>
     <div class="infographic-container" style="padding-top: 5px">
       <div class="infographic-tool-container">
@@ -275,23 +264,34 @@
       </div>
     </div>
     <div class="story-text">
-      <p>
-        There are 50 million rows of this data across different categories.
-        There are 345 categories such as apple, circle, yoga, zigzag to name a
-        few. The location of people participation is scattered across over 200
-        countries. So we have to know where mosst of these drawings are coming
-        from.
-      </p>
+      <code>recognized: true</code>
+      <p>The recognized metadata is AI’s output of personal understanding.</p>
 
       <p>
-        United States has the largest number of drawings. Size of enclosing
-        rectangle below represents the drawings from the US. United Kingdom is
-        the second highest with a huge gap.
+        If the player was told to draw a cat and the AI recognized the drawing
+        as a cat, the boolean value would be ‘true’. If the drawing is outside
+        the scope of AI’s understanding spectrum, say the player draw a cat in a
+        way that this AI had never seen before, the boolean value is ‘false’.
+      </p>
+      <p>
+        I went on to analyze the origin of these drawings, location of these
+        players. But participation in this game is likely a factor of player
+        location, availability of internet and efforts made to promote the game
+        in that region.
+      </p>
+      <p>
+        The United States has a lion’s share of participation with 0.25 million
+        drawings, the outer rectangle in the visualization below showing it’s
+        entires. United Kingdom is far second with 41,000 entries which is less
+        than 25% of United States entries.
+      </p>
+      <p style="font-size: medium">
+        <em
+          >Click Play for legend, after that click on country names to see their
+          proportions.</em
+        >
       </p>
     </div>
-
-    <br />
-    <br />
     <div class="infographic-container">
       <div class="infographic-tool-container">
         <svg width="1000" height="40" id="svg-countries-toolbar">
@@ -329,110 +329,141 @@
         </svg>
       </div>
       <div id="svg-countries-container" class="svg-container">
-        <svg id="svg-countries"></svg><br />
+        <svg id="svg-countries"></svg>
       </div>
       <div class="svg-caption">
         <p class="svg-caption" style="font-size: smaller">
           <em
             >Methodology: Entires from House, Dishwasher, Fan and Blackberry
-            datasets were summed and distributed by Country. Percent of
-            recognized and unrecognized drawings were calculated.
+            datasets were summed and distributed by Countries. Percent
+            calculation of entires of drawings from each country in proportion
+            to United States. Percent calculation of recognized and unrecognized
+            drawings for each country based on total number of drawings. Python
+            for data processing and javascript for visualizing.
           </em>
         </p>
       </div>
     </div>
     <div class="story-text">
-      <div>
-        The data above is skewed. There are also a few other countries apart
-        from the ones shown that have very minimalistic numbers. A few up to
-        10,000 would be Tunisia, Cyprus, Maldives, Bermuda, but at the extreme
-        bottom were less than 20 observations were possible would be Ethiopia,
-        Mali, Guinea.
-      </div>
+      <p>Korea had 95% of its drawings recognized, followed by Japan at 93%.</p>
+      <p>While Zimbabwe had the least at 56%, followed by Iraq at 74%.</p>
       <p>
-        Not every individual across the world has equal access to the internet.
+        Tunisia, Cyprus, Maldives, Bermuda had less than 10,000 entries and at
+        the extreme bottom were Ethiopia, Mali, Guinea with less than 20
+        entires.
+      </p>
+      <p>
+        Subsetting drawings that went unrecognized
+        <code>recognized : false</code> in the dataset, there is a diverse trend
+        of culture. AI was unable to identify these drawings either due to human
+        imperfection or abstract representations of concepts. We can only assume
+        the AI models training dataset might not included sufficient examples of
+        certain types of drawings leading to lower recognition rate. These are
+        opportunities where the AI model could improve and this game continues
+        to provides valuable data for retraining and refining its model.
+      </p>
+      <p>
+        <u>
+          So I made a hypothesis that only the most promising version of what
+          could be happening in a developed country may have been used for
+          training.</u
+        >And went on to analyze almost all categories to find stories, I settled
+        down on a few that I thought were the best representation of human
+        diversity. I have to admit my personal bias here.
       </p>
       <p class="decorated-p">
-        But the probability of an individual from a developed country having
-        access to internet is higher.
+        I could only look for stories that I have experienced. For others, I
+        failed to identify them even when they were staring right into my eye.
       </p>
       <p>
-        We don't know what the training dataset for this AI looks like, but it
-        seems that to be coming from the most promising version of what would
-        happen in a developed country.
+        The visual below contains unrecognized drawings across 4 categories.
       </p>
-      <p>
-        So I digged deep into the unrecognized drawings to find stories. After
-        browsing through many categories and their stories, below are a few.
+      <p style="font-size: medium">
+        <em>Click the words below, then hover over the doodles.</em>
       </p>
     </div>
-    <div class="story-text">
-      <p>Click over the categories or hover over the doodles</p>
-    </div>
-    <br />
-    <br />
     <div class="infographic-container">
       <div id="recognized-false-container" class="svg-container">
         <svg id="recognized-false"></svg>
       </div>
       <div class="svg-caption">
-        <p style="font-size: smaller">
+        <p style="font-size: smaller" class="svg-caption">
           <em
-            >Methodology: Drawings that were unrecognized (recognized: false,
-            the meta data with every drawing) were considered from House,
-            Dishwasher, Fan and Blackberry datasets. This trimmed dataset was
-            then curated manually and visualized above.
+            >Methodology: Unrecognized drawings considered from House,
+            Dishwasher, Fan and Blackberry datasets. Key ids of this trimmed
+            dataset distributed by country. Then first 2000 drawings curated
+            manually to find stories and visualized above. Python for data
+            processing and javascript for visualizing.
           </em>
         </p>
       </div>
     </div>
-    <br />
     <div class="story-text">
       <p>A horse for a house?</p>
+      <p>There could be a few reasons for this mixup:</p>
       <p>
-        To find the reason for a horse showing up from countries such as Egypt,
-        Nigeria, Viet Nam and India I went back to the game to find out more.
-        Since English is not their native language and the game supports only
-        other few, this may be one of the categories that is based on the
-        players best guess.
+        <em>Cognitive slip: </em> some players may have had a momentary lapse in
+        attention or memory and drew the first thing that came to mind thinking
+        of word that starts with ‘ho-‘.
       </p>
       <p>
-        Seeing this I was compelled to take a step back and look into how the
-        most basic shapes are drawn and see if those could have differences too.
+        <em>Language barriers: </em> the game starts in English with an option
+        to change to a few languages using control at bottom right. If the
+        player speaks a different language and missed the option, it is likely
+        they were confused.
+      </p>
+      <p>
+        Having pondered about cognitive abilities and language barriers,<u>
+          this got me to explore the most basic level at which people can
+          perceive differently.</u
+        >
+        Shapes like line, square, rectangle are the most basic units of drawings
+        that enrich our visual language.
+      </p>
+      <p style="font-size: medium">
+        <em>Click the words below, then hover over the doodles.</em>
       </p>
     </div>
-    <br />
-    <br />
-    <br />
     <div class="infographic-container">
       <div id="different-ways-container" class="svg-container">
         <svg id="different-ways"></svg>
       </div>
       <div class="svg-caption">
-        <p style="font-size: smaller">
+        <p style="font-size: smaller" class="svg-caption">
           <em
-            >Methodology: Drawing area was divied into 4 quadrants. Direction of
-            markers of the first stroke was calculated to calculate the percent
-            of direction.
+            >Methodology: Drawing area was divided into 4 quadrants. Direction
+            calculated by observing location of first and second point of
+            stroke. Only single strokes considered.
           </em>
         </p>
       </div>
     </div>
     <div class="story-text">
       <p>
-        It's been a while since I have been calling Boston my home. Have made
-        friends, visited historical places, seen museums and had a lot of food.
-        But still when I look at certain systems or things that I have not grown
-        up with, there is a thought for a fraction of a second - wow, this is
-        new!
+        Most of the circles coming from Japan and other Asian countries are
+        clockwise. While those coming from United States are counter clockwise.
+      </p>
+      <p>
+        The location of a player can profoundly affect how they perceive and
+        create shapes. Surely globalization may have grayed out some areas, but
+        it does not play a role huge enough in order to catch up with cultural
+        influence of cognition and human perception.
+      </p>
+      <p class="decorated-p">
+        Every culture’s history, philosophy and values can be seen in the way
+        its people draw and interpret visual language.
+      </p>
+      <p>
+        And so it’s been a while I’ve been calling Boston my home. Have made
+        friends, visited places, seen museums and had a lot of food. But even
+        then, when I look at certain things I have not grown up with, there is a
+        thought for a fraction of a second - wow, this is new!
       </p>
     </div>
     <div class="footer">
       <div class="background">
         <div class="background-text">
-          <p class="inner-sticky-text">
-            We live with our own cultural systems, be kind.
-          </p>
+          <p class="inner-sticky-text">There is a lot of diversity, be kind.</p>
         </div>
       </div>
       <div class="foreground">

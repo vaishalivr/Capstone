@@ -121,9 +121,9 @@ countriesArray.forEach((country, countryIndex) => {
       .attr("class", "animatedText")
       .attr("text-anchor", "middle")
       .attr("dominant-baseline", "central")
-      .attr("fill", "#aaa")
-      .style("font-family", "'Permanent Marker', cursive")
-      .style("font-size", "1rem")
+      .attr("fill", "#000")
+      .attr("font-family", "Just Me Again Down Here")
+      .style("font-size", "1.5rem")
       .text(country.helpText)
       .attr("opacity", 0);
 
@@ -186,10 +186,10 @@ const animateInfographic = function (e) {
             .attr("y", 80)
             .attr("text-anchor", "middle")
             .attr("dominant-baseline", "central")
-            .attr("fill", "#aaa")
-            .style("font-family", "'Permanent Marker', cursive")
-            .style("font-size", "1rem")
-            .text("# of entries from US");
+            .attr("fill", "#000")
+            .attr("font-family", "Just Me Again Down Here")
+            .style("font-size", "1.5rem")
+            .text("entries from US");
 
           var curve = d3.line().curve(d3.curveNatural);
           var curvePoints = [

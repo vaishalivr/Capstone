@@ -130,7 +130,6 @@ words1.forEach((word, index) => {
         { value: 113736, label: "recognized" }
       );
       appendRectsWithImagesAndText(6, imagePathBlackberry, [
-        "Blackberry Fruit",
         "Blackberry Phone",
       ]);
     }

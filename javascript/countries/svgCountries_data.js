@@ -30,7 +30,7 @@ const countriesArray = [
     Counts: { recognized: 1569, unrecognized: 135 },
   },
   {
-    Country: "Bosnia and Herzegovina",
+    Country: "Bosnia",
     Total: 1161,
     Counts: { recognized: 1022, unrecognized: 139 },
   },
@@ -88,7 +88,7 @@ const countriesArray = [
     Country: "Estonia",
     Total: 1270,
     Counts: { recognized: 1078, unrecognized: 192 },
-    helpText: "# of entries frpm Estonia compared to US",
+    helpText: "proportion of entries from Estonia",
   },
   {
     Country: "Finland",
@@ -234,7 +234,7 @@ const countriesArray = [
     Country: "Romania",
     Total: 3966,
     Counts: { recognized: 3405, unrecognized: 561 },
-    helpText: "# of entries from Romania compared to US",
+    helpText: "proportion of entries from Romania",
   },
   {
     Country: "Russia",
@@ -319,7 +319,7 @@ const countriesArray = [
   {
     Country: "Zimbabwe",
     Total: 1700,
-    Counts: { recognized: 2456, unrecognized: 763 },
+    Counts: { recognized: 1000, unrecognized: 700 },
   },
   {
     Country: "United States",
@@ -333,5 +333,5 @@ const baseDataPoint = {
   Country: "United States",
   Total: 258671,
   Counts: { recognized: 231319, unrecognized: 27352 },
-  helpText: "# of entries frpm US",
+  helpText: "# of entries from US",
 };
