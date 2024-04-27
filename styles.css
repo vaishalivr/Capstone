@@ -311,3 +311,15 @@ div.infographic-container .svg-caption {
 .infographic-tool-container svg {
   opacity: 0;
 }
+
+.inline-highlight {
+  background-position: left;
+  background-image: linear-gradient(#ffd43c, #ffd43c);
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  transition: background-size 1s;
+}
+
+.in-view .inline-highlight {
+  background-size: 100% 100%;
+}
