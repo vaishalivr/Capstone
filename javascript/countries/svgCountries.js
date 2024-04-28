@@ -47,6 +47,36 @@ countriesLevelGauge.resize(
   { value: baseDataPoint.Counts.recognized, label: "recognized" }
 );
 
+svgCountries
+  .append("text")
+  .attr("class", "animatedText")
+  .attr("id", "base-country-text")
+  .attr("x", 900)
+  .attr("y", 80)
+  .attr("text-anchor", "middle")
+  .attr("dominant-baseline", "central")
+  .attr("fill", "#000")
+  .attr("font-family", "Just Me Again Down Here")
+  .style("font-size", "1.5rem")
+  .text(`United States - ${baseDataPoint.Total}`)
+  .attr("opacity", 0);
+
+svgCountries
+  .append("path")
+  .attr(
+    "d",
+    d3.line().curve(d3.curveNatural)([
+      [960, 90],
+      [965, 105],
+      [990, 110],
+    ])
+  )
+  .attr("id", "base-country-text-pointer")
+  .attr("stroke-width", 2)
+  .attr("fill", "none")
+  .attr("stroke", "#000")
+  .attr("opacity", 0);
+
 countriesArray.forEach((country, countryIndex) => {
   if ("skipDrawing" in country && country.skipDrawing) {
     return;
@@ -72,7 +102,7 @@ countriesArray.forEach((country, countryIndex) => {
     .attr("id", rectId)
     .attr("opacity", 0);
 
-  var dataPointText = svgCountries
+  svgCountries
     .append("text")
     .attr("id", `data-point-text-${countryIndex}`)
     .attr("class", "country-data-point-text")
@@ -82,11 +112,15 @@ countriesArray.forEach((country, countryIndex) => {
     .attr("dominant-baseline", "central")
     .attr("font-size", "12px")
     .attr("data-bg-rect", rectId)
+    .attr("data-country-index", countryIndex)
     .text(country.Country)
     .style("cursor", "pointer")
     .on("click", function () {
-      d3.selectAll(".country-data-point-text").attr("opacity", 0.25);
+      d3.selectAll(".country-data-point-text").attr("opacity", 0.1);
+      d3.selectAll(".country-hint").attr("opacity", 0);
       d3.select(this).attr("opacity", 1);
+      var didx = d3.select(this).attr("data-country-index");
+      d3.select(`#data-point-hint-text-${didx}`).attr("opacity", 1);
       var bgRectId = d3.select(this).attr("data-bg-rect");
       const hashedLevel = country["Counts"]["unrecognized"];
       if (lastClickedRectId) {
@@ -102,17 +136,63 @@ countriesArray.forEach((country, countryIndex) => {
         }
       );
 
+      d3.select("#base-country-text")
+        .transition()
+        .ease(d3.easeLinear)
+        .attr("opacity", 1)
+        .transition()
+        .duration(3000)
+        .ease(d3.easeLinear)
+        .attr("opacity", 0);
+      d3.select("#base-country-text-pointer")
+        .transition()
+        .ease(d3.easeLinear)
+        .attr("opacity", 1)
+        .transition()
+        .duration(3000)
+        .ease(d3.easeLinear)
+        .attr("opacity", 0);
       d3.select("#country-us-size-rect")
         .transition()
-        .duration(5000)
         .ease(d3.easeLinear)
-        .attr("stroke-width", 6)
+        .attr("stroke-width", "12px")
         .attr("stroke", "#ffd43c")
         .transition()
         .duration(3000)
         .ease(d3.easeLinear)
-        .attr("stroke-width", 0);
+        .attr("stroke-width", "0px");
     });
+
+  var countryDrawingCountRatio = (country.Total * 100) / baseDataPoint.Total;
+  var dataPointHintText = svgCountries
+    .append("text")
+    .attr("id", `data-point-hint-text-${countryIndex}`)
+    .attr("class", "country-hint")
+    .attr("text-anchor", "start")
+    .attr("dominant-baseline", "central")
+    .attr("fill", "#000")
+    .style("font-family", "Arial, sans-serif")
+    .style("font-size", "0.9rem")
+    .text(countryDrawingCountRatio.toFixed(2) + "%")
+    .attr("opacity", 0);
+
+  dataPointHintText.attr(
+    "x",
+    parseInt(dataPointRect.attr("x")) +
+      Math.floor(
+        (squareSize - dataPointHintText.node().getComputedTextLength()) / 2
+      )
+  );
+
+  var hintYCoordinate =
+    parseInt(dataPointRect.attr("y")) +
+    parseInt(dataPointRect.attr("height")) +
+    20;
+
+  if (hintYCoordinate > countryGridHeight - 50) {
+    hintYCoordinate = parseInt(dataPointRect.attr("y")) - 20;
+  }
+  dataPointHintText.attr("y", hintYCoordinate);
 
   if ("helpText" in country) {
     var dataPointHelpText = svgCountries
@@ -121,7 +201,7 @@ countriesArray.forEach((country, countryIndex) => {
       .attr("class", "animatedText")
       .attr("text-anchor", "middle")
       .attr("dominant-baseline", "central")
-      .attr("fill", "#000")
+      .attr("fill", "#aaa")
       .attr("font-family", "Just Me Again Down Here")
       .style("font-size", "1.5rem")
       .text(country.helpText)
@@ -135,12 +215,7 @@ countriesArray.forEach((country, countryIndex) => {
           2
     );
 
-    dataPointHelpText.attr(
-      "y",
-      parseInt(dataPointRect.attr("y")) +
-        parseInt(dataPointRect.attr("height")) +
-        20
-    );
+    dataPointHelpText.attr("y", parseInt(dataPointHintText.attr("y")) + 20);
   }
 });
 
@@ -186,7 +261,7 @@ const animateInfographic = function (e) {
             .attr("y", 80)
             .attr("text-anchor", "middle")
             .attr("dominant-baseline", "central")
-            .attr("fill", "#000")
+            .attr("fill", "#aaa")
             .attr("font-family", "Just Me Again Down Here")
             .style("font-size", "1.5rem")
             .text("entries from US");
@@ -228,6 +303,7 @@ const animateInfographic = function (e) {
 
           setTimeout(() => {
             d3.select("#data-point-help-text-46").attr("opacity", 0);
+            d3.select("#data-point-hint-text-46").attr("opacity", 0);
             d3.select(`#rect-46`).transition().attr("opacity", 0);
             countriesLevelGauge.reset();
             d3.selectAll(".country-data-point-text").attr("opacity", 1);
@@ -254,6 +330,7 @@ d3.select("#country-infographic-container-play").on(
 d3.select("#country-infographic-container-reset").on("click", function (e) {
   svgCountries.selectAll("#animationPath").remove();
   svgCountries.selectAll(".animatedText").attr("opacity", 0);
+  svgCountries.selectAll(".country-hint").attr("opacity", 0);
   svgCountries.selectAll(".curve").remove();
   d3.select("#country-us-size-rect").attr("stroke-width", 6);
   countriesLevelGauge.resize(
