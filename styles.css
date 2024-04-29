@@ -1,6 +1,8 @@
 body {
   font-family: "Arial", sans-serif;
   background-color: #faf8f6;
+  margin: 0;
+  padding: 0;
 }
 
 /* main heading */
@@ -322,4 +324,33 @@ div.infographic-container .svg-caption {
 
 .in-view .inline-highlight {
   background-size: 100% 100%;
+}
+
+.mobile-responsive {
+  width: 100vw;
+  height: 100%;
+  position: fixed;
+  align-content: center;
+  justify-content: center;
+  display: none;
+  background-color: #faf8f6;
+  overflow: none;
+  z-index: 100;
+}
+.mobile-responsive h1 {
+  margin-top: 20%;
+  text-align: center;
+}
+
+.mobile-responsive p {
+  text-align: center;
+  margin-top: 10%;
+}
+@media screen and (max-width: 1024px) {
+  .mobile-responsive {
+    display: block !important;
+  }
+  .all-content {
+    display: none !important;
+  }
 }
