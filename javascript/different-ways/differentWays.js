@@ -85,10 +85,15 @@ Object.keys(shapeDrawings).forEach((word, index) => {
     );
 
     shapeDrawings[word]["drawings"].forEach((drawing, index) => {
+      var percentage =
+        (drawing["totalCount"] * 100) /
+        (shapeDrawings[word]["recognizedDrawingCount"] +
+          shapeDrawings[word]["unrecognizedDrawingCount"]);
       var group = createDoodleGroup(
         drawing["vectorId"],
         word + "-group",
-        drawing["totalCount"]
+        drawing["totalCount"] +
+          ` (${percentage.toFixed(2)}% of total drawings for ${word})`
       );
       var path = appendPathsToGroups(group, drawing["strokes"], createPath);
       differentWaysInfographic.addGraphicComponent(group);
