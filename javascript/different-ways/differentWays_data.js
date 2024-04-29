@@ -31,7 +31,7 @@ const shapeDrawings = {
       },
       {
         vectorId: "square-1",
-        totalCount: 12345,
+        totalCount: 12314,
         strokes: [
           [
             [
