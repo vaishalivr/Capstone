@@ -58,7 +58,7 @@ const appendRectsWithImagesAndText = (numRects, imagePaths, textArray) => {
         .attr("y", yRowStart)
         .attr("width", rectSize)
         .attr("height", rectSize)
-        .attr("fill", "white")
+        .attr("fill", "none")
         .attr("stroke", "black");
 
       if (row * rectsPerRow + col < imagePaths.length) {
