@@ -95,8 +95,8 @@ svg text {
 }
 
 .decorated-p {
-  margin-top: 5rem;
-  margin-bottom: 5rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
   border-top: 2px solid #000; /* Adds a line above the text */
   border-bottom: 2px solid #000; /* Adds a line below the text */
   padding: 8px 0; /* Adds some spacing between the text and the lines */
@@ -241,7 +241,7 @@ div.infographic-container .svg-caption {
   width: 100vw;
 }
 .background {
-  background-image: url(./media/call_to_action/footer_bg.png);
+  background-image: url(./media/call_to_action/call_to_action.png);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
