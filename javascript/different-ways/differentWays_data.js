@@ -139,7 +139,7 @@ const shapeDrawings = {
       },
       {
         vectorId: "triangle-1",
-        totalCount: 23456,
+        totalCount: 6782,
         strokes: [
           [
             [53, 16, 13, 19, 54, 61, 65, 105, 136, 180, 185, 180, 92, 4, 0, 1],
