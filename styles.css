@@ -261,9 +261,18 @@ div.infographic-container .svg-caption {
   margin: auto;
   justify-content: left;
   align-items: center;
+  display: none;
+}
+.background-text-flex {
+  padding: 50px;
+  width: 55vw;
+  background-position: 0px 0px;
+  margin: auto;
+  justify-content: left;
+  align-items: center;
   display: flex;
 }
-.background-text:before {
+.background-text-flex:before {
   content: "";
   position: absolute;
   height: 60%;
@@ -293,22 +302,11 @@ div.infographic-container .svg-caption {
   z-index: 90;
   opacity: 0;
   padding-right: 15px;
+  display: none;
 }
 .foreground section {
   height: 200vh;
   width: 100vw;
-}
-#section0 {
-  background-color: #fff;
-}
-#section1 {
-  background-color: #ccc;
-}
-#section2 {
-  background-color: #999;
-}
-#section3 {
-  background-color: #555;
 }
 .infographic-tool-container svg {
   opacity: 0;
