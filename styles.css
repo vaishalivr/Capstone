@@ -1,3 +1,7 @@
+:root {
+  overscroll-behavior: none;
+}
+
 body {
   font-family: "Arial", sans-serif;
   background-color: #faf8f6;
@@ -259,7 +263,7 @@ div.infographic-container .svg-caption {
   width: 55vw;
   background-position: 0px 0px;
   margin: auto;
-  justify-content: left;
+  justify-content: center;
   align-items: center;
   display: none;
 }
@@ -268,7 +272,7 @@ div.infographic-container .svg-caption {
   width: 55vw;
   background-position: 0px 0px;
   margin: auto;
-  justify-content: left;
+  justify-content: center;
   align-items: center;
   display: flex;
 }
