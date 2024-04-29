@@ -1,5 +1,5 @@
 const svgCountries = d3.select("#svg-countries");
-const square_proportion = (1000 * 1000) / baseDataPoint.Total;
+const square_proportion = (1000 * 740) / baseDataPoint.Total;
 const countriesInfographic = Object.create(infographicContainer);
 countriesInfographic.svg = svgCountries;
 countriesInfographic.height = "800px";
