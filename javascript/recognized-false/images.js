@@ -82,12 +82,12 @@ const imagePathHouse = [
 ];
 
 const imagePathBlackberry = [
-  // "./media/recognized_false/blackberry/fruit/fruit_4788730265075712.png",
-  // "./media/recognized_false/blackberry/fruit/fruit_5123038976671744.png",
-  // "./media/recognized_false/blackberry/fruit/fruit_5237183738806272.png",
-  // "./media/recognized_false/blackberry/fruit/fruit_6054992756604928.png",
-  // "./media/recognized_false/blackberry/fruit/fruit_6465756751462400.png",
-  // "./media/recognized_false/blackberry/fruit/fruit_6484884035993600.png",
+  "./media/recognized_false/blackberry/fruit/fruit_4788730265075712.png",
+  "./media/recognized_false/blackberry/fruit/fruit_5123038976671744.png",
+  "./media/recognized_false/blackberry/fruit/fruit_5237183738806272.png",
+  "./media/recognized_false/blackberry/fruit/fruit_6054992756604928.png",
+  "./media/recognized_false/blackberry/fruit/fruit_6465756751462400.png",
+  "./media/recognized_false/blackberry/fruit/fruit_6484884035993600.png",
 
   "./media/recognized_false/blackberry/phone/phone_4604734201659392.png",
   "./media/recognized_false/blackberry/phone/phone_5097209764773888.png",

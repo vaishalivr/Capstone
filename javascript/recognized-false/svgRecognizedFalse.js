@@ -129,7 +129,8 @@ words1.forEach((word, index) => {
         { value: 14417, label: "unrecognized" },
         { value: 113736, label: "recognized" }
       );
-      appendRectsWithImagesAndText(6, imagePathBlackberry, [
+      appendRectsWithImagesAndText(12, imagePathBlackberry, [
+        "Blackberry Fruit",
         "Blackberry Phone",
       ]);
     }
