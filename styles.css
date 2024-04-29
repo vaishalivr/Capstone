@@ -267,6 +267,11 @@ div.infographic-container .svg-caption {
   align-items: center;
   display: none;
 }
+
+#svg-countries .country-data-point-text:hover {
+  opacity: 1 !important;
+}
+
 .background-text-flex {
   padding: 50px;
   width: 55vw;

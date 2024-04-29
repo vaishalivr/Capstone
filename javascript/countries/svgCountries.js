@@ -327,14 +327,14 @@ d3.select("#country-infographic-container-play").on(
   animateInfographic
 );
 
-d3.select("#country-infographic-container-reset").on("click", function (e) {
-  svgCountries.selectAll("#animationPath").remove();
-  svgCountries.selectAll(".animatedText").attr("opacity", 0);
-  svgCountries.selectAll(".country-hint").attr("opacity", 0);
-  svgCountries.selectAll(".curve").remove();
-  d3.select("#country-us-size-rect").attr("stroke-width", 6);
-  countriesLevelGauge.resize(
-    { value: baseDataPoint.Counts.unrecognized, label: "unrecognized" },
-    { value: baseDataPoint.Counts.recognized, label: "recognized" }
-  );
-});
+// d3.select("#country-infographic-container-reset").on("click", function (e) {
+//   svgCountries.selectAll("#animationPath").remove();
+//   svgCountries.selectAll(".animatedText").attr("opacity", 0);
+//   svgCountries.selectAll(".country-hint").attr("opacity", 0);
+//   svgCountries.selectAll(".curve").remove();
+//   d3.select("#country-us-size-rect").attr("stroke-width", 6);
+//   countriesLevelGauge.resize(
+//     { value: baseDataPoint.Counts.unrecognized, label: "unrecognized" },
+//     { value: baseDataPoint.Counts.recognized, label: "recognized" }
+//   );
+// });
