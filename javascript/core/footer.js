@@ -1,7 +1,6 @@
 let mainfooterObserver = new IntersectionObserver(
   function (entries) {
     entries.forEach((entry) => {
-      console.log(entry);
       if (entry.isIntersecting) {
         d3.select(".foreground").style("display", "block");
         d3.select("#callToActionFooterText").attr(
@@ -20,45 +19,96 @@ mainfooterObserver.observe(
   document.querySelector("#callToActionFooterBackground")
 );
 let inFooterObserver = new IntersectionObserver(
-  function (entries, observer) {
+  function (entries) {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         if (entry.target.getAttribute("id") == "section0") {
+          if (entry.boundingClientRect.top == entry.intersectionRect.top) {
+            document
+              .querySelector("#footer-brush-clip-rect")
+              .setAttribute("height", 0);
+          }
+          if (
+            entry.boundingClientRect.bottom == entry.intersectionRect.bottom
+          ) {
+            document
+              .querySelector("#footer-brush-clip-rect")
+              .setAttribute("height", 0.25);
+          }
           document
             .querySelector(".background-text-flex")
             .setAttribute("style", "opacity: 0");
           document
             .querySelector(".inner-sticky-text")
-            .setAttribute("style", "width: 0px");
+            .setAttribute("style", "width: 0%");
         }
         if (entry.target.getAttribute("id") == "section1") {
+          if (entry.boundingClientRect.top == entry.intersectionRect.top) {
+            document
+              .querySelector("#footer-brush-clip-rect")
+              .setAttribute("height", 0.375);
+            document
+              .querySelector(".inner-sticky-text")
+              .setAttribute("style", "width: 0%");
+          }
+          if (
+            entry.boundingClientRect.bottom == entry.intersectionRect.bottom
+          ) {
+            document
+              .querySelector("#footer-brush-clip-rect")
+              .setAttribute("height", 0.5);
+            document
+              .querySelector(".inner-sticky-text")
+              .setAttribute("style", "width: 100%");
+          }
           document
             .querySelector(".background-text-flex")
-            .setAttribute("style", "opacity: 0.33");
-          document
-            .querySelector(".inner-sticky-text")
-            .setAttribute("style", "width: 33%");
+            .setAttribute("style", "opacity: 1");
         }
         if (entry.target.getAttribute("id") == "section2") {
+          if (entry.boundingClientRect.top == entry.intersectionRect.top) {
+            document
+              .querySelector("#footer-brush-clip-rect")
+              .setAttribute("height", 0.625);
+            document
+              .querySelector(".inner-sticky-text")
+              .setAttribute("style", "width: 100%");
+          }
+          if (
+            entry.boundingClientRect.bottom == entry.intersectionRect.bottom
+          ) {
+            document
+              .querySelector("#footer-brush-clip-rect")
+              .setAttribute("height", 0.75);
+            document
+              .querySelector(".inner-sticky-text")
+              .setAttribute("style", "width: 100%");
+          }
           document
             .querySelector(".background-text-flex")
-            .setAttribute("style", "opacity: 0.66");
-          document
-            .querySelector(".inner-sticky-text")
-            .setAttribute("style", "width: 66%");
+            .setAttribute("style", "opacity: 1");
         }
         if (entry.target.getAttribute("id") == "section3") {
+          console.log(entry);
+          if (entry.boundingClientRect.top == entry.intersectionRect.top) {
+            document
+              .querySelector("#footer-brush-clip-rect")
+              .setAttribute("height", 1);
+          }
           document
             .querySelector(".background-text-flex")
-            .setAttribute("style", "opacity: 0.99");
-          document
-            .querySelector(".inner-sticky-text")
-            .setAttribute("style", "width: 100%");
+            .setAttribute("style", "opacity: 1");
+          // document
+          //   .querySelector(".inner-sticky-text")
+          //   .setAttribute("style", "width: 100%");
         }
       }
     });
   },
-  { root: document.querySelector(".footer"), threshold: 0.5 }
+  {
+    root: document.querySelector(".footer"),
+    threshold: [0.25, 0.5],
+  }
 );
 
 inFooterObserver.observe(document.querySelector("#section0"));
