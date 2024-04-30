@@ -97,7 +97,7 @@ words1.forEach((word, index) => {
       appendRectsWithImagesAndText(24, imagePathDishwasher, [
         "Counter top Dishwashers",
         "Tap Shower",
-        "Person Washing Dishes",
+        "Person as a Dishwasher",
         "Washing Dishes in Sink",
       ]);
     }
