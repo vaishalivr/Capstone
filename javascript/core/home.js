@@ -21,3 +21,6 @@ inParagraphTextHighlightObserver.observe(
 inParagraphTextHighlightObserver.observe(
   document.getElementById("p-highlight-3")
 );
+inParagraphTextHighlightObserver.observe(
+  document.getElementById("p-highlight-4")
+);
